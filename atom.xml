@@ -1,17 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[My Octopress Blog]]></title>
+  <title><![CDATA[lianghaijun]]></title>
   <link href="http://seavers.github.io/atom.xml" rel="self"/>
   <link href="http://seavers.github.io/"/>
-  <updated>2013-11-27T18:48:55+08:00</updated>
+  <updated>2013-11-28T09:43:27+08:00</updated>
   <id>http://seavers.github.io/</id>
   <author>
-    <name><![CDATA[Your Name]]></name>
+    <name><![CDATA[seavers]]></name>
     
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Html5版仙剑]]></title>
+    <link href="http://seavers.github.io/blog/2013/11/27/xianjian/"/>
+    <updated>2013-11-27T23:20:11+08:00</updated>
+    <id>http://seavers.github.io/blog/2013/11/27/xianjian</id>
+    <content type="html"><![CDATA[<p>刚学习html5时, 为了练手, 基于html5写了版仙剑, <a href="http://xianjian.github.com/">http://xianjian.github.com/</a></p>
+
+<p>当时花了不少心血, 也解决了不少算法问题, 可用度80%, 然而后来比较忙, 就停止了</p>
+
+<p>今天心血来潮, 在服务器上重新部署了一套, 欢迎试用 (图片点击右键, 新窗口打开)</p>
+
+<p><a href="http://lianghaijun.com/xianjian"><img src="http://seavers.github.io/uploads/xianjian.png" alt="xianjian" /></a></p>
+
+<p>刚开始下载时, 速度有点慢, 请耐心等待, 后续再更改算法, 如果本地玩, 可以git clone哦~~</p>
+
+<ul>
+<li>github地址在  <a href="https://github.com/seavers/xianjian">https://github.com/seavers/xianjian</a></li>
+<li>其实还有一个java版的 <a href="https://github.com/seavers/pal">https://github.com/seavers/pal</a></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[About Octopress]]></title>
