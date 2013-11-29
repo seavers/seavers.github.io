@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
+    <url>
+        <loc>http://seavers.github.io/blog/2013/11/27/hello-octopress/</loc>
+        <lastmod>2013-11-29T13:23:12+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://seavers.github.io/blog/2013/11/27/about-octopress/</loc>
+        <lastmod>2013-11-29T13:23:12+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://seavers.github.io/blog/2013/11/27/xianjian/</loc>
+        <lastmod>2013-11-29T13:23:12+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://seavers.github.io/blog/2013/11/28/sed/</loc>
+        <lastmod>2013-11-29T13:23:12+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://seavers.github.io/blog/2013/11/28/octopress-deploy/</loc>
+        <lastmod>2013-11-29T13:23:12+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://seavers.github.io/robots.txt</loc>
+        <lastmod>2013-11-29T13:17:20+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://seavers.github.io/</loc>
+        <lastmod>2013-11-29T13:23:12+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://seavers.github.io/blog/archives/</loc>
+        <lastmod>2013-11-29T13:23:12+08:00</lastmod>
+    </url>
+</urlset>

@@ -1,102 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
 
-<!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
-<head>
-  <meta charset="utf-8">
-  <title>lianghaijun</title>
-  <meta name="author" content="seavers">
-
-  
-  <meta name="description" content="今天准备实现 octopress 的自动部署, 完成以下功能 在github.com提交markdown文件后,自动触发服务器打包更新
-服务器打包更新后, 同步至github.io, 以及服务器展示 实现之前, 参考了下这篇, 监听github，自动编译octopress博客, 写的蛮不错的
-不过 &hellip;">
-  
-
-  <!-- http://t.co/dKP3o1e -->
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  
-  <link rel="canonical" href="http://seavers.github.io">
-  <link href="/favicon.png" rel="icon">
-  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <link href="/atom.xml" rel="alternate" title="lianghaijun" type="application/atom+xml">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
-<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-
-  
-
-</head>
-
-<body   >
-  <header role="banner"><hgroup>
-  <h1><a href="/">lianghaijun</a></h1>
-  
-    <h2>Looking for Interest</h2>
-  
-</hgroup>
-
-</header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
-</ul>
-  
-<form action="http://google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="q" value="site:seavers.github.io" />
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
-  
-<ul class="main-navigation">
-  <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
-</ul>
-
-</nav>
-  <div id="main">
-    <div id="content">
-      <div class="blog-index">
-  
-  
-  
-    <article>
-      
-  <header>
+  <title><![CDATA[lianghaijun]]></title>
+  <link href="http://seavers.github.io/atom.xml" rel="self"/>
+  <link href="http://seavers.github.io/"/>
+  <updated>2013-11-29T13:27:56+08:00</updated>
+  <id>http://seavers.github.io/</id>
+  <author>
+    <name><![CDATA[seavers]]></name>
     
-      <h1 class="entry-title"><a href="/blog/2013/11/28/octopress-deploy/">Octopress 自动部署方案</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
 
   
-
-
-<time datetime="2013-11-28T22:20:52+08:00" pubdate data-updated="true">Nov 28<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>今天准备实现 octopress 的自动部署, 完成以下功能</p>
+  <entry>
+    <title type="html"><![CDATA[Octopress 自动部署方案]]></title>
+    <link href="http://seavers.github.io/blog/2013/11/28/octopress-deploy/"/>
+    <updated>2013-11-28T22:20:52+08:00</updated>
+    <id>http://seavers.github.io/blog/2013/11/28/octopress-deploy</id>
+    <content type="html"><![CDATA[<p>今天准备实现 octopress 的自动部署, 完成以下功能</p>
 
 <ul>
 <li>在github.com提交markdown文件后,自动触发服务器打包更新</li>
@@ -213,42 +135,15 @@ deploy会触发git commit, commit再触发hook, hook里再deploy,再commit, 如�
 
 <p>另一种解决方案, 就是把master与source, 放置在不同git仓库上
 这样, 提交source的时候, 就不会触发blog的hook了</p>
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/11/28/sed/">Sed</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-11-28T16:50:01+08:00" pubdate data-updated="true">Nov 28<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>sed是基于行进行文本替换的神器, 这里记录一些自己常用的功能</p>
+  <entry>
+    <title type="html"><![CDATA[Sed]]></title>
+    <link href="http://seavers.github.io/blog/2013/11/28/sed/"/>
+    <updated>2013-11-28T16:50:01+08:00</updated>
+    <id>http://seavers.github.io/blog/2013/11/28/sed</id>
+    <content type="html"><![CDATA[<p>sed是基于行进行文本替换的神器, 这里记录一些自己常用的功能</p>
 
 <p>直接替换</p>
 
@@ -323,48 +218,21 @@ deploy会触发git commit, commit再触发hook, hook里再deploy,再commit, 如�
 <p>还有这个
 <a href="http://henter.me/post/sed-notes.html">http://henter.me/post/sed-notes.html</a>
 <a href="http://blog.csdn.net/hepeng597/article/details/11269387">http://blog.csdn.net/hepeng597/article/details/11269387</a></p>
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/11/27/xianjian/">Html5版仙剑</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-11-27T23:20:11+08:00" pubdate data-updated="true">Nov 27<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>刚学习html5时, 为了练手, 基于html5写了版仙剑, <a href="http://xianjian.github.com/">http://xianjian.github.com/</a></p>
+  <entry>
+    <title type="html"><![CDATA[Html5版仙剑]]></title>
+    <link href="http://seavers.github.io/blog/2013/11/27/xianjian/"/>
+    <updated>2013-11-27T23:20:11+08:00</updated>
+    <id>http://seavers.github.io/blog/2013/11/27/xianjian</id>
+    <content type="html"><![CDATA[<p>刚学习html5时, 为了练手, 基于html5写了版仙剑, <a href="http://xianjian.github.com/">http://xianjian.github.com/</a></p>
 
 <p>当时花了不少心血, 也解决了不少算法问题, 可用度80%, 然而后来比较忙, 就停止了</p>
 
 <p>今天心血来潮, 在服务器上重新部署了一套, 欢迎试用 (图片点击右键, 新窗口打开)</p>
 
-<p><a href="http://lianghaijun.com/xianjian"><img src="/uploads/xianjian.png" alt="xianjian" /></a></p>
+<p><a href="http://lianghaijun.com/xianjian"><img src="http://seavers.github.io/uploads/xianjian.png" alt="xianjian" /></a></p>
 
 <p>刚开始下载时, 速度有点慢, 请耐心等待, 后续再更改算法, 如果本地玩, 可以git clone哦~~</p>
 
@@ -373,42 +241,15 @@ deploy会触发git commit, commit再触发hook, hook里再deploy,再commit, 如�
 <li>其实还有一个java版的 <a href="https://github.com/seavers/pal">https://github.com/seavers/pal</a></li>
 </ul>
 
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/11/27/about-octopress/">About Octopress</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-11-27T18:30:41+08:00" pubdate data-updated="true">Nov 27<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>一直以来, 都使用javaeye来记录博客, 见 <a href="http://seavers.iteye.com/">http://seavers.iteye.com/</a>, 偶有心得, 必记录之</p>
+  <entry>
+    <title type="html"><![CDATA[About Octopress]]></title>
+    <link href="http://seavers.github.io/blog/2013/11/27/about-octopress/"/>
+    <updated>2013-11-27T18:30:41+08:00</updated>
+    <id>http://seavers.github.io/blog/2013/11/27/about-octopress</id>
+    <content type="html"><![CDATA[<p>一直以来, 都使用javaeye来记录博客, 见 <a href="http://seavers.iteye.com/">http://seavers.iteye.com/</a>, 偶有心得, 必记录之</p>
 
 <p>然, 随着时间积累, 发现只依赖博客, 很多的需求无法满足, 如一个DEMO, 一个作品, 甚至是自定义样式
 每遇新技术时, 总想折腾下, 无奈博客只能写写文字, 不能充分自主设计
@@ -432,122 +273,18 @@ deploy会触发git commit, commit再触发hook, hook里再deploy,再commit, 如�
 
 
 <p>后续试试自动化, 外加git同步, 自动部署至服务器</p>
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/11/27/hello-octopress/">Hello Octopress</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-11-27T17:56:47+08:00" pubdate data-updated="true">Nov 27<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>hello octopress</p>
+  <entry>
+    <title type="html"><![CDATA[Hello Octopress]]></title>
+    <link href="http://seavers.github.io/blog/2013/11/27/hello-octopress/"/>
+    <updated>2013-11-27T17:56:47+08:00</updated>
+    <id>http://seavers.github.io/blog/2013/11/27/hello-octopress</id>
+    <content type="html"><![CDATA[<p>hello octopress</p>
 
 <p>2013-11-27</p>
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  <div class="pagination">
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
-</div>
-<aside class="sidebar">
-  
-    <section>
-  <h1>Recent Posts</h1>
-  <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/blog/2013/11/28/octopress-deploy/">Octopress 自动部署方案</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/11/28/sed/">Sed</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/11/27/xianjian/">Html5版仙剑</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/11/27/about-octopress/">About Octopress</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/11/27/hello-octopress/">Hello Octopress</a>
-      </li>
-    
-  </ul>
-</section>
-
-
-
-
-
-  
-</aside>
-
-    </div>
-  </div>
-  <footer role="contentinfo"><p>
-  Copyright &copy; 2013 - seavers -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
-</p>
-
-</footer>
-  
-
-
-
-
-
-
-
-  <script type="text/javascript">
-    (function(){
-      var twitterWidgets = document.createElement('script');
-      twitterWidgets.type = 'text/javascript';
-      twitterWidgets.async = true;
-      twitterWidgets.src = '//platform.twitter.com/widgets.js';
-      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
-    })();
-  </script>
-
-
-
-
-
-</body>
-</html>
+</feed>
