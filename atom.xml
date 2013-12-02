@@ -4,7 +4,7 @@
   <title><![CDATA[lianghaijun]]></title>
   <link href="http://seavers.github.io/atom.xml" rel="self"/>
   <link href="http://seavers.github.io/"/>
-  <updated>2013-11-29T14:20:52+08:00</updated>
+  <updated>2013-12-02T15:09:07+08:00</updated>
   <id>http://seavers.github.io/</id>
   <author>
     <name><![CDATA[seavers]]></name>
@@ -12,6 +12,63 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Utuntu Group]]></title>
+    <link href="http://seavers.github.io/blog/2013/12/02/utuntu-group/"/>
+    <updated>2013-12-02T14:28:53+08:00</updated>
+    <id>http://seavers.github.io/blog/2013/12/02/utuntu-group</id>
+    <content type="html"><![CDATA[<p>linux用户管理中, 一直都有分组的概率, 然而我们总感觉使用场景较少, 其实是因为我们不了解</p>
+
+<p>举个例子, 比如</p>
+
+<ul>
+<li> 在配置apache,nginx时, htdocs的目录权限, 遇到问题时, 我们总喜欢用 777,</li>
+<li> 在使用samba, 或者 nfs 或者 ftp 时, 为避免复杂性, 也是 777</li>
+<li> 是否希望将工作,生活的帐户体系分开, 是否希望, 使用不同的git环境</li>
+</ul>
+
+
+<h2>基础</h2>
+
+<ul>
+<li> 每个用户都有一个主分组, 以及多个次分组, 即一个用户可以属于多个分组</li>
+</ul>
+
+
+<h2>常用命令</h2>
+
+<p>分组常用的几个操作</p>
+
+<p>查看自己的分组</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>seavers@seavers:/home/admin$ id
+</span><span class='line'>uid=1000(seavers) gid=1000(seavers) groups=1000(seavers),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev),109(lpadmin),124(sambashare)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>查看所有的分组</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cat /etc/group</span></code></pre></td></tr></table></div></figure>
+
+
+<p>查看某个用户所在的分组</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>groups seavers</span></code></pre></td></tr></table></div></figure>
+
+
+<p>增加用户到某个分组</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>usermod seavers -a -G admin </span></code></pre></td></tr></table></div></figure>
+
+
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Octopress 自动部署方案]]></title>
