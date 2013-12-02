@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Octopress | lianghaijun]]></title>
-  <link href="http://seavers.github.io/blog/categories/octopress/atom.xml" rel="self"/>
-  <link href="http://seavers.github.io/"/>
-  <updated>2013-12-02T15:31:11+08:00</updated>
-  <id>http://seavers.github.io/</id>
+  <link href="http://lianghaijun.com/blog/categories/octopress/atom.xml" rel="self"/>
+  <link href="http://lianghaijun.com/"/>
+  <updated>2013-12-02T16:49:04+08:00</updated>
+  <id>http://lianghaijun.com/</id>
   <author>
     <name><![CDATA[seavers]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Octopress 自动部署方案]]></title>
-    <link href="http://seavers.github.io/blog/2013/11/28/octopress-deploy/"/>
+    <link href="http://lianghaijun.com/blog/2013/11/28/octopress-deploy/"/>
     <updated>2013-11-28T22:20:52+08:00</updated>
-    <id>http://seavers.github.io/blog/2013/11/28/octopress-deploy</id>
+    <id>http://lianghaijun.com/blog/2013/11/28/octopress-deploy</id>
     <content type="html"><![CDATA[<p>今天准备实现 octopress 的自动部署, 完成以下功能</p>
 
 <ul>
@@ -118,9 +118,9 @@ deploy会触发git commit, commit再触发hook, hook里再deploy,再commit, 如�
   
   <entry>
     <title type="html"><![CDATA[About Octopress]]></title>
-    <link href="http://seavers.github.io/blog/2013/11/27/about-octopress/"/>
+    <link href="http://lianghaijun.com/blog/2013/11/27/about-octopress/"/>
     <updated>2013-11-27T18:30:41+08:00</updated>
-    <id>http://seavers.github.io/blog/2013/11/27/about-octopress</id>
+    <id>http://lianghaijun.com/blog/2013/11/27/about-octopress</id>
     <content type="html"><![CDATA[<p>一直以来, 都使用javaeye来记录博客, 见 <a href="http://seavers.iteye.com/">http://seavers.iteye.com/</a>, 偶有心得, 必记录之</p>
 
 <p>然, 随着时间积累, 发现只依赖博客, 很多的需求无法满足, 如一个DEMO, 一个作品, 甚至是自定义样式

@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Ubuntu | lianghaijun]]></title>
-  <link href="http://seavers.github.io/blog/categories/ubuntu/atom.xml" rel="self"/>
-  <link href="http://seavers.github.io/"/>
-  <updated>2013-12-02T15:31:11+08:00</updated>
-  <id>http://seavers.github.io/</id>
+  <link href="http://lianghaijun.com/blog/categories/ubuntu/atom.xml" rel="self"/>
+  <link href="http://lianghaijun.com/"/>
+  <updated>2013-12-02T16:49:04+08:00</updated>
+  <id>http://lianghaijun.com/</id>
   <author>
     <name><![CDATA[seavers]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Sed]]></title>
-    <link href="http://seavers.github.io/blog/2013/11/28/sed/"/>
+    <link href="http://lianghaijun.com/blog/2013/11/28/sed/"/>
     <updated>2013-11-28T16:50:01+08:00</updated>
-    <id>http://seavers.github.io/blog/2013/11/28/sed</id>
+    <id>http://lianghaijun.com/blog/2013/11/28/sed</id>
     <content type="html"><![CDATA[<p>sed是基于行进行文本替换的神器, 这里记录一些自己常用的功能</p>
 
 <p>直接替换

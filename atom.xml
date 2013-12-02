@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[lianghaijun]]></title>
-  <link href="http://seavers.github.io/atom.xml" rel="self"/>
-  <link href="http://seavers.github.io/"/>
-  <updated>2013-12-02T15:31:11+08:00</updated>
-  <id>http://seavers.github.io/</id>
+  <link href="http://lianghaijun.com/atom.xml" rel="self"/>
+  <link href="http://lianghaijun.com/"/>
+  <updated>2013-12-02T16:49:04+08:00</updated>
+  <id>http://lianghaijun.com/</id>
   <author>
     <name><![CDATA[seavers]]></name>
     
@@ -15,10 +15,10 @@
   
   <entry>
     <title type="html"><![CDATA[Utuntu Group]]></title>
-    <link href="http://seavers.github.io/blog/2013/12/02/utuntu-group/"/>
+    <link href="http://lianghaijun.com/blog/2013/12/02/utuntu-group/"/>
     <updated>2013-12-02T14:28:53+08:00</updated>
-    <id>http://seavers.github.io/blog/2013/12/02/utuntu-group</id>
-    <content type="html"><![CDATA[<p>linux用户管理中, 一直都有分组的概率, 然而我们总感觉使用场景较少, 其实是因为我们不了解</p>
+    <id>http://lianghaijun.com/blog/2013/12/02/utuntu-group</id>
+    <content type="html"><![CDATA[<p>linux用户管理中, 一直都有分组的概念, 然而我们总感觉使用场景较少, 其实是因为我们不了解</p>
 
 <p>举个例子, 比如</p>
 
@@ -72,9 +72,9 @@
   
   <entry>
     <title type="html"><![CDATA[Octopress 自动部署方案]]></title>
-    <link href="http://seavers.github.io/blog/2013/11/28/octopress-deploy/"/>
+    <link href="http://lianghaijun.com/blog/2013/11/28/octopress-deploy/"/>
     <updated>2013-11-28T22:20:52+08:00</updated>
-    <id>http://seavers.github.io/blog/2013/11/28/octopress-deploy</id>
+    <id>http://lianghaijun.com/blog/2013/11/28/octopress-deploy</id>
     <content type="html"><![CDATA[<p>今天准备实现 octopress 的自动部署, 完成以下功能</p>
 
 <ul>
@@ -197,9 +197,9 @@ deploy会触发git commit, commit再触发hook, hook里再deploy,再commit, 如�
   
   <entry>
     <title type="html"><![CDATA[Sed]]></title>
-    <link href="http://seavers.github.io/blog/2013/11/28/sed/"/>
+    <link href="http://lianghaijun.com/blog/2013/11/28/sed/"/>
     <updated>2013-11-28T16:50:01+08:00</updated>
-    <id>http://seavers.github.io/blog/2013/11/28/sed</id>
+    <id>http://lianghaijun.com/blog/2013/11/28/sed</id>
     <content type="html"><![CDATA[<p>sed是基于行进行文本替换的神器, 这里记录一些自己常用的功能</p>
 
 <p>直接替换</p>
@@ -280,16 +280,16 @@ deploy会触发git commit, commit再触发hook, hook里再deploy,再commit, 如�
   
   <entry>
     <title type="html"><![CDATA[Html5版仙剑]]></title>
-    <link href="http://seavers.github.io/blog/2013/11/27/xianjian/"/>
+    <link href="http://lianghaijun.com/blog/2013/11/27/xianjian/"/>
     <updated>2013-11-27T23:20:11+08:00</updated>
-    <id>http://seavers.github.io/blog/2013/11/27/xianjian</id>
+    <id>http://lianghaijun.com/blog/2013/11/27/xianjian</id>
     <content type="html"><![CDATA[<p>刚学习html5时, 为了练手, 基于html5写了版仙剑, <a href="http://xianjian.github.com/">http://xianjian.github.com/</a></p>
 
 <p>当时花了不少心血, 也解决了不少算法问题, 可用度80%, 然而后来比较忙, 就停止了</p>
 
 <p>今天心血来潮, 在服务器上重新部署了一套, 欢迎试用 (图片点击右键, 新窗口打开)</p>
 
-<p><a href="http://lianghaijun.com/xianjian"><img src="http://seavers.github.io/uploads/xianjian.png" alt="xianjian" /></a></p>
+<p><a href="http://lianghaijun.com/xianjian"><img src="http://lianghaijun.com/uploads/xianjian.png" alt="xianjian" /></a></p>
 
 <p>刚开始下载时, 速度有点慢, 请耐心等待, 后续再更改算法, 如果本地玩, 可以git clone哦~~</p>
 
@@ -303,9 +303,9 @@ deploy会触发git commit, commit再触发hook, hook里再deploy,再commit, 如�
   
   <entry>
     <title type="html"><![CDATA[About Octopress]]></title>
-    <link href="http://seavers.github.io/blog/2013/11/27/about-octopress/"/>
+    <link href="http://lianghaijun.com/blog/2013/11/27/about-octopress/"/>
     <updated>2013-11-27T18:30:41+08:00</updated>
-    <id>http://seavers.github.io/blog/2013/11/27/about-octopress</id>
+    <id>http://lianghaijun.com/blog/2013/11/27/about-octopress</id>
     <content type="html"><![CDATA[<p>一直以来, 都使用javaeye来记录博客, 见 <a href="http://seavers.iteye.com/">http://seavers.iteye.com/</a>, 偶有心得, 必记录之</p>
 
 <p>然, 随着时间积累, 发现只依赖博客, 很多的需求无法满足, 如一个DEMO, 一个作品, 甚至是自定义样式
@@ -335,9 +335,9 @@ deploy会触发git commit, commit再触发hook, hook里再deploy,再commit, 如�
   
   <entry>
     <title type="html"><![CDATA[Hello Octopress]]></title>
-    <link href="http://seavers.github.io/blog/2013/11/27/hello-octopress/"/>
+    <link href="http://lianghaijun.com/blog/2013/11/27/hello-octopress/"/>
     <updated>2013-11-27T17:56:47+08:00</updated>
-    <id>http://seavers.github.io/blog/2013/11/27/hello-octopress</id>
+    <id>http://lianghaijun.com/blog/2013/11/27/hello-octopress</id>
     <content type="html"><![CDATA[<p>hello octopress</p>
 
 <p>2013-11-27</p>
