@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Octopress | lianghaijun]]></title>
   <link href="http://seavers.github.io/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://seavers.github.io/"/>
-  <updated>2013-12-02T15:09:07+08:00</updated>
+  <updated>2013-12-02T15:31:11+08:00</updated>
   <id>http://seavers.github.io/</id>
   <author>
     <name><![CDATA[seavers]]></name>
@@ -34,7 +34,7 @@
 <p>在github的项目设置的Service Hooks中添加一个WebHook URLs的钩子
 ```</p>
 
-<pre><code>http://blog.lianghaijun.com:4001/blog-update
+<pre><code>http://&lt;host&gt;:&lt;port&gt;/blog-update
 </code></pre>
 
 <p><code>

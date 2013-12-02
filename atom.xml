@@ -4,7 +4,7 @@
   <title><![CDATA[lianghaijun]]></title>
   <link href="http://seavers.github.io/atom.xml" rel="self"/>
   <link href="http://seavers.github.io/"/>
-  <updated>2013-12-02T15:09:07+08:00</updated>
+  <updated>2013-12-02T15:31:11+08:00</updated>
   <id>http://seavers.github.io/</id>
   <author>
     <name><![CDATA[seavers]]></name>
@@ -91,7 +91,7 @@
 <p>在github的项目设置的Service Hooks中添加一个WebHook URLs的钩子</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>http://blog.lianghaijun.com:4001/blog-update</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>http://&lt;host&gt;:&lt;port&gt;/blog-update</span></code></pre></td></tr></table></div></figure>
 
 
 <p>而github钩子, 我采用的是ruby, 命名为hook.rb</p>
