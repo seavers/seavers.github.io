@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Linux | lianghaijun的博客]]></title>
+  <link href="http://lianghaijun.com/blog/categories/linux/atom.xml" rel="self"/>
+  <link href="http://lianghaijun.com/"/>
+  <updated>2013-12-13T10:15:42+08:00</updated>
+  <id>http://lianghaijun.com/</id>
+  <author>
+    <name><![CDATA[seavers]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Linux Repeat]]></title>
+    <link href="http://lianghaijun.com/blog/linux-repeat"/>
+    <updated>2013-12-04T15:32:01+08:00</updated>
+    <id>http://lianghaijun.com/blog/linux-repeat</id>
+    <content type="html"><![CDATA[<p>linux下循环执行命令</p>
+
+<p>```</p>
+
+<pre><code>vi ~/.bash_aliases
+</code></pre>
+
+<p>```</p>
+
+<p>```
+repeat() {</p>
+
+<pre><code>n=100
+s=1
+
+while true; do
+    arg=$1
+    if [ "$arg" == "-n" ]; then
+        n=$2
+        shift
+        shift
+    elif [ "$arg" == "-s" ]; then
+        s=$2
+        shift
+        shift
+    else
+        break
+    fi
+done
+
+while [ $((n -= 1)) -ge 0 ]; do
+    "$@"
+    sleep $s
+done
+</code></pre>
+
+<p>}
+```</p>
+
+<p>```</p>
+
+<pre><code>source ~/.bash_aliases
+</code></pre>
+
+<p>```</p>
+
+<p>```</p>
+
+<pre><code>repeat ls -l
+repeat date
+repeat iostat
+repeat -n 3 curl 'http://www.lianghaijun.com'
+repeat -n 3 -s 300 curl 'http://www.lianghaijun.com'
+repeat -n 3 -s 0.5 sh -c "curl -I -s 'http://www.lianghaijun.com' | head -1"
+</code></pre>
+
+<p>```</p>
+]]></content>
+  </entry>
+  
+</feed>

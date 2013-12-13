@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[lianghaijun]]></title>
+  <title><![CDATA[lianghaijun的博客]]></title>
   <link href="http://lianghaijun.com/atom.xml" rel="self"/>
   <link href="http://lianghaijun.com/"/>
-  <updated>2013-12-04T10:35:42+08:00</updated>
+  <updated>2013-12-13T10:15:42+08:00</updated>
   <id>http://lianghaijun.com/</id>
   <author>
     <name><![CDATA[seavers]]></name>
@@ -12,6 +12,95 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Linux Repeat]]></title>
+    <link href="http://lianghaijun.com/blog/linux-repeat"/>
+    <updated>2013-12-04T15:32:01+08:00</updated>
+    <id>http://lianghaijun.com/blog/linux-repeat</id>
+    <content type="html"><![CDATA[<p>linux下循环执行命令</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>vi ~/.bash_aliases</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>repeat() {
+</span><span class='line'>    n=100
+</span><span class='line'>    s=1
+</span><span class='line'>
+</span><span class='line'>    while true; do
+</span><span class='line'>        arg=$1
+</span><span class='line'>        if [ "$arg" == "-n" ]; then
+</span><span class='line'>            n=$2
+</span><span class='line'>            shift
+</span><span class='line'>            shift
+</span><span class='line'>        elif [ "$arg" == "-s" ]; then
+</span><span class='line'>            s=$2
+</span><span class='line'>            shift
+</span><span class='line'>            shift
+</span><span class='line'>        else
+</span><span class='line'>            break
+</span><span class='line'>        fi
+</span><span class='line'>    done
+</span><span class='line'>
+</span><span class='line'>    while [ $((n -= 1)) -ge 0 ]; do
+</span><span class='line'>        "$@"
+</span><span class='line'>        sleep $s
+</span><span class='line'>    done
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>source ~/.bash_aliases</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>repeat ls -l
+</span><span class='line'>repeat date
+</span><span class='line'>repeat iostat
+</span><span class='line'>repeat -n 3 curl 'http://www.lianghaijun.com'
+</span><span class='line'>repeat -n 3 -s 300 curl 'http://www.lianghaijun.com'
+</span><span class='line'>repeat -n 3 -s 0.5 sh -c "curl -I -s 'http://www.lianghaijun.com' | head -1"</span></code></pre></td></tr></table></div></figure>
+
+
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Utuntu Group]]></title>
