@@ -9,8 +9,7 @@
   <meta name="author" content="seavers">
 
   
-  <meta name="description" content="linux下循环执行命令 1
-vi ~/.bash_aliases 1
+  <meta name="description" content="最近在使用hive来处理些大数据,偶有心得,记录之 建表 1
 2
 3
 4
@@ -20,21 +19,9 @@ vi ~/.bash_aliases 1
 8
 9
 10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-repeat() { n=100 s=1 while true; do arg=$1 if [ "$ &hellip;">
+create external table hive_table ( id int, name string, category string, tag string
+)
+PARTITIONED &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -80,6 +67,113 @@ repeat() { n=100 s=1 while true; do arg=$1 if [ "$ &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/hive-skill">Hive 常用技巧</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-12-13T10:52:07+08:00" pubdate data-updated="true">Dec 13<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>最近在使用hive来处理些大数据,偶有心得,记录之</p>
+
+<p>建表</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>create external table hive_table (
+</span><span class='line'>  id int,
+</span><span class='line'>  name string,
+</span><span class='line'>  category string,
+</span><span class='line'>  tag string
+</span><span class='line'>)
+</span><span class='line'>PARTITIONED BY (pt string) 
+</span><span class='line'>ROW FORMAT DELIMITED
+</span><span class='line'>   FIELDS TERMINATED BY ',' 
+</span><span class='line'>STORED AS TEXTFILE</span></code></pre></td></tr></table></div></figure>
+
+
+<p>分组统计</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>select id,name,count(*),
+</span><span class='line'>  count(distinct category),collect_set(category),
+</span><span class='line'>  count(distinct tag),collect_set(tag)
+</span><span class='line'>from hive_table
+</span><span class='line'>where pt='20131213'
+</span><span class='line'>group by id,name</span></code></pre></td></tr></table></div></figure>
+
+
+<p>拆分多行</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>select id,name,category_id
+</span><span class='line'>from hive_table
+</span><span class='line'>lateral view explode(split(category, ',')) category_table as category_id
+</span><span class='line'>where pt='20131213'</span></code></pre></td></tr></table></div></figure>
+
+
+<p>过滤某些行</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>select h.*
+</span><span class='line'>from hive_table h
+</span><span class='line'>left semi join
+</span><span class='line'>girl_names g
+</span><span class='line'>on h.name = g.name
+</span><span class='line'>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -707,6 +801,10 @@ deploy会触发git commit, commit再触发hook, hook里再deploy,再commit, 如�
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/hive-skill">Hive 常用技巧</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/linux-repeat">Linux Repeat</a>
       </li>
     
@@ -720,10 +818,6 @@ deploy会触发git commit, commit再触发hook, hook里再deploy,再commit, 如�
     
       <li class="post">
         <a href="/blog/sed">Sed</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/xianjian">Html5版仙剑</a>
       </li>
     
   </ul>
