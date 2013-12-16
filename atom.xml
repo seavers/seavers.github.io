@@ -4,7 +4,7 @@
   <title><![CDATA[lianghaijun的博客]]></title>
   <link href="http://lianghaijun.com/atom.xml" rel="self"/>
   <link href="http://lianghaijun.com/"/>
-  <updated>2013-12-13T11:53:05+08:00</updated>
+  <updated>2013-12-17T00:06:43+08:00</updated>
   <id>http://lianghaijun.com/</id>
   <author>
     <name><![CDATA[seavers]]></name>
@@ -12,6 +12,51 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[全屏图片查看器 Fullscreen Picture Viewer]]></title>
+    <link href="http://lianghaijun.com/blog/fullscreen-picture-viewer"/>
+    <updated>2013-12-16T23:54:34+08:00</updated>
+    <id>http://lianghaijun.com/blog/fullscreen-picture-viewer</id>
+    <content type="html"><![CDATA[<p>今天写了一个chrome扩展,可以用于全屏查看图片</p>
+
+<h2>全屏图片查看器 chrome 扩展</h2>
+
+<ul>
+<li>用于隐藏掉网页内其它内容,只留下大图</li>
+<li>chrome 安装地址: <a href="http://www.lianghaijun.com/download/fullscreen.crx">fullscreen.crx</a></li>
+</ul>
+
+
+<h2>举一些实际的使用场景</h2>
+
+<ul>
+<li>看一些图片时,发现旁边全是广告,直接屏蔽掉,只显示中间的大图</li>
+<li>浏览壁纸时,全屏展示大图,用于观看全屏效果</li>
+<li>查看所有的图片,直接寻找兴趣点</li>
+</ul>
+
+
+<h2>使用方式</h2>
+
+<ul>
+<li>双击网页内的空白区</li>
+<li>按f键 (fullscreen的缩写)</li>
+<li>按w/s按来调整threshold, 调整图片最小尺寸的阀值</li>
+</ul>
+
+
+<p>源码见<a href="https://github.com/seavers/fullscreen">github</a></p>
+
+<h2>试用</h2>
+
+<ul>
+<li>图片大小的默认阀值是350px</li>
+<li>可以随便找个有大图的页面,按下f键体验一下</li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Hive 常用技巧]]></title>
@@ -458,11 +503,12 @@ deploy会触发git commit, commit再触发hook, hook里再deploy,再commit, 如�
 
 <p>今天心血来潮, 在服务器上重新部署了一套, 欢迎试用 (图片点击右键, 新窗口打开)</p>
 
-<p><a href="http://lianghaijun.com/xianjian"><img src="http://lianghaijun.com/uploads/xianjian.png" alt="xianjian" /></a></p>
+<p><a href="http://xianjian.u.qiniudn.com/"><img src="http://lianghaijun.com/uploads/xianjian.png" alt="xianjian" /></a></p>
 
 <p>刚开始下载时, 速度有点慢, 请耐心等待, 后续再更改算法, 如果本地玩, 可以git clone哦~~</p>
 
 <ul>
+<li>在线试玩,可以使用<a href="http://xianjian.u.qiniudn.com">qiniudn</a> 或者 <a href="http://xianjian.github.com">github</a> 或者 <a href="http://www.lianghaijun.com/xianjian/">博客内</a></li>
 <li>github地址在  <a href="https://github.com/seavers/xianjian">https://github.com/seavers/xianjian</a></li>
 <li>其实还有一个java版的 <a href="https://github.com/seavers/pal">https://github.com/seavers/pal</a></li>
 </ul>

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Html5 | lianghaijun的博客]]></title>
   <link href="http://lianghaijun.com/blog/categories/html5/atom.xml" rel="self"/>
   <link href="http://lianghaijun.com/"/>
-  <updated>2013-12-13T11:53:05+08:00</updated>
+  <updated>2013-12-17T00:06:43+08:00</updated>
   <id>http://lianghaijun.com/</id>
   <author>
     <name><![CDATA[seavers]]></name>
@@ -24,11 +24,12 @@
 
 <p>今天心血来潮, 在服务器上重新部署了一套, 欢迎试用 (图片点击右键, 新窗口打开)</p>
 
-<p><a href="http://lianghaijun.com/xianjian"><img src="/uploads/xianjian.png" alt="xianjian" /></a></p>
+<p><a href="http://xianjian.u.qiniudn.com/"><img src="/uploads/xianjian.png" alt="xianjian" /></a></p>
 
 <p>刚开始下载时, 速度有点慢, 请耐心等待, 后续再更改算法, 如果本地玩, 可以git clone哦~~</p>
 
 <ul>
+<li>在线试玩,可以使用<a href="http://xianjian.u.qiniudn.com">qiniudn</a> 或者 <a href="http://xianjian.github.com">github</a> 或者 <a href="http://www.lianghaijun.com/xianjian/">博客内</a></li>
 <li>github地址在  <a href="https://github.com/seavers/xianjian">https://github.com/seavers/xianjian</a></li>
 <li>其实还有一个java版的 <a href="https://github.com/seavers/pal">https://github.com/seavers/pal</a></li>
 </ul>
