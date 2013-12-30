@@ -9,9 +9,14 @@
   <meta name="author" content="seavers">
 
   
-  <meta name="description" content="全屏图片查看器是一个chrome扩展 可以用于全屏查看图片,当查看网页时,按f键后,会隐藏掉网页里的其它内容,只留下大图 举一些实际的使用场景 看一些图片时,发现旁边全是广告,直接屏蔽掉,只显示中间的大图
-浏览壁纸时,全屏展示大图,用于观看全屏效果
-查看所有的图片,直接寻找兴趣点 使用方式 &hellip;">
+  <meta name="description" content="最近开始喜欢上研究ruby了,正好手头有一些抓取的需求,正好练练手 在写爬虫时,我们总希望能方便的实现以下功能 类似curl的下载模块,提供URL即可获取下载内容
+方便的网页分析工具,最好能提供类似css selector的元素选择器
+简单方便的数据处理模块 写个简单的例子 1
+2
+3
+4
+5
+6 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -51,13 +56,113 @@
 <ul class="main-navigation">
   <li><a href="/">Blog</a></li>
   <li><a href="/blog/archives">Archives</a></li>
-  <li><a href="/picture/">picture</a><li>
+  <li><a href="/blog/picture">picture</a><li>
+  <li><a href="/blog/link">link</a></li>
+  <li><a href="/blog/about">about</a></li>
 </ul>
 </nav>
   <div id="main">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/ruby-spider">Ruby Spider</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-12-23T21:19:09+08:00" pubdate data-updated="true">Dec 23<span>rd</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>最近开始喜欢上研究ruby了,正好手头有一些抓取的需求,正好练练手</p>
+
+<p>在写爬虫时,我们总希望能方便的实现以下功能</p>
+
+<ul>
+<li>类似curl的下载模块,提供URL即可获取下载内容</li>
+<li>方便的网页分析工具,最好能提供类似css selector的元素选择器</li>
+<li>简单方便的数据处理模块</li>
+</ul>
+
+
+<p>写个简单的例子</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#encoding:utf-8
+</span><span class='line'>require 'open-uri'
+</span><span class='line'>require 'nokogiri'
+</span><span class='line'>
+</span><span class='line'>def spide
+</span><span class='line'>    url = "http://home.photo.qq.com/index.php?mod=activity&act=detail&category_id=1"
+</span><span class='line'>
+</span><span class='line'>    html = open(url).read
+</span><span class='line'>    doc = Nokogiri::HTML(html)
+</span><span class='line'>
+</span><span class='line'>    list = doc.search('.photo-list li img')
+</span><span class='line'>    list.each { |x|
+</span><span class='line'>        src = x.attr('src')
+</span><span class='line'>        puts src.gsub(/400/, '800');
+</span><span class='line'>    }
+</span><span class='line'>end
+</span><span class='line'>
+</span><span class='line'>spide</span></code></pre></td></tr></table></div></figure>
+
+
+<p>其中:</p>
+
+<ol>
+<li>open-uri模块用于实现curl的功能, open后read即可</li>
+<li>Nokogiri为html分析模块,支持css selector式的元素选择</li>
+<li>而ruby本身的特点, 则可快速处理数据</li>
+</ol>
+
+
+<p>抓到图片URL后,剩下的就容易多了,都下载下来吧~~</p>
+
+<p>&#8220;`</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -852,12 +957,24 @@ deploy会触发git commit, commit再触发hook, hook里再deploy,再commit, 如�
 <aside class="sidebar">
   
     <section>
-  <h1>微博秀</h1>
-  <iframe width="100%" height="550" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=1&ptype=1&speed=300&skin=2&isTitle=1&noborder=1&isWeibo=1&isFans=0&uid=1675756764&verifier=af23a2af&dpc=1"></iframe>
+  <h1>Categories</h1>
+  <ul id="categories">
+    <li class='category'><a href='/blog/categories/chrome/'>chrome (1)</a></li>
+<li class='category'><a href='/blog/categories/hive/'>hive (1)</a></li>
+<li class='category'><a href='/blog/categories/html5/'>html5 (1)</a></li>
+<li class='category'><a href='/blog/categories/octopress/'>octopress (2)</a></li>
+<li class='category'><a href='/blog/categories/ruby/'>ruby (1)</a></li>
+<li class='category'><a href='/blog/categories/ubuntu/'>ubuntu (3)</a></li>
+
+  </ul>
 </section>
 <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/ruby-spider">Ruby Spider</a>
+      </li>
     
       <li class="post">
         <a href="/blog/fullscreen-picture-viewer">全屏图片查看器 Fullscreen Picture Viewer</a>
@@ -873,10 +990,6 @@ deploy会触发git commit, commit再触发hook, hook里再deploy,再commit, 如�
     
       <li class="post">
         <a href="/blog/utuntu-group">Utuntu Group</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/octopress-deploy">Octopress 自动部署方案</a>
       </li>
     
   </ul>

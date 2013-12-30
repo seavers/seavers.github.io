@@ -51,7 +51,9 @@
 <ul class="main-navigation">
   <li><a href="/">Blog</a></li>
   <li><a href="/blog/archives">Archives</a></li>
-  <li><a href="/picture/">picture</a><li>
+  <li><a href="/blog/picture">picture</a><li>
+  <li><a href="/blog/link">link</a></li>
+  <li><a href="/blog/about">about</a></li>
 </ul>
 </nav>
   <div id="main">
@@ -260,12 +262,24 @@ deploy会触发git commit, commit再触发hook, hook里再deploy,再commit, 如�
 <aside class="sidebar">
   
     <section>
-  <h1>微博秀</h1>
-  <iframe width="100%" height="550" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=1&ptype=1&speed=300&skin=2&isTitle=1&noborder=1&isWeibo=1&isFans=0&uid=1675756764&verifier=af23a2af&dpc=1"></iframe>
+  <h1>Categories</h1>
+  <ul id="categories">
+    <li class='category'><a href='/blog/categories/chrome/'>chrome (1)</a></li>
+<li class='category'><a href='/blog/categories/hive/'>hive (1)</a></li>
+<li class='category'><a href='/blog/categories/html5/'>html5 (1)</a></li>
+<li class='category'><a href='/blog/categories/octopress/'>octopress (2)</a></li>
+<li class='category'><a href='/blog/categories/ruby/'>ruby (1)</a></li>
+<li class='category'><a href='/blog/categories/ubuntu/'>ubuntu (3)</a></li>
+
+  </ul>
 </section>
 <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/ruby-spider">Ruby Spider</a>
+      </li>
     
       <li class="post">
         <a href="/blog/fullscreen-picture-viewer">全屏图片查看器 Fullscreen Picture Viewer</a>
@@ -281,10 +295,6 @@ deploy会触发git commit, commit再触发hook, hook里再deploy,再commit, 如�
     
       <li class="post">
         <a href="/blog/utuntu-group">Utuntu Group</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/octopress-deploy">Octopress 自动部署方案</a>
       </li>
     
   </ul>

@@ -4,7 +4,7 @@
   <title><![CDATA[lianghaijun的博客]]></title>
   <link href="http://lianghaijun.com/atom.xml" rel="self"/>
   <link href="http://lianghaijun.com/"/>
-  <updated>2013-12-23T21:15:04+08:00</updated>
+  <updated>2013-12-30T10:02:31+08:00</updated>
   <id>http://lianghaijun.com/</id>
   <author>
     <name><![CDATA[seavers]]></name>
@@ -12,6 +12,77 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Ruby Spider]]></title>
+    <link href="http://lianghaijun.com/blog/ruby-spider"/>
+    <updated>2013-12-23T21:19:09+08:00</updated>
+    <id>http://lianghaijun.com/blog/ruby-spider</id>
+    <content type="html"><![CDATA[<p>最近开始喜欢上研究ruby了,正好手头有一些抓取的需求,正好练练手</p>
+
+<p>在写爬虫时,我们总希望能方便的实现以下功能</p>
+
+<ul>
+<li>类似curl的下载模块,提供URL即可获取下载内容</li>
+<li>方便的网页分析工具,最好能提供类似css selector的元素选择器</li>
+<li>简单方便的数据处理模块</li>
+</ul>
+
+
+<p>写个简单的例子</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#encoding:utf-8
+</span><span class='line'>require 'open-uri'
+</span><span class='line'>require 'nokogiri'
+</span><span class='line'>
+</span><span class='line'>def spide
+</span><span class='line'>    url = "http://home.photo.qq.com/index.php?mod=activity&act=detail&category_id=1"
+</span><span class='line'>
+</span><span class='line'>    html = open(url).read
+</span><span class='line'>    doc = Nokogiri::HTML(html)
+</span><span class='line'>
+</span><span class='line'>    list = doc.search('.photo-list li img')
+</span><span class='line'>    list.each { |x|
+</span><span class='line'>        src = x.attr('src')
+</span><span class='line'>        puts src.gsub(/400/, '800');
+</span><span class='line'>    }
+</span><span class='line'>end
+</span><span class='line'>
+</span><span class='line'>spide</span></code></pre></td></tr></table></div></figure>
+
+
+<p>其中:</p>
+
+<ol>
+<li>open-uri模块用于实现curl的功能, open后read即可</li>
+<li>Nokogiri为html分析模块,支持css selector式的元素选择</li>
+<li>而ruby本身的特点, 则可快速处理数据</li>
+</ol>
+
+
+<p>抓到图片URL后,剩下的就容易多了,都下载下来吧~~</p>
+
+<p>&#8220;`</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[全屏图片查看器 Fullscreen Picture Viewer]]></title>
