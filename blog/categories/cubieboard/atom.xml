@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: cubieboard | lianghaijun的博客]]></title>
+  <link href="http://lianghaijun.com/blog/categories/cubieboard/atom.xml" rel="self"/>
+  <link href="http://lianghaijun.com/"/>
+  <updated>2013-12-31T13:53:19+08:00</updated>
+  <id>http://lianghaijun.com/</id>
+  <author>
+    <name><![CDATA[seavers]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[raspberry 网络设置]]></title>
+    <link href="http://lianghaijun.com/blog/1850803"/>
+    <updated>2013-04-20T19:52:00+08:00</updated>
+    <id>http://lianghaijun.com/blog/1850803</id>
+    <content type="html"><![CDATA[<p>今天调了一天 raspberry pi 的网络设置</p>
+
+<p>测试结论如下
+1. raspberry pi的USB确实有问题, 插拔都会引起系统重启, 尤其是TTL2USB以及USB网卡
+2. usb网卡在TTL模式下时, 可以设置成功, 拔掉TTL后, 自动重启, 然后就连不上了, 再接上TTL, 网络又好了, 很怪
+3. 有线网卡, DHCP下总是不成功, 设置死IP后, 就成功了, 可以断掉TTL, 重启后,依然正常
+4. 有线网卡, DHCP下也是可以成功的, 需要在rc.local中添加 dhclient eth0</p>
+
+<p>正常的/etc/network/interfaces 如下
+[code=&ldquo;conf&rdquo;]
+auto lo
+iface lo inet loopback</p>
+
+<p>auto eth0
+allow-hotplug eth0</p>
+
+<h1>iface eth0 inet dhcp</h1>
+
+<p>iface eth0 inet static
+   address 192.168.1.8
+   netmask 255.255.255.0
+   gateway 192.168.1.1</p>
+
+<p>allow-hotplug wlan0
+iface wlan0 inet manual
+wpa-roam /etc/wpa_supplicant/wpa_supplicant.conf
+iface default inet dhcp</p>
+
+<p>```</p>
+
+<p>以上测试基于2013-02-09-wheezy-raspbian.img
+只改动了 interfaces , 其余未动</p>
+
+<p>dhcp的/etc/network/interfaces 如下
+[code=&ldquo;conf&rdquo;]
+auto lo
+iface lo inet loopback</p>
+
+<p>auto eth0
+allow-hotplug eth0
+iface eth0 inet dhcp</p>
+
+<p>allow-hotplug wlan0
+iface wlan0 inet manual
+wpa-roam /etc/wpa_supplicant/wpa_supplicant.conf
+iface default inet dhcp</p>
+
+<p>```
+并在 /etc/rc.local中添加一行, 需在exit 0前
+dhclient eth0</p>
+
+<ol>
+<li>难道无线网卡也是同样的问题, 再试下</li>
+</ol>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[sunxi-bsp 脚本分析]]></title>
+    <link href="http://lianghaijun.com/blog/1833467"/>
+    <updated>2013-03-21T15:36:00+08:00</updated>
+    <id>http://lianghaijun.com/blog/1833467</id>
+    <content type="html"><![CDATA[<p>cubieboard刷sd卡时, 使用了下面的脚本
+[url]<a href="https://github.com/linux-sunxi/sunxi-bsp/blob/master/scripts/sunxi-media-create.sh">https://github.com/linux-sunxi/sunxi-bsp/blob/master/scripts/sunxi-media-create.sh</a>[/url]</p>
+
+<p>命令如下:
+./script/sunxi-media-create.sh /dev/sdb 引导文件 操作系统文件</p>
+
+<p>[size=medium]分析如下:</p>
+
+<ul>
+<li>umount sd</li>
+<li>sd卡前1M的字节,全部清0</li>
+<li>sfdisk命令写分区表</li>
+<li>两个分区分别格式化成vfat与ext4文件系统</li>
+<li>解压两个文件到临时目录</li>
+<li>/bootloader/sunxi-spl.bin 写至sd卡8K处, (第二引导系统处)</li>
+<li>/bootloader/u-boot.bin 写至32K处        (真正的引导模块)</li>
+<li>两个分区mount至文件系统</li>
+<li>拷贝文件 /kernel/uImage => 第一分区</li>
+<li>拷贝文件 /kernel/*.bin  => 第一分区</li>
+<li>拷贝文件 /kernel/*.scr  => 第一分区</li>
+<li>拷贝文件 操作系统文件/*   => 第二分区</li>
+<li>拷贝文件 /rootfs/*      => 第二分区</li>
+</ul>
+
+
+<p>[size=medium]总结如下:</p>
+
+<ul>
+<li>脚本主要是分区,格式化,拷贝文件</li>
+<li>分成两个区,两个文件解压后,拷贝至分区内</li>
+</ul>
+
+
+<p>[size=medium]关于源码
+源码的github上,有几多很特别的目录, 是打不开的, 很怪~~~
+更详细的可参考:
+[url]<a href="http://linux-sunxi.org/Main_Page/zh_cn#.E8.BD.AF.E4.BB.B6">http://linux-sunxi.org/Main_Page/zh_cn#.E8.BD.AF.E4.BB.B6</a>[/url]</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[cubieboard上手]]></title>
+    <link href="http://lianghaijun.com/blog/1832923"/>
+    <updated>2013-03-20T20:19:00+08:00</updated>
+    <id>http://lianghaijun.com/blog/1832923</id>
+    <content type="html"><![CDATA[<p>最近刚买了cubieboard, 入手到玩转后的各个过程记录下</p>
+
+<p>购买链接: [url]<a href="http://item.taobao.com/item.htm?id=18271795262">http://item.taobao.com/item.htm?id=18271795262</a>[/url]
+已有装备: 笔记本, 无线路由器
+入手装备: cubieboard, 带电源,ttl2usb线等
+关键问题: 无显示器与电视
+超市购物: 读卡器+网线,  (从手机上拿的TF卡)</p>
+
+<p>[size=large]Q: 没有显示器与电视, 如何连接</p>
+
+<ul>
+<li>板子预装的android, 启动后, 可以直连至无线路由器, 但无法ssh或telnet上</li>
+<li>使用TTL线进行连接 <a href="http://linux-sunxi.org/Cubieboard/TTL">http://linux-sunxi.org/Cubieboard/TTL</a></li>
+<li>然后使用windows/putty连接  方式:serial COM3 速率:115200</li>
+<li>然后接上电源就可以看到输出信息了, 这时就可以敲shell命令了 (如ls)</li>
+<li>没有找到命令行下载与安装软件的方式, 后续考虑</li>
+</ul>
+
+
+<p>[size=large]Q: 在tf卡上安装ubuntu</p>
+
+<ul>
+<li>用读卡器装tf卡连接到了ubuntu笔记本上</li>
+<li>刚开始时, 容量有问题, 只有64M, 用fdisk命令解决了, 见前一博文</li>
+<li>刷tf方法见:   [url]<a href="http://blog.sina.com.cn/s/blog_5459f60d0101h0j3.html">http://blog.sina.com.cn/s/blog_5459f60d0101h0j3.html</a>[/url]
+[url]<a href="http://cn.cubieboard.org/forum.php?mod=viewthread&amp;tid=55&amp;extra=page%3D1">http://cn.cubieboard.org/forum.php?mod=viewthread&amp;tid=55&amp;extra=page%3D1</a>[/url]
+(precise在镜像上已经失效了,换quantal(即v12.10))</li>
+<li>装上tf卡, 拔电源重启, 就可在ttl上看到, 已经连接到ubuntu上, 并且可以敲命令了</li>
+<li>在/etc/resolv.conf配置nameserver, 就可以ping通baidu.com了</li>
+<li>apt-get install openssh-server, 然后就可以拔掉ttl线了,</li>
+<li>买上无线网卡, 就可拔掉网线, 连接线, 只剩下电源线了</li>
+</ul>
+
+
+<p>[size=large]Q: 刷nand</p>
+
+<ul>
+<li>可使用官网提供的方式刷系统</li>
+<li>也可以用tf卡的ubuntu, 直接写系统至 /dev/nand</li>
+<li>拔掉tf卡, 用nand上的系统启动</li>
+</ul>
+
+
+<p>接下来, 就可以搜索各种有趣的玩法了~~~</p>
+
+<hr />
+
+<p>sd卡刷ubuntu/linaro, (来源见前面描述)
+<code>
+git clone https://github.com/linux-sunxi/sunxi-bsp/
+cd sunxi-bsp
+wget http://dl.linux-sunxi.org/amery/sunxi-3.0/latest/cubieboard_hwpack.tar.xz
+wget http://releases.linaro.org/latest/ubuntu/quantal-images/alip/linaro-quantal-alip-20121124-519.tar.gz
+./scripts/sunxi-media-create.sh /dev/sdb cubieboard_hwpack.tar.xz linaro-quantal-alip-20121124-519.tar.gz
+</code></p>
+]]></content>
+  </entry>
+  
+</feed>

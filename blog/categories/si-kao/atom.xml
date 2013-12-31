@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: 思考 | lianghaijun的博客]]></title>
+  <link href="http://lianghaijun.com/blog/categories/si-kao/atom.xml" rel="self"/>
+  <link href="http://lianghaijun.com/"/>
+  <updated>2013-12-31T13:53:19+08:00</updated>
+  <id>http://lianghaijun.com/</id>
+  <author>
+    <name><![CDATA[seavers]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[小清新网站标准]]></title>
+    <link href="http://lianghaijun.com/blog/1981188"/>
+    <updated>2013-11-26T23:19:00+08:00</updated>
+    <id>http://lianghaijun.com/blog/1981188</id>
+    <content type="html"><![CDATA[<p>[size=large]<em>小清新网站标准</em>        纯属YY</p>
+
+<ul>
+<li>采用微博登录</li>
+<li>提供iphone,android,html5版本</li>
+<li>采用小新清设计原则:  色块背景, 图文混排, 配色明亮, 合适留白</li>
+<li>新删改采用ajax请求, 支持滚动式翻页</li>
+<li>restful url</li>
+<li>icon式文字, 文字式按钮</li>
+<li>赞, 评论, 分享, 收藏, 加关注</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[思考方法论]]></title>
+    <link href="http://lianghaijun.com/blog/1881714"/>
+    <updated>2013-06-03T19:56:00+08:00</updated>
+    <id>http://lianghaijun.com/blog/1881714</id>
+    <content type="html"><![CDATA[<ol>
+<li>客户是谁？客户细分？</li>
+<li>客户需要我们解决的问题？</li>
+<li>什么情况和标志出现才体现我们解决了客户的问题？</li>
+<li>独特卖点？与众不同的引起客户关注的是什么？</li>
+<li>为解决客户的问题，我们需要聚焦的突破点和瓶颈是什么？</li>
+<li>客户现有的能力即制或习惯是什么？</li>
+<li>解决方案</li>
+<li>产品最重要的三个功能？</li>
+<li>客户参与的动力在哪？</li>
+</ol>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[使用符号链接提高工作效率]]></title>
+    <link href="http://lianghaijun.com/blog/1825519"/>
+    <updated>2013-03-07T14:23:00+08:00</updated>
+    <id>http://lianghaijun.com/blog/1825519</id>
+    <content type="html"><![CDATA[<p>使用符号链接提高工作效率</p>
+
+<p>目标
+本文主要阐述一种理念，如何使用符号链接来提高工作效率</p>
+
+<p>[size=large]什么是符号链接
+1. windows下使用junction或者mklink /J创建的符号链接 (非快捷方式)
+2. linux下使用ln -s创建的符号链接</p>
+
+<p>让我们来先看看各种使用场景</p>
+
+<p><em>dropbox</em>
+很多网盘只支持同步单一个文件夹，容易设计，容易理解，容易使用
+但事实上会遇到很多不方便，尤其是想同步一个已经存在的目录时
+使用junction或ln -s吧，不仅同步，还不影响原来的开发环境</p>
+
+<p><em>apache</em>
+apache默认安装的时候，根目录是指向 /var/www 的
+很多人喜欢去改 apache.conf 来修改ROOT 比如改至 ~/workspace 这样的
+其实可以这样用 ln -s ~/workspace  /var/www/workpsace
+这样能解决几个问题
+a). 系统重装时，或者更换环境时， /home/xx/workspace要换成 /home/yy/workspace，因为使用 ~ ，apache可能不知所云
+b). 这时，如果想重新搭环境，改apache.conf是个问题，是从网上下载一份，还是拷贝之前，有时喜欢把这些配置放在云盘备份，但有些目录系统重装后目录就没了，或者要配置另一个环境
+c). SCM维护大量机器的时候，也是希望.conf可以统一，不统一的再用include子conf
+d). 如果使用 alias, 这不要改配置还要重启吗？ 试试符号链接吧, ls一目了然
+e). 也许会有很多不错的使用方式</p>
+
+<pre><code>i). 把公司统一配置的tools从共享服务器别名过来，里面已经装了dummyimage等等
+ii). 把github目录别名过来，直接浏览器预览
+iii). 把 ~/personal/secret 临时别名下，使用完后，马上删除别名
+</code></pre>
+
+<p>f). 很多好处</p>
+
+<p><em>切换版本</em>
+比如:
+<a href="http://backup.com/nodejs/lastest/index.html">http://backup.com/nodejs/lastest/index.html</a>
+<a href="http://backup.com/nodejs/v8.0.16/index.html">http://backup.com/nodejs/v8.0.16/index.html</a>
+<a href="http://backup.com/nodejs/v8.0.22/index.html">http://backup.com/nodejs/v8.0.22/index.html</a>
+这里的lastest目录，就使用符号链接吧</p>
+
+<p><a href="http://ftp.mozilla.org/pub/mozilla.org/firefox/releases/latest/">http://ftp.mozilla.org/pub/mozilla.org/firefox/releases/latest/</a>
+这里的lastest，也应该是某个版本的符号链接吧
+难道每发布一次版本，改下apache.conf，再重启，用符号链接</p>
+
+<p>你经常在python2 与 python3 之间切换，这些路径在很多地方都配置过，在shell,在历史维护任务，在很多django工程中，你新找到一个python3的运行统计工具，你想尝试下，建立一个python别名，大家都指向到这里吧，随时切换</p>
+
+<p><em>mod-enabled</em>
+无意中发现ubuntu中的/etc/apache2/中的模块是这样管理的
+将增加删除一个模块，改为文件操作，不用再修改配置文件了
+如果能不改配置文件，就会有以下好处
+1. 命令行工具，帮忙调整apache配置时，可以不用去改配置文件，避名意外
+2. apt-get做插件开发时，不需要去解析修改配置文件，直接改文件就可能是一个插件了</p>
+
+<p><em>/etc/init.d/</em>
+在linux下面，有很多目录下，都是由一些别名文件组成的
+/etc/init.d/    /etc/fonts/conf.d
+这些目录大部分是相当于一个list的工作，用于收集需要进行的任务
+然后将各个任务从四面八方收集而来，这里只是一个汇总工作，不破坏各个任务的内容</p>
+
+<p><em>库</em>
+win7引入的库，其实也是一个别名，也是一个符号链接的应用</p>
+
+<p><em>你有什么想法？</em></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[包管理软件]]></title>
+    <link href="http://lianghaijun.com/blog/1820183"/>
+    <updated>2013-03-01T22:38:00+08:00</updated>
+    <id>http://lianghaijun.com/blog/1820183</id>
+    <content type="html"><![CDATA[<p>常见的各类包管理软件对比</p>
+
+<p>包管理分类</p>
+
+<ul>
+<li>操作系统包管理  如: yum (RHL), apt-get(ubuntu), homebrew(mac)</li>
+<li>语言级别  如: npm(nodejs), gem(ruby),pip(python), bower(javascript), maven(java)</li>
+</ul>
+
+
+<p>总结</p>
+
+<ul>
+<li>包管理几乎都有list, install, uninstall, update|upgrade, search 等功能</li>
+<li>语言级别时, 因涉及到应用, 会分 local与global, 会有工程配置如package.json</li>
+<li>maven比较特殊, 不支持install, 需要手工配置pom.xml   (需要不少插件)</li>
+</ul>
+
+
+<p>一些列表
+[table]
+|name   | list | install | uninstall| update | search | init|
+|apt-get| apt-cache  | install | uninstall | upgrade | apt-cache search | |
+|yum     | ||||||
+|brew    | list | install | uninstall | upgrade | search | |
+|npm     | local | -g &mdash;save  | prune  | update |  /regexp | package.json|
+|gem     | &mdash;local | local| cleanup | update | &mdash;remote | Gemfile (bundle init)|
+|pip       | freeze | install | uninstall | &mdash;&mdash; | search | |
+|bower  | list  | -g &mdash;save | cache-clean | update | search  |  component.json |
+[/table]</p>
+
+<p>心得</p>
+
+<ul>
+<li>yum, apt-get, npm, gem 几乎是官方的, 但mac, python还是选择性较多</li>
+<li>install 并保存至 .json 配置时, 使用 &mdash;save参数, 但gem,python不清楚,待补充</li>
+<li>有些update是更新版本信息的, upgrade才是升级所有组件</li>
+<li>组件的依赖版本冲突如何办, npm的方法确实不错</li>
+</ul>
+
+
+<p>汇总列表</p>
+
+<ul>
+<li>apt-get(ubuntu),yum(fedora),macports(mac),homebrew(mac),pkg(solaris),emerge(Gentoo)</li>
+<li>npm(nodejs),gem(ruby),pip(python),easy_install(python),nuget(vs),bower(javascript)</li>
+<li>maven(java),grunt(java),gradle(java),pear(php),cpan(perl)</li>
+<li></li>
+</ul>
+
+
+<p>各种镜像:
+<a href="http://ruby.taobao.org/">http://ruby.taobao.org/</a>
+<a href="http://gems.rubyforge.org/">http://gems.rubyforge.org/</a>
+<a href="http://gems.github.com/">http://gems.github.com/</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[关于平台]]></title>
+    <link href="http://lianghaijun.com/blog/1782749"/>
+    <updated>2013-02-01T16:15:00+08:00</updated>
+    <id>http://lianghaijun.com/blog/1782749</id>
+    <content type="html"><![CDATA[<p>所谓“平台”就是能够独立运行并自主存在，为其所支撑的上层系统和应用提供运行所依赖的环境。 (来自百度百科)</p>
+
+<p>越来越多的平台出现了
+1. 操作系统层面: PC, MAC, IOS, Android,
+2. 技术体系层面: HTML5, Flash
+3. 语言层面:  java, .net, python
+4. 业务开放平台:  webbo, qq, baidu, taobao 开放平台
+5. &hellip;.</p>
+
+<p>每个大公司都在制造自己的大平台, 各方各面的大平台
+很多程序也在不断完善着自己的产品, 在每个平台上, 推出自己的产品</p>
+
+<p>如:
+1. 很多云盘都在不断扩充自己的战线, 支持着越来越多的平台
+2. 音乐听歌软件，也是pc, mac, web, ios, mp3， 甚至不少开放平台上</p>
+
+<hr />
+
+<p>继续:
+1. 如果有着各色各样的虚拟机,模拟器, 我们就可以将另一个平台的软件迁移至新的平台
+2. 但是移植并不是那么容易的,很多软件移植时，必须作更改，甚至是界面，操作上的更改
+3. 平台的差异同时也决定着移植的难度， 如PC上软件，迁移至触摸屏上
+4. 当然：平台的迁移也有着自己的复杂度</p>
+
+<p>考虑一类迁移
+1. FC游戏机上软件的迁移，我们会统称这类软件为模拟器，我们会建立各种各样的模块器
+2. windows上的模拟器，mac上，flash的，html5版的
+3. 我们不需要，一个游戏一个游戏的迁移， 我们只需要一个模拟器就可以了</p>
+
+<hr />
+
+<p>然后：
+1. 各色各样的模拟器出现了
+2. FC的，GBA的，DOSBOX, 然后是IOS的
+3. 最重量级的， 就是虚拟机了， 直接模拟硬件，连各类操作系统也模拟了</p>
+
+<p>好了
+1. 你可以在一个终级模拟的PC上玩着，各色各样的终端的产品
+2. 现在触模的笔记本也出来，你可以模拟更多的终端了
+3.</p>
+
+<hr />
+
+<ol>
+<li>突然想通了GOOGLE的本质，google就是想在web上，搭建着更加终极的终端，其它终端能干的事，他也要做出来，做不出来，就模拟一个终端出来</li>
+<li>想想这个可能性：
+  a) web版linux
+  b) web版模拟器，有flash版本的，也有nacl版本的
+  c) web版远程连接，有vnc, 有RDP的，还有chrome与chrome的
+  d) web版的云盘，相当于硬盘
+  e) web版的操作系统, chromeOS
+  f) web版的。。。。</li>
+<li>一流的企业做平台啊~~~</li>
+</ol>
+
+
+<hr />
+
+<ol>
+<li>我们经常在代码中，设计一些中间层，借此来统一各类解决方案</li>
+<li>如JDBC接口的出现，就是JAVA当年为了统一存取各种关系数据库</li>
+<li>而这样一来，带来了相当多的好处，上层使用方面了，中间层可以各类扩展，底层也有一依据，大家都很愉快</li>
+<li>同时，成功与失败都在于接口的设计的好与坏</li>
+<li>类似这样的设计有很多：opengl， 各类图片视频格式，tcp/ip， 等等。。</li>
+<li>硬件也是同理的，像USB, wifi， 都是这样的例子</li>
+</ol>
+
+
+<hr />
+
+<p>用于实际中
+1. 我们平时的软件开发过程中，也需要加入这样的思考
+2. 一是采用业界通入的解决方案，这样会有很多的第三方的技术，工具支持
+3. 二是从中抽象出自己的中间平台来，让别人帮你丰富起来
+4. 在中间平台上，作更多的文章</p>
+
+<hr />
+
+<p>平台的成功与失败
+1. 平台的成功有时不在于平台的技术实力，接口的完善
+2. 更多的还是在于，支持者的实力，以及平台对应工具的实力了
+3. 只有用户看到平台真正带来的好处，才会明白过来</p>
+
+<p>举例：
+1. 之前还是ant+cvs的年代的时候，并没有感觉到，会被新的maven+svn取代，但是周边工具丰富起来时，慢慢的大家也就接受了
+2. 再想想现在的git与svn，有人喜欢有人讨厌，但git支持的人多，有很多人共同努力，替代svn估计也是迟早的事情了
+3. 等到svn最后一个让你挽留的特性也被git模仿超越的时候，你就会改变你的想法了
+4. 早点尝试，多学习下，对你有好处
+5. 更多的趋势正在进行，你捕捉到了吗？ 要不要提前学习下</p>
+
+<hr />
+
+<p>有人说，变化每天都在继续，说不定，将来谁笑到最后
+而且变化那么多，哪有办法都学的过来，实在太多了
+提高自己的开发效率，从手头相关的工具，框架，平台开始吧</p>
+
+<ol>
+<li>IDE，开发语言，编程框架，浏览器，操作系统，文件共享，版本管理，知识管理</li>
+<li>太多的基础平台，多研究下，改进下效率吧</li>
+<li>如果有兴趣，可以找一个方向，大胆深入底层去看看</li>
+<li>别忘了，找志同道合的人去一起研究</li>
+</ol>
+
+]]></content>
+  </entry>
+  
+</feed>

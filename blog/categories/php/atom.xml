@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: php | lianghaijun的博客]]></title>
+  <link href="http://lianghaijun.com/blog/categories/php/atom.xml" rel="self"/>
+  <link href="http://lianghaijun.com/"/>
+  <updated>2013-12-31T13:53:19+08:00</updated>
+  <id>http://lianghaijun.com/</id>
+  <author>
+    <name><![CDATA[seavers]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[php 学习笔记 (1)]]></title>
+    <link href="http://lianghaijun.com/blog/903168"/>
+    <updated>2011-02-10T22:02:00+08:00</updated>
+    <id>http://lianghaijun.com/blog/903168</id>
+    <content type="html"><![CDATA[<p>与java.String对比
+[table]
+||id|java.String|php.String|
+||0| equals | strcmp |
+||1| substring(start,end)| substr(string,start,length) |
+||2| indexOf(str, fromIndex)|  strpos stripos  ,  strstr  stristr  strrpos|
+||3| concat(str) (+)| (.)|
+||4| startsWith ||
+||5| endsWith ||
+||6| getBytes | |
+||7| matches | |
+||8| replace | str_replace(find, replace, str, count)  ,  str_ireplace|
+||9| replaceAll ||
+||10| split | |
+||11| toLowerCase | strtolower() |
+||12| toUpperCase | strtoupper()|
+||13| trim() | trim()  ltrim()  rtrim()|
+||14| length | strlen |
+||15|  | md5|
+||16| format|fprintf|
+[/table]</p>
+
+<p>php    join  md5</p>
+]]></content>
+  </entry>
+  
+</feed>

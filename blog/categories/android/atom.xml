@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: android | lianghaijun的博客]]></title>
+  <link href="http://lianghaijun.com/blog/categories/android/atom.xml" rel="self"/>
+  <link href="http://lianghaijun.com/"/>
+  <updated>2013-12-31T13:53:19+08:00</updated>
+  <id>http://lianghaijun.com/</id>
+  <author>
+    <name><![CDATA[seavers]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[android 整合 maven 环境]]></title>
+    <link href="http://lianghaijun.com/blog/1857184"/>
+    <updated>2013-04-30T14:33:00+08:00</updated>
+    <id>http://lianghaijun.com/blog/1857184</id>
+    <content type="html"><![CDATA[<p>我们再先整理一下思路:</p>
+
+<p>使用eclipse:
+1. 创建:  adt自带的android创建插件  New &ndash;> android application project
+2. 引入:  import &ndash;> existing project into workspace
+3. 打包:  run as &ndash;>  android application</p>
+
+<p>使用maven:
+1. 创建: maven archetype:generate (99: de.akquinet.android.archetypes:android-quickstart)</p>
+
+<pre><code>  [url]https://github.com/akquinet/android-archetypes[/url]
+</code></pre>
+
+<ol>
+<li>运行: maven clean package android:deploy android:run    (android-maven-plugin)</li>
+<li>引入eclipse:
+    a).  mvn eclipse:eclipse
+    b).  import &ndash;> android &ndash;> existing android code into workspace
+    c).  注意, 要选中 copy projects into workspace , 否则会有 overlaps 问题
+    d).  下次,已经存在.project .classpath, 直接导入已存在的java工程即可</li>
+<li>打包同上~~~</li>
+</ol>
+
+
+<hr />
+
+<p>用maven编译android并部署
+<code>
+  export ANDROID_HOME=~/android/sdk/
+  mvn clean package android:deploy android:run
+</code></p>
+
+<p>其中package中使用了 android-maven-plugin中的</p>
+
+<ul>
+<li>android-maven-plugin:3.5.0:generate-sources</li>
+<li>android-maven-plugin:3.5.0:proguard</li>
+<li>android-maven-plugin:3.5.0:emma</li>
+<li>android-maven-plugin:3.5.0:dex</li>
+<li>android-maven-plugin:3.5.0:apk</li>
+</ul>
+
+
+<p>这四个mvn指令,穿插在了package正常打包过程中
+这四个mvn指令,均是直接调用了android.sdk中的platform-tools中的某个指令或java调用</p>
+
+<p>```
+<plugin></p>
+
+<pre><code>&lt;groupId&gt;com.jayway.maven.plugins.android.generation2&lt;/groupId&gt;
+&lt;artifactId&gt;android-maven-plugin&lt;/artifactId&gt;
+&lt;version&gt;3.1.1&lt;/version&gt;
+&lt;extensions&gt;true&lt;/extensions&gt;
+&lt;configuration&gt;
+ &lt;sdk&gt;
+  &lt;platform&gt;16&lt;/platform&gt;
+ &lt;/sdk&gt;
+&lt;/configuration&gt;
+</code></pre>
+
+<p>   </plugin></p>
+
+<p>```</p>
+
+<p>maven.android的eclipse常用插件是 m2e-android 插件
+可以认为m2e-android也是同样的道理,</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[android开发环境]]></title>
+    <link href="http://lianghaijun.com/blog/1857067"/>
+    <updated>2013-04-29T23:06:00+08:00</updated>
+    <id>http://lianghaijun.com/blog/1857067</id>
+    <content type="html"><![CDATA[<p>android 开发环境搭建</p>
+
+<p>刚接触android开发, 前辈们都说现在的android开发环境比以前容易搭建了~~~</p>
+
+<p>搭建方式如下:</p>
+
+<ol>
+<li>下载android sdk
+[url]<a href="http://developer.android.com/sdk/index.html">http://developer.android.com/sdk/index.html</a>[/url]
+下载后的sdk, 包括了 eclipse 以及 sdk</li>
+<li>解压, 并切换至 eclipse 目录, 打开 eclipse</li>
+<li>eclipse打开菜单window-android SDK Manager下载SDK sources</li>
+<li>安装m2e-android 用于maven工程    (当然没有使用maven就算了)
+web: [url]<a href="http://rgladwell.github.com/m2e-android/">http://rgladwell.github.com/m2e-android/</a>[/url]
+update: [url]<a href="http://rgladwell.github.com/m2e-android/updates/">http://rgladwell.github.com/m2e-android/updates/</a>[/url]</li>
+<li>import导入 maven版的android工程</li>
+</ol>
+
+
+<p>另外:</p>
+
+<p>由于android自带的eclipse不支持eclipse marketplace
+你也可以下载最新版eclipse
+然后从插件市场中下载 android sdk, m2e-android</p>
+
+<p>入门必备,存档留念</p>
+]]></content>
+  </entry>
+  
+</feed>

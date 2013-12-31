@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: java | lianghaijun的博客]]></title>
+  <link href="http://lianghaijun.com/blog/categories/java/atom.xml" rel="self"/>
+  <link href="http://lianghaijun.com/"/>
+  <updated>2013-12-31T13:53:19+08:00</updated>
+  <id>http://lianghaijun.com/</id>
+  <author>
+    <name><![CDATA[seavers]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Class.forName 返回 String[].class]]></title>
+    <link href="http://lianghaijun.com/blog/1923887"/>
+    <updated>2013-08-13T11:38:00+08:00</updated>
+    <id>http://lianghaijun.com/blog/1923887</id>
+    <content type="html"><![CDATA[<p>A: 如何通过Class.forName 返回 String[].class
+Q: Class.forName(&ldquo;[Ljava.lang.String;&rdquo;)</p>
+
+<p>因为 String[].class.getName() => &ldquo;[Ljava.lang.String;&rdquo;
+经测试, 反过来, 也成立</p>
+
+<p>因此:
+在sqlmap-config.xml可以这样写</p>
+
+<p><code>
+&lt;typeHandler javaType="[Ljava.util.String;" callback="xxxxxx.StringArrayTypeHandler" /&gt;
+</code></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[ibatis typehandler]]></title>
+    <link href="http://lianghaijun.com/blog/1922745"/>
+    <updated>2013-08-09T18:57:00+08:00</updated>
+    <id>http://lianghaijun.com/blog/1922745</id>
+    <content type="html"><![CDATA[<p>今天配置typehandler时碰到一个问题</p>
+
+<p>主要解决的问题是
+java.sql.SQLException: Cannot convert value &lsquo;0000-00-00 00:00:00&rsquo; from column 18 to TIMESTAMP</p>
+
+<p>解决方案: 替换掉系统默认的 typehandler, 抛出异常时,改为null</p>
+
+<p>```
+&lt;?xml version=&ldquo;1.0&rdquo; encoding=&ldquo;GBK&rdquo;?>
+&lt;!DOCTYPE sqlMapConfig
+ PUBLIC &ldquo;&ndash;//iBATIS.com//DTD SQL Map Config 2.0//EN&rdquo;
+ &ldquo;<a href="http://www.ibatis.com/dtd/sql-map-config-2.dtd">http://www.ibatis.com/dtd/sql-map-config-2.dtd</a>&rdquo;>
+<sqlMapConfig></p>
+
+<pre><code>&lt;settings 
+    cacheModelsEnabled="true" 
+/&gt;
+&lt;typeHandler javaType="java.util.Date" callback="xxxxxxxxx.CustomDateTypeHandler" /&gt;
+
+&lt;sqlMap resource="sqlmap/sqlmap-price.xml" /&gt;   
+</code></pre>
+
+<p></sqlMapConfig></p>
+
+<p>```</p>
+
+<p>这里需要注意的是</p>
+
+<ol>
+<li>typeHandler 中的 jdbcType 取值应为 null, DATE, TIME, 这里用的null</li>
+<li>typehandler 必须要在 sqlmap 前面, 否则sqlmap中的类型handler就会用默认的</li>
+</ol>
+
+
+<p>下面是自定义的datetypehandler</p>
+
+<p>package xxxxxxxxx;</p>
+
+<p>import java.sql.CallableStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;</p>
+
+<p>import com.ibatis.sqlmap.engine.type.DateTypeHandler;</p>
+
+<p>public class CustomDateTypeHandler extends DateTypeHandler {</p>
+
+<pre><code>@Override
+public Object getResult(ResultSet rs, String columnName) throws SQLException {
+    try {
+        return super.getResult(rs, columnName);
+    } catch(SQLException e) {
+        if("S1009".equals(e.getSQLState())) {
+            return null;
+        }
+        throw e;
+    }
+}
+
+@Override
+public Object getResult(ResultSet rs, int columnIndex) throws SQLException {
+    try {
+        return super.getResult(rs, columnIndex);
+    } catch(SQLException e) {
+        if("S1009".equals(e.getSQLState())) {
+            return null;
+        }
+        throw e;
+    }
+}
+
+@Override
+public Object getResult(CallableStatement cs, int columnIndex) throws SQLException {
+    try {
+        return super.getResult(cs, columnIndex);
+    } catch(SQLException e) {
+        if("S1009".equals(e.getSQLState())) {
+            return null;
+        }
+        throw e;
+    }
+}
+</code></pre>
+
+<p>}
+```</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[java rsa code]]></title>
+    <link href="http://lianghaijun.com/blog/1855578"/>
+    <updated>2013-04-26T23:08:00+08:00</updated>
+    <id>http://lianghaijun.com/blog/1855578</id>
+    <content type="html"><![CDATA[<p>package rsa;
+import java.security.Key;<br/>
+import java.security.KeyFactory;<br/>
+import java.security.KeyPair;<br/>
+import java.security.KeyPairGenerator;<br/>
+import java.security.PrivateKey;<br/>
+import java.security.PublicKey;<br/>
+import java.security.interfaces.RSAPrivateKey;<br/>
+import java.security.interfaces.RSAPublicKey;<br/>
+import java.security.spec.PKCS8EncodedKeySpec;<br/>
+import java.security.spec.X509EncodedKeySpec;</p>
+
+<p>import javax.crypto.Cipher;</p>
+
+<p>import sun.misc.BASE64Decoder;<br/>
+import sun.misc.BASE64Encoder;</p>
+
+<p>public class RSAUtil {</p>
+
+<pre><code>public static String[] initKey() throws Exception {
+    KeyPairGenerator keyPairGen = KeyPairGenerator.getInstance("RSA");  
+    //密钥位数  
+    keyPairGen.initialize(1024);  
+    //密钥对  
+    KeyPair keyPair = keyPairGen.generateKeyPair();  
+
+    // 公钥  
+    PublicKey publicKey = (RSAPublicKey) keyPair.getPublic();  
+
+    // 私钥  
+    PrivateKey privateKey = (RSAPrivateKey) keyPair.getPrivate();  
+
+    String publicKeyString = getKeyString(publicKey);  
+    System.out.println("public:\n" + publicKeyString);  
+
+    String privateKeyString = getKeyString(privateKey);  
+    System.out.println("private:\n" + privateKeyString);  
+    return new String[]{publicKeyString, privateKeyString};
+}
+
+public static String encode(String data, String publicKey) throws Exception {
+    //加解密类  
+    Cipher cipher = Cipher.getInstance("RSA");//Cipher.getInstance("RSA/ECB/PKCS1Padding");  
+    cipher.init(Cipher.ENCRYPT_MODE, getPublicKey(publicKey));  
+
+    //加密  
+    byte[] enBytes = cipher.doFinal(data.getBytes("UTF-8"));  
+    return new BASE64Encoder().encode(enBytes);
+}
+
+public static String decode(String data, String privateKey) throws Exception {
+    //加解密类  
+    Cipher cipher = Cipher.getInstance("RSA");//Cipher.getInstance("RSA/ECB/PKCS1Padding");  
+    cipher.init(Cipher.DECRYPT_MODE, getPrivateKey(privateKey));  
+
+    //加密  
+    byte[] deBytes = new BASE64Decoder().decodeBuffer(data);
+    byte[] enBytes = cipher.doFinal(deBytes);  
+    return new String(enBytes, "UTF-8");
+}   
+
+
+  /** 
+   * 得到公钥 
+   * @param key 密钥字符串（经过base64编码） 
+   * @throws Exception 
+   */  
+  private static PublicKey getPublicKey(String key) throws Exception {  
+        byte[] keyBytes;  
+        keyBytes = (new BASE64Decoder()).decodeBuffer(key);  
+
+        X509EncodedKeySpec keySpec = new X509EncodedKeySpec(keyBytes);  
+        KeyFactory keyFactory = KeyFactory.getInstance("RSA");  
+        PublicKey publicKey = keyFactory.generatePublic(keySpec);  
+        return publicKey;  
+  }  
+  /** 
+   * 得到私钥 
+   * @param key 密钥字符串（经过base64编码） 
+   * @throws Exception 
+   */  
+  private static PrivateKey getPrivateKey(String key) throws Exception {  
+        byte[] keyBytes;  
+        keyBytes = (new BASE64Decoder()).decodeBuffer(key);  
+
+        PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(keyBytes);  
+        KeyFactory keyFactory = KeyFactory.getInstance("RSA");  
+        PrivateKey privateKey = keyFactory.generatePrivate(keySpec);  
+        return privateKey;  
+  }  
+
+  /** 
+   * 得到密钥字符串（经过base64编码） 
+   * @return 
+   */  
+  private static String getKeyString(Key key) throws Exception {  
+        byte[] keyBytes = key.getEncoded();  
+        String s = (new BASE64Encoder()).encode(keyBytes);  
+        return s;  
+  }  
+
+
+  public static void main(String[] args) throws Exception {  
+      //明文  
+      String plainText = "很好！hello world";  
+      String[] keys = initKey();
+
+      System.out.println(encode(plainText, keys[0]));
+      System.out.println(decode(encode(plainText, keys[0]), keys[1]));
+
+  }  
+</code></pre>
+
+<p>}<br/>
+```</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[利用bat反编译jar包生成源码jar包]]></title>
+    <link href="http://lianghaijun.com/blog/1416013"/>
+    <updated>2012-02-21T22:27:00+08:00</updated>
+    <id>http://lianghaijun.com/blog/1416013</id>
+    <content type="html"><![CDATA[<p>之前曾发表在 csdn(blog.csdn.net/seavers) 上, 不过, csdn的代码乱掉了, 今天重新整理了一下</p>
+
+<p>反编译所使用的工具是jad.exe,笔者的测试版本是1.5.8e,压缩与解压缩使用的是WinRAR</p>
+
+<p>jad.exe 可反编译一个class文件为java文件,笔者的BAT可通过此工具将一个jar包反编译成一个完整的源码jar包,同时生成的目录也可以在eclipse中使用</p>
+
+<p>jad.exe 官方网站 ： <a href="http://www.kpdus.com/jad.html">http://www.kpdus.com/jad.html</a>   (已失效, 从[url=<a href="https://github.com/seavers/jad">https://github.com/seavers/jad</a>]这里[/url]或者附件下载)</p>
+
+<p>BAT脚本见后</p>
+
+<p>安装方法如下:</p>
+
+<pre><code>    复制粘贴后面的文本为一个BAT,然后与jad.exe放在同一个目录即可(WinRAR需正确安装)
+</code></pre>
+
+<p>使用方法如下:   (有3种使用方法, 使用其中任意一种均可,结果是相同的)</p>
+
+<pre><code> 1. 双击BAT,提示输入需反编译的jar包,请输入完整的jar路径
+ 2. 直接将 jar 包拖放在bat上
+ 3.右键点击jar包,选择打开方式,然后选择使用该BAT来执行
+</code></pre>
+
+<p>运行后的结果如下:</p>
+
+<pre><code>  在jar包的同一目录下, 将会生成一个目录,一个jar,目录下有两个子目录,一个目录存放解压缩后的所有class,一个目录存放反编译后的java文件,jar包是用源码压缩生成的
+</code></pre>
+
+<p>几点说明:</p>
+
+<pre><code>1. 工具中使用的WinRAR是自动识别安装路径的,请正确安装WinRAR
+2. 工具使用的jad.exe,须与BAT放在同一目录,或者放在PATH可搜索到的位置
+3.  jar包中非class文件,也会完整拷贝在源码目录下,方便生成源码工程
+4. 生成的目录名与原 jar 包同名, 生成的源码 jar 包的文件名是在原名称中加入-src而生成, 如原 jar 包为 jdbc.jar, 则生成的目录名为 jdbc, 而生成的源码jar 包名则为 jdbc-src.jar
+5. eclipse使用方法1, 将BAT生成的目录放在workspace中,然后创建同名工程
+6. eclipse使用方法2,在 eclipse 中创建同名工程,使用src为源文件目录,bin为class文件目录,然后将BAT生成的目录拷贝在eclipse的workspace中 
+</code></pre>
+
+<p>该BAT为 blog.csdn.net/seavers 原创, BAT源码仅供个人学习,使用,研究,未经本人同意,不可用于商业用途</p>
+
+<hr />
+
+<p>我通常的使用方式是: 将 bat 与 jad.exe 解压在windows根目录, .jar右键用bat打开发后, 第二次及以后使用就方便多了</p>
+
+<p>BAT更新了一下</p>
+
+<p>BAT源码如下: (请直接拷贝在BAT文件中)</p>
+
+<p>[code=&ldquo;bat&rdquo;]
+::功能:     利用bat反编译jar包生成源码jar包
+::作者:     seavers
+::博客:     <a href="http://seavers.iteye.com/">http://seavers.iteye.com/</a>
+::版本:     1.7</p>
+
+<p>::打开/关闭命令行显示
+REM @echo OFF</p>
+
+<p>::::::::::::::::::::::::::::解析并设置变量::::::::::::::::::</p>
+
+<p>::查找jad文件的路径, 这里取的jad.exe, 表示从PATH中查找,如果想手工指定,需在这里修改
+set JAD_PATH=jad.exe</p>
+
+<p>::设置解压出的class文件存放的位置(相对路径)
+set CLASS_PATH=bin</p>
+
+<p>::设置反编译后的java文件存放的位置(相对路径)
+set JAVA_PATH=src</p>
+
+<p>::检查JAD文件是否存在bat所在目录下,
+if exist &ldquo;%~dp0jad.exe&rdquo; set JAD_PATH=%~dp0jad.exe</p>
+
+<p>::判断参数个数,如果没有文件参数,则报错,这里也可以使用%~f1,也可以用%1,没有关系,之后要去掉引号
+if &ldquo;&rdquo;%1"&ldquo;==&rdquo;&ldquo;&rdquo;&ldquo; (set /P JAR_PATH=请输入要反编译的JAR包的路径&hellip;) else (set JAR_PATH=%~f1)
+if &lsquo;%JAR_PATH:~0,1%%JAR_PATH:~0,1%&rsquo;==&lsquo;&rdquo;&ldquo;&rsquo; set JAR_PATH=%JAR_PATH:~1,-1%</p>
+
+<p>::获取源代码存放的路径,这里取JAR包所在路径,然后去掉".jar"作为文件夹路径, 这里的LOCATION不能带引号,因为下面还要追加字符)
+if &ldquo;&rdquo;%2"&ldquo;==&rdquo;&ldquo;&rdquo;&ldquo; (set LOCATION=%JAR_PATH:~0,-4%) else (set LOCATION=%~f2)</p>
+
+<p>::::::::::::::::::::开始执行程序:::::::::::::::::::::::::::::::</p>
+
+<p>::获取WinRAR.exe的路径,设置在临时变量rarpath中
+for /f &ldquo;usebackq delims=&rdquo; %%i in (<code>ftype WinRAR</code>) do set RARPATH=%%i</p>
+
+<p>::对rarpath进行解析,去掉前面7个节符,去掉后面5个字符,得到WinRAR执行路径
+::路径大致是这样的形式  Winrar=&ldquo;C:\Program Files\WinRAR\WinRAR.exe&rdquo; &ldquo;%1&rdquo;
+set RAREXE=%RARPATH:~7,-5%</p>
+
+<p>::调用WinRAR命令,解压文件到指定目录的bin目录下
+%RAREXE% x &ldquo;%JAR_PATH%&rdquo; &ldquo;%LOCATION%\%CLASS_PATH%\&rdquo;</p>
+
+<p>::遍历整个bin目录,取所有class文件,调用jad.exe反编译出源码,非class的拷贝到src目录下
+::打开变量延迟功能
+setlocal EnableDelayedExpansion
+for /r &ldquo;%LOCATION%\bin&rdquo; %%i in (<em>.</em>) do if &lsquo;%%~xi&rsquo;==&lsquo;.class&rsquo; (&ldquo;%JAD_PATH%&rdquo;  -o -r -sjava -ff -b -nonlb -space -t -8 -d"%LOCATION%\%JAVA_PATH%&ldquo; &rdquo;%%~si") else (set TEMP_PATH=%%i &amp; echo f|xcopy &ldquo;%%i&rdquo; &ldquo;!TEMP_PATH:%LOCATION%\bin=%LOCATION%\src!&rdquo;)
+endlocal EnableDelayedExpansion</p>
+
+<p>::将产生的java文件压缩成源码文件
+%RAREXE% a -ep1 -r &ldquo;%LOCATION%-src.zip&rdquo; &ldquo;%LOCATION%\%JAVA_PATH%*.*&rdquo;</p>
+
+<p>::::::::::::::::::程序结束, 显示运行结果::::::::::::::::::::::
+echo <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><em>
+echo 程序运行结束
+echo 解析的JAR包的路径为 %JAR_PATH%
+echo 解压缩工具WinRAR.exe的路径为 %RAREXE%
+echo 反编译工具JAD.exe的路径为 %JAD_PATH%
+echo 解析后的文件的根路径为 %LOCATION%
+echo 解析后的class文件存放在 %LOCATION%\%CLASS_PATH%
+echo 解析后的java文件存放在 %LOCATION%\%JAVA_PATH%
+echo 压缩后的java文件存放在 %LOCATION%-src.zip
+echo </em></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>
+pause</p>
+
+<p>```</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[version compare]]></title>
+    <link href="http://lianghaijun.com/blog/904122"/>
+    <updated>2011-02-11T21:34:00+08:00</updated>
+    <id>http://lianghaijun.com/blog/904122</id>
+    <content type="html"><![CDATA[<p>[img]<a href="http://dl.iteye.com/upload/attachment/412672/dda5fd96-afce-3f8c-bdf3-bf20b8228fe7.jpg">http://dl.iteye.com/upload/attachment/412672/dda5fd96-afce-3f8c-bdf3-bf20b8228fe7.jpg</a>[/img]</p>
+
+<p>Apache log4j™ 1.3 development has been abandoned and no future releases or development is anticipated. Users of Apache log4j 1.3 are encouraged to migrate to Apache log4j 1.2 or to monitor and contribute to the Apache log4j 2.0 development effort. The companions for Apache log4j 1.2 provide many of the features that were developed during the Apache log4j 1.3 development effort.</p>
+]]></content>
+  </entry>
+  
+</feed>

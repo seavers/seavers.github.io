@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ubuntu | lianghaijun的博客]]></title>
   <link href="http://lianghaijun.com/blog/categories/ubuntu/atom.xml" rel="self"/>
   <link href="http://lianghaijun.com/"/>
-  <updated>2013-12-31T13:26:53+08:00</updated>
+  <updated>2013-12-31T13:53:19+08:00</updated>
   <id>http://lianghaijun.com/</id>
   <author>
     <name><![CDATA[seavers]]></name>
@@ -192,6 +192,72 @@ sed 's/1|2|3/*/g' //在GNU里将不管是1或2或者是3替换成*
 <p>还有这个
 <a href="http://henter.me/post/sed-notes.html">http://henter.me/post/sed-notes.html</a>
 <a href="http://blog.csdn.net/hepeng597/article/details/11269387">http://blog.csdn.net/hepeng597/article/details/11269387</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[wget 整站下载]]></title>
+    <link href="http://lianghaijun.com/blog/1980761"/>
+    <updated>2013-11-26T10:22:00+08:00</updated>
+    <id>http://lianghaijun.com/blog/1980761</id>
+    <content type="html"><![CDATA[<p>下载整站
+<code>
+wget -r -nv --restrict-file-names=nocontrol http://seavers.iteye.com/
+</code></p>
+
+<p>下载时可以加 -np, 不下载父目录
+<code>
+wget -r -nv --restrict-file-names=nocontrol -np http://seavers.iteye.com/blog/
+</code></p>
+
+<p>下载时, 加入断点续传
+<code>
+wget -r -nv -c --restrict-file-names=nocontrol http://seavers.iteye.com/
+</code></p>
+
+<ul>
+<li><p>&mdash;restrict-file-names=nocontrol 用来解决中文乱码问题</p></li>
+<li><p>[url]<a href="http://aotee.com/using-wget-recursive-download-the-entire-station">http://aotee.com/using-wget-recursive-download-the-entire-station</a>[/url]</p></li>
+<li>[url]<a href="http://www.cnblogs.com/lybeta/archive/2012/05/23/2514759.html">http://www.cnblogs.com/lybeta/archive/2012/05/23/2514759.html</a>[/url]</li>
+<li>[url]<a href="http://blog.csdn.net/flyskywhy/article/details/7777972">http://blog.csdn.net/flyskywhy/article/details/7777972</a>[/url]</li>
+<li>[url]<a href="http://www.butian.org/knowledge/linux/254.html">http://www.butian.org/knowledge/linux/254.html</a>[/url]</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[ubuntu ipconfig]]></title>
+    <link href="http://lianghaijun.com/blog/1972028"/>
+    <updated>2013-11-06T13:45:00+08:00</updated>
+    <id>http://lianghaijun.com/blog/1972028</id>
+    <content type="html"><![CDATA[<p>sudo vi /sbin/ipconfig</p>
+
+<p>[code=&ldquo;bash&rdquo;]</p>
+
+<h1>! /bin/bash</h1>
+
+<p>for word in <code>ifconfig eth0 | grep "inet addr" | sed  's/          inet addr/addr/g'</code>; do echo $word | sed &rsquo;s/:/\t/g'; done
+route -n | awk &lsquo;/UG/ {printf &ldquo;gateway    %-21s %s\n&rdquo;, $2,$8}&rsquo; ;
+grep nameserver /etc/resolv.conf ;
+```</p>
+
+<p>```
+sudo chmod +x /sbin/ipconfig</p>
+
+<p>ipconfig</p>
+
+<p>```</p>
+
+<hr />
+
+<p>待改进</p>
+
+<ul>
+<li>支持eth0 与 wlan0</li>
+<li>支持dnsmasq</li>
+</ul>
+
 ]]></content>
   </entry>
   
