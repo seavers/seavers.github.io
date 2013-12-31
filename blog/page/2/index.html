@@ -1,0 +1,968 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>lianghaijun的博客</title>
+  <meta name="author" content="seavers">
+
+  
+  <meta name="description" content="hello octopress 2013-11-27
+">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://lianghaijun.com/blog/page/2/index.html">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+  <link href="/atom.xml" rel="alternate" title="lianghaijun的博客" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <div id="wb_connect_btn"></div>
+  <h1><a href="/">lianghaijun的博客</a></h1>
+  
+    <h2>Looking for Interest</h2>
+  
+</hgroup>
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:lianghaijun.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/picture">picture</a><li>
+  <li><a href="/blog/link">link</a></li>
+  <li><a href="/blog/about">about</a></li>
+</ul>
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013-11-27-hello-octopress.html">hello octopress</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-27T17:56:47+08:00" pubdate data-updated="true">Nov 27<span>th</span>, 2013</time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>hello octopress</p>
+
+<p>2013-11-27</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013-11-26-1981188.html">小清新网站标准</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-26T23:19:00+08:00" pubdate data-updated="true">Nov 26<span>th</span>, 2013</time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><em>小清新网站标准</em>        纯属YY</p>
+
+<ul>
+<li>采用微博登录</li>
+<li>提供iphone,android,html5版本</li>
+<li>采用小新清设计原则:  色块背景, 图文混排, 配色明亮, 合适留白</li>
+<li>新删改采用ajax请求, 支持滚动式翻页</li>
+<li>restful url</li>
+<li>icon式文字, 文字式按钮</li>
+<li>赞, 评论, 分享, 收藏, 加关注</li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013-11-26-1980761.html">wget 整站下载</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-26T10:22:00+08:00" pubdate data-updated="true">Nov 26<span>th</span>, 2013</time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>下载整站</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>wget -r -nv --restrict-file-names=nocontrol http://seavers.iteye.com/</span></code></pre></td></tr></table></div></figure>
+
+
+<p>下载时可以加 -np, 不下载父目录</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>wget -r -nv --restrict-file-names=nocontrol -np http://seavers.iteye.com/blog/</span></code></pre></td></tr></table></div></figure>
+
+
+<p>下载时, 加入断点续传</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>wget -r -nv -c --restrict-file-names=nocontrol http://seavers.iteye.com/</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><p>&mdash;restrict-file-names=nocontrol 用来解决中文乱码问题</p></li>
+<li><p><a href="http://aotee.com/using-wget-recursive-download-the-entire-station">http://aotee.com/using-wget-recursive-download-the-entire-station</a></p></li>
+<li><a href="http://www.cnblogs.com/lybeta/archive/2012/05/23/2514759.html">http://www.cnblogs.com/lybeta/archive/2012/05/23/2514759.html</a></li>
+<li><a href="http://blog.csdn.net/flyskywhy/article/details/7777972">http://blog.csdn.net/flyskywhy/article/details/7777972</a></li>
+<li><a href="http://www.butian.org/knowledge/linux/254.html">http://www.butian.org/knowledge/linux/254.html</a></li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013-11-06-1972028.html">ubuntu ipconfig</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-06T13:45:00+08:00" pubdate data-updated="true">Nov 6<span>th</span>, 2013</time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>sudo vi /sbin/ipconfig</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#! /bin/bash
+</span><span class='line'>for word in `ifconfig eth0 | grep "inet addr" | sed  's/          inet addr/addr/g'`; do echo $word | sed 's/:/\t/g'; done
+</span><span class='line'>route -n | awk '/UG/ {printf "gateway    %-21s %s\n", $2,$8}' ;
+</span><span class='line'>grep nameserver /etc/resolv.conf ;</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo chmod +x /sbin/ipconfig
+</span><span class='line'>
+</span><span class='line'>ipconfig
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<p>待改进</p>
+
+<ul>
+<li>支持eth0 与 wlan0</li>
+<li>支持dnsmasq</li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013-11-06-1972001.html">ubuntu 注册 wins</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-06T12:17:00+08:00" pubdate data-updated="true">Nov 6<span>th</span>, 2013</time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>以下是为了让ubuntu进入windows网络,实现互ping,互连</p>
+
+<ol>
+<li>ubuntu进入windows网络,必须安装samba</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install samba</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>修改/etc/samba/smb.conf, 将wins server修改为正确的ip
+   可以在windows上, 敲入ipconfig /all得到具体ip</li>
+<li>重启服务</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo service nmbd restart</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>验证下</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>nmblookup -R -U &lt;wins_server_ip&gt; &lt;hostname&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>这时windows就可访问ubuntu,可以直接ping通</li>
+<li>ubuntu互ping, 需要设置search domain</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>echo 'search abc.com' &gt;&gt; /etc/resolv.conf</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<ol>
+<li>如果IP改变后, wins_server的缓存的ip不正确了,
+可以删除以下两个文件
+/var/cache/samba/wins.dat
+/var/cache/samba/browse.dat
+然后重启 nmbd 即可</li>
+<li>如果ubuntu ping 时, ip仍然不正确, 检查下dns server
+   (这块还没有搞清楚, 试试换备用server, 或者等等dns同步)</li>
+<li></li>
+</ol>
+
+
+<hr />
+
+<p>如果只是为了互连互通,只需要 nmbd 服务即可
+如果还需要windows共享文件的服务, 需启动smbd</p>
+
+<p>===========================================================</p>
+
+<p>nsswitch.conf是SUN公司开发的一种扩充（name services switch）</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># /etc/nsswitch.conf
+</span><span class='line'>#
+</span><span class='line'># Example configuration of GNU Name Service Switch functionality.
+</span><span class='line'># If you have the `glibc-doc-reference' and `info' packages installed, try:
+</span><span class='line'># `info libc "Name Service Switch"' for information about this file.
+</span><span class='line'>
+</span><span class='line'>aliases:    邮件别名, sendmail(8) 使用该文件. 
+</span><span class='line'>ethers:     以太网号. 
+</span><span class='line'>group:      用户组, getgrent(3) 函数使用该文件. 
+</span><span class='line'>hosts:      主机名和主机号, gethostbyname(3) 以及类似的函数使用了该文件. 
+</span><span class='line'>netgroup:   网络内主机及其用户的列表, 访问规则使用该文件. 
+</span><span class='line'>network:    网络名及网络号, getnetent(3) 函数使用该文件. 
+</span><span class='line'>passwd:     用户口令, getpwent(3) 函数使用该文件. 
+</span><span class='line'>protocols:  网络协议, getprotoent(3) 函数使用该文件. 
+</span><span class='line'>publickey:  NIS+及NFS 所使用的secure_rpc的公开密匙. 
+</span><span class='line'>rpc:        远程过程调用名及调用号, getrpcbyname(3) 及类似函数使用该文件. 
+</span><span class='line'>services:   网络服务, getservent(3) 函数使用该文件. 
+</span><span class='line'>shadow:     shadow用户口令, getspnam(3) 函数使用该文件.</span></code></pre></td></tr></table></div></figure>
+
+
+<p>=====================</p>
+
+<p>hosts: files mdns4_minimal [NOTFOUND=return] dns mdns4</p>
+
+<ul>
+<li>files:  /etc/hosts</li>
+<li>mdns :  dnsmasq  avahi-daemon</li>
+<li>dns  :  dns server</li>
+</ul>
+
+
+<p>===================</p>
+
+<p>dnsmasq</p>
+
+<p>Dnsmasq is a lightweight, easy to configure DNS forwarder and DHCP server.
+<a href="https://wiki.archlinux.org/index.php/Dnsmasq_">https://wiki.archlinux.org/index.php/Dnsmasq_</a>(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)</p>
+
+<p>stop dnsmasq:
+1. sudo vi /etc/NetworkManager/NetworkManager.conf
+2. comment  dns=dnsmasq
+3. sudo service network-manager restart</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013-11-04-1969731.html">ubuntu 五笔</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-04T15:36:00+08:00" pubdate data-updated="true">Nov 4<span>th</span>, 2013</time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>ubuntu 使用五笔输入法
+ubuntu 13.10 测试通过</p>
+
+<ul>
+<li>sudo apt-get install ibus-table-wubi</li>
+<li>ibus-daemon -x -r -d</li>
+<li>选择五笔输入,生效</li>
+</ul>
+
+
+<p>使用SHIFT+SPACE切换全半角
+使用SHIFT切换中英文输入</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013-10-17-1959997.html">pycompile not found</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-17T16:10:00+08:00" pubdate data-updated="true">Oct 17<span>th</span>, 2013</time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>sudo apt-get remove python 后, 出现了很多错误, 导致后续的无法进行</p>
+
+<p>pycompile not found
+解决方案: 删掉 /usr/bin/pycompile, 然后继续apt-get -f install / remove</p>
+
+<p>gconf2 not found 错误
+sudo dpkg-reconfigure gconf2
+sudo apt-get &mdash;purge remove gconf2</p>
+
+<p>gconf2安装时 gconf-schemas not found
+因安装gconf2时,需执行脚本,脚本中需要python,而python需要gconf2
+导致了这个地方的问题</p>
+
+<p>解决方案: 注掉报错的脚本中的那几行命令,然后重新执行
+或:  如果已经安装了python的话, ln -s 下python即可</p>
+
+<p>==============================</p>
+
+<p>ubuntu从13.04升级至13.10时,报/usr/bin/python错误,不知原因
+修改/usr/bin/python链接位置时,也无法通过
+故直接remove python python3, 然后就出现上面的错误了
+修复后, 可以执行do-release-upgrade了</p>
+
+<p>ubuntu的包管理,要赞一下</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013-09-22-1944892.html">maven的全局去除依赖</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-22T15:01:00+08:00" pubdate data-updated="true">Sep 22<span>nd</span>, 2013</time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>我们在maven中有时候希望将某个依赖包彻底去除</p>
+
+<p>如我们的系统使用的是spring3.1.2, 但是依赖的二方包中, 总是或多或少依赖了spring2.5.6, 希望有个方法, 能全局去除掉</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;!-- globally exclusion --&gt;
+</span><span class='line'>&lt;dependency&gt;
+</span><span class='line'>  &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+</span><span class='line'>  &lt;artifactId&gt;spring&lt;/artifactId&gt;
+</span><span class='line'>  &lt;version&gt;2.5.6.SEC03&lt;/version&gt;
+</span><span class='line'>  &lt;scope&gt;provided&lt;/scope&gt;
+</span><span class='line'>&lt;/dependency&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>以上方式, 有个弊端, 就是eclipse中, 还是会依赖, 且容易用混</p>
+
+<p>有三个方案(建议使用第三种)</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;dependency&gt;
+</span><span class='line'>  &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+</span><span class='line'>  &lt;artifactId&gt;spring&lt;/artifactId&gt;
+</span><span class='line'>  &lt;version&gt;99.0-does-not-exist&lt;/version&gt;
+</span><span class='line'>  &lt;scope&gt;provided&lt;/scope&gt;
+</span><span class='line'>&lt;/dependency&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;dependency&gt;
+</span><span class='line'>  &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+</span><span class='line'>  &lt;artifactId&gt;spring&lt;/artifactId&gt;
+</span><span class='line'>  &lt;version&gt;2.5.6&lt;/version&gt;
+</span><span class='line'>  &lt;scope&gt;system&lt;/scope&gt;
+</span><span class='line'>  &lt;systemPath&gt;${basedir}/lib/empty.jar&lt;/systemPath&gt;
+</span><span class='line'>&lt;/dependency&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>     &lt;plugin&gt;
+</span><span class='line'>          &lt;artifactId&gt;maven-eclipse-plugin&lt;/artifactId&gt;
+</span><span class='line'>          &lt;configuration&gt;
+</span><span class='line'>              &lt;downloadSources&gt;true&lt;/downloadSources&gt;
+</span><span class='line'>              &lt;downloadJavadocs&gt;true&lt;/downloadJavadocs&gt;
+</span><span class='line'>              &lt;classpathContainers&gt;
+</span><span class='line'>                  &lt;classpathContainer&gt;org.eclipse.jdt.launching.JRE_CONTAINER&lt;/classpathContainer&gt;
+</span><span class='line'>              &lt;/classpathContainers&gt;
+</span><span class='line'>              &lt;excludes&gt;
+</span><span class='line'>                  &lt;exclude&gt;org.springframework:spring&lt;/exclude&gt;
+</span><span class='line'>              &lt;/excludes&gt;
+</span><span class='line'>          &lt;/configuration&gt;
+</span><span class='line'>      &lt;/plugin&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013-08-13-1923887.html">Class.forName 返回 String[].class</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-08-13T11:38:00+08:00" pubdate data-updated="true">Aug 13<span>th</span>, 2013</time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>A: 如何通过Class.forName 返回 String[].class
+Q: Class.forName(&ldquo;[Ljava.lang.String;&rdquo;)</p>
+
+<p>因为 String[].class.getName() => &ldquo;[Ljava.lang.String;&rdquo;
+经测试, 反过来, 也成立</p>
+
+<p>因此:
+在sqlmap-config.xml可以这样写</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;typeHandler javaType="[Ljava.util.String;" callback="xxxxxx.StringArrayTypeHandler" /&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013-08-09-1922745.html">ibatis typehandler</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-08-09T18:57:00+08:00" pubdate data-updated="true">Aug 9<span>th</span>, 2013</time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>今天配置typehandler时碰到一个问题</p>
+
+<p>主要解决的问题是
+java.sql.SQLException: Cannot convert value &lsquo;0000-00-00 00:00:00&rsquo; from column 18 to TIMESTAMP</p>
+
+<p>解决方案: 替换掉系统默认的 typehandler, 抛出异常时,改为null</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;?xml version="1.0" encoding="GBK"?&gt;
+</span><span class='line'>&lt;!DOCTYPE sqlMapConfig
+</span><span class='line'> PUBLIC "-//iBATIS.com//DTD SQL Map Config 2.0//EN"
+</span><span class='line'> "http://www.ibatis.com/dtd/sql-map-config-2.dtd"&gt;
+</span><span class='line'>&lt;sqlMapConfig&gt;
+</span><span class='line'>  &lt;settings 
+</span><span class='line'>      cacheModelsEnabled="true" 
+</span><span class='line'>  /&gt;
+</span><span class='line'>  &lt;typeHandler javaType="java.util.Date" callback="xxxxxxxxx.CustomDateTypeHandler" /&gt;
+</span><span class='line'>  
+</span><span class='line'>  &lt;sqlMap resource="sqlmap/sqlmap-price.xml" /&gt; 
+</span><span class='line'>&lt;/sqlMapConfig&gt;
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这里需要注意的是</p>
+
+<ol>
+<li>typeHandler 中的 jdbcType 取值应为 null, DATE, TIME, 这里用的null</li>
+<li>typehandler 必须要在 sqlmap 前面, 否则sqlmap中的类型handler就会用默认的</li>
+</ol>
+
+
+<p>下面是自定义的datetypehandler</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>package xxxxxxxxx;
+</span><span class='line'>
+</span><span class='line'>import java.sql.CallableStatement;
+</span><span class='line'>import java.sql.ResultSet;
+</span><span class='line'>import java.sql.SQLException;
+</span><span class='line'>
+</span><span class='line'>import com.ibatis.sqlmap.engine.type.DateTypeHandler;
+</span><span class='line'>
+</span><span class='line'>public class CustomDateTypeHandler extends DateTypeHandler {
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>  @Override
+</span><span class='line'>  public Object getResult(ResultSet rs, String columnName) throws SQLException {
+</span><span class='line'>      try {
+</span><span class='line'>          return super.getResult(rs, columnName);
+</span><span class='line'>      } catch(SQLException e) {
+</span><span class='line'>          if("S1009".equals(e.getSQLState())) {
+</span><span class='line'>              return null;
+</span><span class='line'>          }
+</span><span class='line'>          throw e;
+</span><span class='line'>      }
+</span><span class='line'>  }
+</span><span class='line'>
+</span><span class='line'>  @Override
+</span><span class='line'>  public Object getResult(ResultSet rs, int columnIndex) throws SQLException {
+</span><span class='line'>      try {
+</span><span class='line'>          return super.getResult(rs, columnIndex);
+</span><span class='line'>      } catch(SQLException e) {
+</span><span class='line'>          if("S1009".equals(e.getSQLState())) {
+</span><span class='line'>              return null;
+</span><span class='line'>          }
+</span><span class='line'>          throw e;
+</span><span class='line'>      }
+</span><span class='line'>  }
+</span><span class='line'>
+</span><span class='line'>  @Override
+</span><span class='line'>  public Object getResult(CallableStatement cs, int columnIndex) throws SQLException {
+</span><span class='line'>      try {
+</span><span class='line'>          return super.getResult(cs, columnIndex);
+</span><span class='line'>      } catch(SQLException e) {
+</span><span class='line'>          if("S1009".equals(e.getSQLState())) {
+</span><span class='line'>              return null;
+</span><span class='line'>          }
+</span><span class='line'>          throw e;
+</span><span class='line'>      }
+</span><span class='line'>  }
+</span><span class='line'>
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/blog/page/3/">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>Categories</h1>
+  <ul id="categories">
+    <li class='category'><a href='/blog/categories/android/'>android (2)</a></li>
+<li class='category'><a href='/blog/categories/chrome/'>chrome (1)</a></li>
+<li class='category'><a href='/blog/categories/css/'>css (3)</a></li>
+<li class='category'><a href='/blog/categories/cubieboard/'>cubieboard (3)</a></li>
+<li class='category'><a href='/blog/categories/git/'>git (2)</a></li>
+<li class='category'><a href='/blog/categories/hive/'>hive (1)</a></li>
+<li class='category'><a href='/blog/categories/html5/'>html5 (1)</a></li>
+<li class='category'><a href='/blog/categories/java/'>java (8)</a></li>
+<li class='category'><a href='/blog/categories/javascript/'>javascript (10)</a></li>
+<li class='category'><a href='/blog/categories/maven/'>maven (5)</a></li>
+<li class='category'><a href='/blog/categories/nginx/'>nginx (1)</a></li>
+<li class='category'><a href='/blog/categories/octopress/'>octopress (2)</a></li>
+<li class='category'><a href='/blog/categories/php/'>php (1)</a></li>
+<li class='category'><a href='/blog/categories/ruby/'>ruby (1)</a></li>
+<li class='category'><a href='/blog/categories/ubuntu/'>ubuntu (20)</a></li>
+<li class='category'><a href='/blog/categories/思考/'>思考 (9)</a></li>
+
+  </ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013-12-31-iteye-blog-migration.html">iteye 博客迁移</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013-12-23-ruby-spider.html">ruby spider</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013-12-16-fullscreen-picture-viewer.html">全屏图片查看器 fullscreen picture viewer</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013-12-13-hive-skill.html">hive 常用技巧</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013-12-04-linux-repeat.html">linux repeat</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>大牛博客</h1>
+  <ul>
+    <li>
+      <a href="http://ithans.com/">ithans</a>
+    </li>
+  </ul>
+</section>
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - seavers -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+</footer>
+  <script src="/javascripts/libs/jquery.min.js"></script>
+<script src="/javascripts/octopress.js"></script>
+
+<script src=" http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=3919158905" charset="utf-8"></script>
+<script src="/javascripts/blog.js"></script>
+<script src='http://hm.baidu.com/h.js?f1e7ae48ee023d8ed983af30c485b5ce'></script>
+
+
+</body>
+</html>

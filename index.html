@@ -9,14 +9,7 @@
   <meta name="author" content="seavers">
 
   
-  <meta name="description" content="最近开始喜欢上研究ruby了,正好手头有一些抓取的需求,正好练练手 在写爬虫时,我们总希望能方便的实现以下功能 类似curl的下载模块,提供URL即可获取下载内容
-方便的网页分析工具,最好能提供类似css selector的元素选择器
-简单方便的数据处理模块 写个简单的例子 1
-2
-3
-4
-5
-6 &hellip;">
+  <meta name="description" content="之前一直是在iteye上写博客的, 后来建立了本博客系统后, 就希望将博客从iteye上迁移过来 然而iteye上博客的文章太多了, 手动一篇一篇拷贝很不现实, 所以写了个工具来辅助迁移 iteye2markdown是一款博客迁移工具,可以将博客从iteye迁移至octopress &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -25,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://lianghaijun.com">
+  <link rel="canonical" href="http://lianghaijun.com/index.html">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
   <link href="/atom.xml" rel="alternate" title="lianghaijun的博客" type="application/atom+xml">
@@ -71,7 +64,233 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/ruby-spider">ruby spider</a></h1>
+      <h1 class="entry-title"><a href="/blog/2013-12-31-iteye-blog-migration.html">iteye 博客迁移</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-12-31T15:16:16+08:00" pubdate data-updated="true">Dec 31<span>st</span>, 2013</time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>之前一直是在iteye上写博客的, 后来建立了本博客系统后, 就希望将博客从iteye上迁移过来</p>
+
+<p>然而iteye上博客的文章太多了, 手动一篇一篇拷贝很不现实, 所以写了个工具来辅助迁移</p>
+
+<p>iteye2markdown是一款博客迁移工具,可以将博客从iteye迁移至octopress</p>
+
+<ul>
+<li>此工具会自动下载iteye博客上的所有文章</li>
+<li>接着会将博客中的bbcode代码转换成markdown</li>
+<li>下载转换后的markdown可用于octopress,迁移至自己的博客系统上</li>
+</ul>
+
+
+<p>使用方式:</p>
+
+<ul>
+<li>修改download.rb中的cookie配置, cookie将用于连接iteye.com的后台系统, 下载博客内容</li>
+<li>修改download.rb中的博客地址</li>
+<li>使用以下命令</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ruby download.rb</span></code></pre></td></tr></table></div></figure>
+
+
+<p>执行下载转换, 结果保存于blog目录中</p>
+
+<p>源代码见:  <a href="https://github.com/seavers/iteye2markdown">github</a></p>
+
+<p>核心代码如下:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>re 'open-uri'
+</span><span class='line'>require 'nokogiri'
+</span><span class='line'>
+</span><span class='line'>def process(id, date)
+</span><span class='line'>  host = 'http://seavers.iteye.com'
+</span><span class='line'>  cookie = ''      #IO.read('cookie.txt')
+</span><span class='line'>  agent = 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/30.0.1599.14 Safari/537.36'
+</span><span class='line'>
+</span><span class='line'>  html = open(host + '/admin/blogs/' + id + '/edit', 'User-Agent'=&gt;agent, 'Cookie'=&gt;cookie).read
+</span><span class='line'>  doc = Nokogiri::HTML(html)
+</span><span class='line'>
+</span><span class='line'>  title = doc.search('#blog_title').attr('value').to_s
+</span><span class='line'>  text = doc.search('#editor_body').text
+</span><span class='line'>  category = doc.search('#blog_category_list').attr('value').to_s
+</span><span class='line'>  tag = doc.search('#blog_tag_list').attr('value').to_s
+</span><span class='line'>  
+</span><span class='line'>
+</span><span class='line'>  content = text
+</span><span class='line'>      .gsub('[size=xx-large]', '#')
+</span><span class='line'>      .gsub('[size=x-large]', '##')
+</span><span class='line'>      .gsub('[size=large]', '###')
+</span><span class='line'>      .gsub('[size=medium]', '####')
+</span><span class='line'>      .gsub('[size=small]', '')
+</span><span class='line'>      .gsub('[size=x-small]', '')
+</span><span class='line'>      .gsub('[size=xx-small]', '')
+</span><span class='line'>      .gsub('[/size]', '')
+</span><span class='line'>      .gsub(/\[url=(.*)\](.*)\[\/url\]/, '[\2](\1)')
+</span><span class='line'>      .gsub('[url]', '').gsub('[/url]', '')
+</span><span class='line'>      .gsub('[b]', '*').gsub('[/b]', '*')
+</span><span class='line'>      .gsub('[list]', '').gsub('[/list]', '')
+</span><span class='line'>      .gsub('[b]', '*').gsub('[/b]', '*')
+</span><span class='line'>      .gsub('[*]', '* ')
+</span><span class='line'>      .gsub('[code]', '```').gsub('[ne/code]', '```')
+</span><span class='line'>      .gsub(/\[code="(.*)"\]/, '```')
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>  filename = date[0..9] + '-' + id + '.markdown'
+</span><span class='line'>  File.open('blog/' + filename, 'w') { |file|
+</span><span class='line'>      file.puts '---'
+</span><span class='line'>      file.puts 'layout: post'
+</span><span class='line'>      file.puts 'title: "' + title.to_s + '"'
+</span><span class='line'>      file.puts 'date: ' + date + ':00 +0800'
+</span><span class='line'>      file.puts 'comments: true'
+</span><span class='line'>      file.puts 'categories:'
+</span><span class='line'>      file.puts '- ' + category.to_s
+</span><span class='line'>      file.puts 'tags:'
+</span><span class='line'>      tag.split(',').each {|x|
+</span><span class='line'>          file.puts '- ' + x
+</span><span class='line'>      }
+</span><span class='line'>      file.puts '---'
+</span><span class='line'>
+</span><span class='line'>      file.puts ''
+</span><span class='line'>      file.puts content 
+</span><span class='line'>  }
+</span><span class='line'>
+</span><span class='line'>end
+</span><span class='line'>
+</span><span class='line'>def spider(page)
+</span><span class='line'>  agent = 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/30.0.1599.14 Safari/537.36'
+</span><span class='line'>
+</span><span class='line'>  url = 'http://seavers.iteye.com/?page='+page.to_s
+</span><span class='line'>  html = open(url, 'User-Agent'=&gt;agent)
+</span><span class='line'>
+</span><span class='line'>  doc = Nokogiri::HTML(html)
+</span><span class='line'>  doc.search('.blog_main').each {|x|
+</span><span class='line'>      id = x.search('h3 a').attr('href').text[/[0-9]+/, 0]
+</span><span class='line'>      date = x.search('.blog_bottom .date').text
+</span><span class='line'>      puts id + "\t" + date
+</span><span class='line'>      process(id, date)
+</span><span class='line'>  }
+</span><span class='line'>
+</span><span class='line'>  return doc.search('.pagination a.next_page').length == 0
+</span><span class='line'>end
+</span><span class='line'>
+</span><span class='line'>##process('1416013', '2013-12-31 14:01')
+</span><span class='line'>(1..100).each {|page|
+</span><span class='line'>  break if spider(page)
+</span><span class='line'>}
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013-12-23-ruby-spider.html">ruby spider</a></h1>
     
     
       <p class="meta">
@@ -168,7 +387,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/fullscreen-picture-viewer">全屏图片查看器 fullscreen picture viewer</a></h1>
+      <h1 class="entry-title"><a href="/blog/2013-12-16-fullscreen-picture-viewer.html">全屏图片查看器 fullscreen picture viewer</a></h1>
     
     
       <p class="meta">
@@ -234,7 +453,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/hive-skill">hive 常用技巧</a></h1>
+      <h1 class="entry-title"><a href="/blog/2013-12-13-hive-skill.html">hive 常用技巧</a></h1>
     
     
       <p class="meta">
@@ -340,7 +559,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/linux-repeat">linux repeat</a></h1>
+      <h1 class="entry-title"><a href="/blog/2013-12-04-linux-repeat.html">linux repeat</a></h1>
     
     
       <p class="meta">
@@ -455,7 +674,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/utuntu-group">utuntu group</a></h1>
+      <h1 class="entry-title"><a href="/blog/2013-12-02-utuntu-group.html">utuntu group</a></h1>
     
     
       <p class="meta">
@@ -538,7 +757,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/octopress-deploy">octopress 自动部署方案</a></h1>
+      <h1 class="entry-title"><a href="/blog/2013-11-28-octopress-deploy.html">octopress 自动部署方案</a></h1>
     
     
       <p class="meta">
@@ -689,7 +908,7 @@ deploy会触发git commit, commit再触发hook, hook里再deploy,再commit, 如�
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/sed">sed</a></h1>
+      <h1 class="entry-title"><a href="/blog/2013-11-28-sed.html">sed</a></h1>
     
     
       <p class="meta">
@@ -798,7 +1017,7 @@ deploy会触发git commit, commit再触发hook, hook里再deploy,再commit, 如�
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/xianjian">html5版仙剑</a></h1>
+      <h1 class="entry-title"><a href="/blog/2013-11-27-xianjian.html">html5版仙剑</a></h1>
     
     
       <p class="meta">
@@ -848,7 +1067,7 @@ deploy会触发git commit, commit再触发hook, hook里再deploy,再commit, 如�
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/about-octopress">about octopress</a></h1>
+      <h1 class="entry-title"><a href="/blog/2013-11-27-about-octopress.html">about octopress</a></h1>
     
     
       <p class="meta">
@@ -901,44 +1120,9 @@ deploy会触发git commit, commit再触发hook, hook里再deploy,再commit, 如�
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/hello-octopress">hello octopress</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-11-27T17:56:47+08:00" pubdate data-updated="true">Nov 27<span>th</span>, 2013</time>
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>hello octopress</p>
-
-<p>2013-11-27</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
+    
+      <a class="prev" href="/blog/page/2/">&larr; Older</a>
     
     <a href="/blog/archives">Blog Archives</a>
     
@@ -949,12 +1133,22 @@ deploy会触发git commit, commit再触发hook, hook里再deploy,再commit, 如�
     <section>
   <h1>Categories</h1>
   <ul id="categories">
-    <li class='category'><a href='/blog/categories/chrome/'>chrome (1)</a></li>
+    <li class='category'><a href='/blog/categories/android/'>android (2)</a></li>
+<li class='category'><a href='/blog/categories/chrome/'>chrome (1)</a></li>
+<li class='category'><a href='/blog/categories/css/'>css (3)</a></li>
+<li class='category'><a href='/blog/categories/cubieboard/'>cubieboard (3)</a></li>
+<li class='category'><a href='/blog/categories/git/'>git (2)</a></li>
 <li class='category'><a href='/blog/categories/hive/'>hive (1)</a></li>
 <li class='category'><a href='/blog/categories/html5/'>html5 (1)</a></li>
+<li class='category'><a href='/blog/categories/java/'>java (8)</a></li>
+<li class='category'><a href='/blog/categories/javascript/'>javascript (10)</a></li>
+<li class='category'><a href='/blog/categories/maven/'>maven (5)</a></li>
+<li class='category'><a href='/blog/categories/nginx/'>nginx (1)</a></li>
 <li class='category'><a href='/blog/categories/octopress/'>octopress (2)</a></li>
+<li class='category'><a href='/blog/categories/php/'>php (1)</a></li>
 <li class='category'><a href='/blog/categories/ruby/'>ruby (1)</a></li>
-<li class='category'><a href='/blog/categories/ubuntu/'>ubuntu (3)</a></li>
+<li class='category'><a href='/blog/categories/ubuntu/'>ubuntu (20)</a></li>
+<li class='category'><a href='/blog/categories/思考/'>思考 (9)</a></li>
 
   </ul>
 </section>
@@ -963,23 +1157,23 @@ deploy会触发git commit, commit再触发hook, hook里再deploy,再commit, 如�
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/ruby-spider">ruby spider</a>
+        <a href="/blog/2013-12-31-iteye-blog-migration.html">iteye 博客迁移</a>
       </li>
     
       <li class="post">
-        <a href="/blog/fullscreen-picture-viewer">全屏图片查看器 fullscreen picture viewer</a>
+        <a href="/blog/2013-12-23-ruby-spider.html">ruby spider</a>
       </li>
     
       <li class="post">
-        <a href="/blog/hive-skill">hive 常用技巧</a>
+        <a href="/blog/2013-12-16-fullscreen-picture-viewer.html">全屏图片查看器 fullscreen picture viewer</a>
       </li>
     
       <li class="post">
-        <a href="/blog/linux-repeat">linux repeat</a>
+        <a href="/blog/2013-12-13-hive-skill.html">hive 常用技巧</a>
       </li>
     
       <li class="post">
-        <a href="/blog/utuntu-group">utuntu group</a>
+        <a href="/blog/2013-12-04-linux-repeat.html">linux repeat</a>
       </li>
     
   </ul>

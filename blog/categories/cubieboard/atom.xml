@@ -4,7 +4,7 @@
   <title><![CDATA[Category: cubieboard | lianghaijun的博客]]></title>
   <link href="http://lianghaijun.com/blog/categories/cubieboard/atom.xml" rel="self"/>
   <link href="http://lianghaijun.com/"/>
-  <updated>2013-12-31T14:35:25+08:00</updated>
+  <updated>2013-12-31T15:36:55+08:00</updated>
   <id>http://lianghaijun.com/</id>
   <author>
     <name><![CDATA[seavers]]></name>
@@ -15,7 +15,7 @@
   
   <entry>
     <title type="html"><![CDATA[raspberry 网络设置]]></title>
-    <link href="http://lianghaijun.com/blog/1850803"/>
+    <link href="http://lianghaijun.com/blog/2013-04-20-1850803.html"/>
     <updated>2013-04-20T19:52:00+08:00</updated>
     <id>http://lianghaijun.com/blog/1850803</id>
     <content type="html"><![CDATA[<p>今天调了一天 raspberry pi 的网络设置</p>
@@ -27,7 +27,7 @@
 4. 有线网卡, DHCP下也是可以成功的, 需要在rc.local中添加 dhclient eth0</p>
 
 <p>正常的/etc/network/interfaces 如下
-[code=&ldquo;conf&rdquo;]
+```
 auto lo
 iface lo inet loopback</p>
 
@@ -52,7 +52,7 @@ iface default inet dhcp</p>
 只改动了 interfaces , 其余未动</p>
 
 <p>dhcp的/etc/network/interfaces 如下
-[code=&ldquo;conf&rdquo;]
+```
 auto lo
 iface lo inet loopback</p>
 
@@ -78,16 +78,16 @@ dhclient eth0</p>
   
   <entry>
     <title type="html"><![CDATA[sunxi-bsp 脚本分析]]></title>
-    <link href="http://lianghaijun.com/blog/1833467"/>
+    <link href="http://lianghaijun.com/blog/2013-03-21-1833467.html"/>
     <updated>2013-03-21T15:36:00+08:00</updated>
     <id>http://lianghaijun.com/blog/1833467</id>
     <content type="html"><![CDATA[<p>cubieboard刷sd卡时, 使用了下面的脚本
-[url]<a href="https://github.com/linux-sunxi/sunxi-bsp/blob/master/scripts/sunxi-media-create.sh">https://github.com/linux-sunxi/sunxi-bsp/blob/master/scripts/sunxi-media-create.sh</a>[/url]</p>
+<a href="https://github.com/linux-sunxi/sunxi-bsp/blob/master/scripts/sunxi-media-create.sh">https://github.com/linux-sunxi/sunxi-bsp/blob/master/scripts/sunxi-media-create.sh</a></p>
 
 <p>命令如下:
 ./script/sunxi-media-create.sh /dev/sdb 引导文件 操作系统文件</p>
 
-<p>[size=medium]分析如下:</p>
+<h4>分析如下:</h4>
 
 <ul>
 <li>umount sd</li>
@@ -106,7 +106,7 @@ dhclient eth0</p>
 </ul>
 
 
-<p>[size=medium]总结如下:</p>
+<h4>总结如下:</h4>
 
 <ul>
 <li>脚本主要是分区,格式化,拷贝文件</li>
@@ -114,27 +114,28 @@ dhclient eth0</p>
 </ul>
 
 
-<p>[size=medium]关于源码
-源码的github上,有几多很特别的目录, 是打不开的, 很怪~~~
+<h4>关于源码</h4>
+
+<p>源码的github上,有几多很特别的目录, 是打不开的, 很怪~~~
 更详细的可参考:
-[url]<a href="http://linux-sunxi.org/Main_Page/zh_cn#.E8.BD.AF.E4.BB.B6">http://linux-sunxi.org/Main_Page/zh_cn#.E8.BD.AF.E4.BB.B6</a>[/url]</p>
+<a href="http://linux-sunxi.org/Main_Page/zh_cn#.E8.BD.AF.E4.BB.B6">http://linux-sunxi.org/Main_Page/zh_cn#.E8.BD.AF.E4.BB.B6</a></p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[cubieboard上手]]></title>
-    <link href="http://lianghaijun.com/blog/1832923"/>
+    <link href="http://lianghaijun.com/blog/2013-03-20-1832923.html"/>
     <updated>2013-03-20T20:19:00+08:00</updated>
     <id>http://lianghaijun.com/blog/1832923</id>
     <content type="html"><![CDATA[<p>最近刚买了cubieboard, 入手到玩转后的各个过程记录下</p>
 
-<p>购买链接: [url]<a href="http://item.taobao.com/item.htm?id=18271795262">http://item.taobao.com/item.htm?id=18271795262</a>[/url]
+<p>购买链接: <a href="http://item.taobao.com/item.htm?id=18271795262">http://item.taobao.com/item.htm?id=18271795262</a>
 已有装备: 笔记本, 无线路由器
 入手装备: cubieboard, 带电源,ttl2usb线等
 关键问题: 无显示器与电视
 超市购物: 读卡器+网线,  (从手机上拿的TF卡)</p>
 
-<p>[size=large]Q: 没有显示器与电视, 如何连接</p>
+<p>Q: 没有显示器与电视, 如何连接</p>
 
 <ul>
 <li>板子预装的android, 启动后, 可以直连至无线路由器, 但无法ssh或telnet上</li>
@@ -145,13 +146,13 @@ dhclient eth0</p>
 </ul>
 
 
-<p>[size=large]Q: 在tf卡上安装ubuntu</p>
+<p>Q: 在tf卡上安装ubuntu</p>
 
 <ul>
 <li>用读卡器装tf卡连接到了ubuntu笔记本上</li>
 <li>刚开始时, 容量有问题, 只有64M, 用fdisk命令解决了, 见前一博文</li>
-<li>刷tf方法见:   [url]<a href="http://blog.sina.com.cn/s/blog_5459f60d0101h0j3.html">http://blog.sina.com.cn/s/blog_5459f60d0101h0j3.html</a>[/url]
-[url]<a href="http://cn.cubieboard.org/forum.php?mod=viewthread&amp;tid=55&amp;extra=page%3D1">http://cn.cubieboard.org/forum.php?mod=viewthread&amp;tid=55&amp;extra=page%3D1</a>[/url]
+<li>刷tf方法见:   <a href="http://blog.sina.com.cn/s/blog_5459f60d0101h0j3.html">http://blog.sina.com.cn/s/blog_5459f60d0101h0j3.html</a>
+<a href="http://cn.cubieboard.org/forum.php?mod=viewthread&amp;tid=55&amp;extra=page%3D1">http://cn.cubieboard.org/forum.php?mod=viewthread&amp;tid=55&amp;extra=page%3D1</a>
 (precise在镜像上已经失效了,换quantal(即v12.10))</li>
 <li>装上tf卡, 拔电源重启, 就可在ttl上看到, 已经连接到ubuntu上, 并且可以敲命令了</li>
 <li>在/etc/resolv.conf配置nameserver, 就可以ping通baidu.com了</li>
@@ -160,7 +161,7 @@ dhclient eth0</p>
 </ul>
 
 
-<p>[size=large]Q: 刷nand</p>
+<p>Q: 刷nand</p>
 
 <ul>
 <li>可使用官网提供的方式刷系统</li>

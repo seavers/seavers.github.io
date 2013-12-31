@@ -1,0 +1,294 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>包管理软件 - lianghaijun的博客</title>
+  <meta name="author" content="seavers">
+
+  
+  <meta name="description" content="常见的各类包管理软件对比 包管理分类 操作系统包管理 如: yum (RHL), apt-get(ubuntu), homebrew(mac)
+语言级别 如: npm(nodejs), gem(ruby),pip(python), bower(javascript), maven(java) 总结 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://lianghaijun.com/blog/2013-03-01-1820183.html">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+  <link href="/atom.xml" rel="alternate" title="lianghaijun的博客" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <div id="wb_connect_btn"></div>
+  <h1><a href="/">lianghaijun的博客</a></h1>
+  
+    <h2>Looking for Interest</h2>
+  
+</hgroup>
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:lianghaijun.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/picture">picture</a><li>
+  <li><a href="/blog/link">link</a></li>
+  <li><a href="/blog/about">about</a></li>
+</ul>
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">包管理软件</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-01T22:38:00+08:00" pubdate data-updated="true">Mar 1<span>st</span>, 2013</time>
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>常见的各类包管理软件对比</p>
+
+<p>包管理分类</p>
+
+<ul>
+<li>操作系统包管理  如: yum (RHL), apt-get(ubuntu), homebrew(mac)</li>
+<li>语言级别  如: npm(nodejs), gem(ruby),pip(python), bower(javascript), maven(java)</li>
+</ul>
+
+
+<p>总结</p>
+
+<ul>
+<li>包管理几乎都有list, install, uninstall, update|upgrade, search 等功能</li>
+<li>语言级别时, 因涉及到应用, 会分 local与global, 会有工程配置如package.json</li>
+<li>maven比较特殊, 不支持install, 需要手工配置pom.xml   (需要不少插件)</li>
+</ul>
+
+
+<p>一些列表
+[table]
+|name   | list | install | uninstall| update | search | init|
+|apt-get| apt-cache  | install | uninstall | upgrade | apt-cache search | |
+|yum     | ||||||
+|brew    | list | install | uninstall | upgrade | search | |
+|npm     | local | -g &mdash;save  | prune  | update |  /regexp | package.json|
+|gem     | &mdash;local | local| cleanup | update | &mdash;remote | Gemfile (bundle init)|
+|pip       | freeze | install | uninstall | &mdash;&mdash; | search | |
+|bower  | list  | -g &mdash;save | cache-clean | update | search  |  component.json |
+[/table]</p>
+
+<p>心得</p>
+
+<ul>
+<li>yum, apt-get, npm, gem 几乎是官方的, 但mac, python还是选择性较多</li>
+<li>install 并保存至 .json 配置时, 使用 &mdash;save参数, 但gem,python不清楚,待补充</li>
+<li>有些update是更新版本信息的, upgrade才是升级所有组件</li>
+<li>组件的依赖版本冲突如何办, npm的方法确实不错</li>
+</ul>
+
+
+<p>汇总列表</p>
+
+<ul>
+<li>apt-get(ubuntu),yum(fedora),macports(mac),homebrew(mac),pkg(solaris),emerge(Gentoo)</li>
+<li>npm(nodejs),gem(ruby),pip(python),easy_install(python),nuget(vs),bower(javascript)</li>
+<li>maven(java),grunt(java),gradle(java),pear(php),cpan(perl)</li>
+<li></li>
+</ul>
+
+
+<p>各种镜像:
+<a href="http://ruby.taobao.org/">http://ruby.taobao.org/</a>
+<a href="http://gems.rubyforge.org/">http://gems.rubyforge.org/</a>
+<a href="http://gems.github.com/">http://gems.github.com/</a></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">seavers</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-01T22:38:00+08:00" pubdate data-updated="true">Mar 1<span>st</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/si-kao/'>思考</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013-02-28-1817854.html" title="Previous Post: chrome  support for sass">&laquo; chrome  support for sass</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2013-03-07-1825519.html" title="Next Post: 使用符号链接提高工作效率">使用符号链接提高工作效率 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="comments" aria-live="polite"><!-- Duoshuo Comment BEGIN -->
+<div class="ds-thread" data-title=""></div>
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"lianghaijun"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+<!-- Duoshuo Comment END -->
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Categories</h1>
+  <ul id="categories">
+    <li class='category'><a href='/blog/categories/android/'>android (2)</a></li>
+<li class='category'><a href='/blog/categories/chrome/'>chrome (1)</a></li>
+<li class='category'><a href='/blog/categories/css/'>css (3)</a></li>
+<li class='category'><a href='/blog/categories/cubieboard/'>cubieboard (3)</a></li>
+<li class='category'><a href='/blog/categories/git/'>git (2)</a></li>
+<li class='category'><a href='/blog/categories/hive/'>hive (1)</a></li>
+<li class='category'><a href='/blog/categories/html5/'>html5 (1)</a></li>
+<li class='category'><a href='/blog/categories/java/'>java (8)</a></li>
+<li class='category'><a href='/blog/categories/javascript/'>javascript (10)</a></li>
+<li class='category'><a href='/blog/categories/maven/'>maven (5)</a></li>
+<li class='category'><a href='/blog/categories/nginx/'>nginx (1)</a></li>
+<li class='category'><a href='/blog/categories/octopress/'>octopress (2)</a></li>
+<li class='category'><a href='/blog/categories/php/'>php (1)</a></li>
+<li class='category'><a href='/blog/categories/ruby/'>ruby (1)</a></li>
+<li class='category'><a href='/blog/categories/ubuntu/'>ubuntu (20)</a></li>
+<li class='category'><a href='/blog/categories/思考/'>思考 (9)</a></li>
+
+  </ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013-12-31-iteye-blog-migration.html">iteye 博客迁移</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013-12-23-ruby-spider.html">ruby spider</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013-12-16-fullscreen-picture-viewer.html">全屏图片查看器 fullscreen picture viewer</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013-12-13-hive-skill.html">hive 常用技巧</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013-12-04-linux-repeat.html">linux repeat</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>大牛博客</h1>
+  <ul>
+    <li>
+      <a href="http://ithans.com/">ithans</a>
+    </li>
+  </ul>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - seavers -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+</footer>
+  <script src="/javascripts/libs/jquery.min.js"></script>
+<script src="/javascripts/octopress.js"></script>
+
+<script src=" http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=3919158905" charset="utf-8"></script>
+<script src="/javascripts/blog.js"></script>
+<script src='http://hm.baidu.com/h.js?f1e7ae48ee023d8ed983af30c485b5ce'></script>
+
+
+</body>
+</html>

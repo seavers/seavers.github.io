@@ -4,7 +4,7 @@
   <title><![CDATA[Category: java | lianghaijun的博客]]></title>
   <link href="http://lianghaijun.com/blog/categories/java/atom.xml" rel="self"/>
   <link href="http://lianghaijun.com/"/>
-  <updated>2013-12-31T14:35:25+08:00</updated>
+  <updated>2013-12-31T15:36:55+08:00</updated>
   <id>http://lianghaijun.com/</id>
   <author>
     <name><![CDATA[seavers]]></name>
@@ -15,7 +15,7 @@
   
   <entry>
     <title type="html"><![CDATA[Class.forName 返回 String[].class]]></title>
-    <link href="http://lianghaijun.com/blog/1923887"/>
+    <link href="http://lianghaijun.com/blog/2013-08-13-1923887.html"/>
     <updated>2013-08-13T11:38:00+08:00</updated>
     <id>http://lianghaijun.com/blog/1923887</id>
     <content type="html"><![CDATA[<p>A: 如何通过Class.forName 返回 String[].class
@@ -35,7 +35,7 @@ Q: Class.forName(&ldquo;[Ljava.lang.String;&rdquo;)</p>
   
   <entry>
     <title type="html"><![CDATA[ibatis typehandler]]></title>
-    <link href="http://lianghaijun.com/blog/1922745"/>
+    <link href="http://lianghaijun.com/blog/2013-08-09-1922745.html"/>
     <updated>2013-08-09T18:57:00+08:00</updated>
     <id>http://lianghaijun.com/blog/1922745</id>
     <content type="html"><![CDATA[<p>今天配置typehandler时碰到一个问题</p>
@@ -74,7 +74,8 @@ java.sql.SQLException: Cannot convert value &lsquo;0000-00-00 00:00:00&rsquo; fr
 
 <p>下面是自定义的datetypehandler</p>
 
-<p>package xxxxxxxxx;</p>
+<p>```
+package xxxxxxxxx;</p>
 
 <p>import java.sql.CallableStatement;
 import java.sql.ResultSet;
@@ -128,10 +129,11 @@ public Object getResult(CallableStatement cs, int columnIndex) throws SQLExcepti
   
   <entry>
     <title type="html"><![CDATA[java rsa code]]></title>
-    <link href="http://lianghaijun.com/blog/1855578"/>
+    <link href="http://lianghaijun.com/blog/2013-04-26-1855578.html"/>
     <updated>2013-04-26T23:08:00+08:00</updated>
     <id>http://lianghaijun.com/blog/1855578</id>
-    <content type="html"><![CDATA[<p>package rsa;
+    <content type="html"><![CDATA[<p>```
+package rsa;
 import java.security.Key;<br/>
 import java.security.KeyFactory;<br/>
 import java.security.KeyPair;<br/>
@@ -251,7 +253,7 @@ public static String decode(String data, String privateKey) throws Exception {
   
   <entry>
     <title type="html"><![CDATA[利用bat反编译jar包生成源码jar包]]></title>
-    <link href="http://lianghaijun.com/blog/1416013"/>
+    <link href="http://lianghaijun.com/blog/2012-02-21-1416013.html"/>
     <updated>2012-02-21T22:27:00+08:00</updated>
     <id>http://lianghaijun.com/blog/1416013</id>
     <content type="html"><![CDATA[<p>之前曾发表在 csdn(blog.csdn.net/seavers) 上, 不过, csdn的代码乱掉了, 今天重新整理了一下</p>
@@ -260,7 +262,7 @@ public static String decode(String data, String privateKey) throws Exception {
 
 <p>jad.exe 可反编译一个class文件为java文件,笔者的BAT可通过此工具将一个jar包反编译成一个完整的源码jar包,同时生成的目录也可以在eclipse中使用</p>
 
-<p>jad.exe 官方网站 ： <a href="http://www.kpdus.com/jad.html">http://www.kpdus.com/jad.html</a>   (已失效, 从[url=<a href="https://github.com/seavers/jad">https://github.com/seavers/jad</a>]这里[/url]或者附件下载)</p>
+<p>jad.exe 官方网站 ： <a href="http://www.kpdus.com/jad.html">http://www.kpdus.com/jad.html</a>   (已失效, 从<a href="https://github.com/seavers/jad">这里</a>或者附件下载)</p>
 
 <p>BAT脚本见后</p>
 
@@ -301,7 +303,7 @@ public static String decode(String data, String privateKey) throws Exception {
 
 <p>BAT源码如下: (请直接拷贝在BAT文件中)</p>
 
-<p>[code=&ldquo;bat&rdquo;]
+<p>```
 ::功能:     利用bat反编译jar包生成源码jar包
 ::作者:     seavers
 ::博客:     <a href="http://seavers.iteye.com/">http://seavers.iteye.com/</a>
@@ -371,7 +373,7 @@ pause</p>
   
   <entry>
     <title type="html"><![CDATA[version compare]]></title>
-    <link href="http://lianghaijun.com/blog/904122"/>
+    <link href="http://lianghaijun.com/blog/2011-02-11-904122.html"/>
     <updated>2011-02-11T21:34:00+08:00</updated>
     <id>http://lianghaijun.com/blog/904122</id>
     <content type="html"><![CDATA[<p>[img]<a href="http://dl.iteye.com/upload/attachment/412672/dda5fd96-afce-3f8c-bdf3-bf20b8228fe7.jpg">http://dl.iteye.com/upload/attachment/412672/dda5fd96-afce-3f8c-bdf3-bf20b8228fe7.jpg</a>[/img]</p>

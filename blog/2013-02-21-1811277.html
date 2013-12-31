@@ -1,0 +1,362 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>ubuntu 与 windows 的互联与共享 - lianghaijun的博客</title>
+  <meta name="author" content="seavers">
+
+  
+  <meta name="description" content="windows访问ubuntu ubuntu 安装 samba 1
+sudo apt-get install samba 修改 /etc/samba/smb.conf文件 1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17 [global] workgroup = &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://lianghaijun.com/blog/2013-02-21-1811277.html">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+  <link href="/atom.xml" rel="alternate" title="lianghaijun的博客" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <div id="wb_connect_btn"></div>
+  <h1><a href="/">lianghaijun的博客</a></h1>
+  
+    <h2>Looking for Interest</h2>
+  
+</hgroup>
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:lianghaijun.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/picture">picture</a><li>
+  <li><a href="/blog/link">link</a></li>
+  <li><a href="/blog/about">about</a></li>
+</ul>
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">ubuntu 与 windows 的互联与共享</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-02-21T18:23:00+08:00" pubdate data-updated="true">Feb 21<span>st</span>, 2013</time>
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>windows访问ubuntu</p>
+
+<ol>
+<li>ubuntu 安装 samba</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install samba</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>修改 /etc/samba/smb.conf文件</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>
+</span><span class='line'>[global]
+</span><span class='line'>   workgroup = WORKGROUP
+</span><span class='line'>   server string = %h server (Samba, Ubuntu)
+</span><span class='line'>;   wins support = no
+</span><span class='line'>   wins server =  (用ipconfig /all里看， 或者直接填网关ip)
+</span><span class='line'>   dns proxy = no
+</span><span class='line'>   name resolve order = lmhosts host wins bcast
+</span><span class='line'>
+</span><span class='line'>   security = share
+</span><span class='line'>   usershare allow guests = yes
+</span><span class='line'>[share]
+</span><span class='line'>      path = /home/ubuntu/
+</span><span class='line'>      available = yes
+</span><span class='line'>      browseable = yes
+</span><span class='line'>      public = yes
+</span><span class='line'>      writable = yes
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>重启服务</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo restart smbd
+</span><span class='line'>sudo restart nmbd</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>smbd 是 samba 的文件共享服务</li>
+<li><p>nmbd 是 windows name 解析服务</p></li>
+<li><p>OK
+这样，windows 就可以ping 通,且能查看unbutu的共享文件</p></li>
+</ul>
+
+
+<hr />
+
+<p>ubuntu 访问windows</p>
+
+<ol>
+<li>安装服务</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install cifs</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>mount</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo mount -t cifs //hostname/share  /mnt/path/to/name -o username=user</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<p>补： 上述是通过samba即cifs实现，也可通过ftp, webdav 等等其它协议实现互相访问</p>
+
+<p>其它问题</p>
+
+<ol>
+<li>ubuntu ping 的时候速度很慢，ping taobao.com 也慢
+<a href="http://forum.ubuntu.org.cn/viewtopic.php?f=116&amp;t=345288">http://forum.ubuntu.org.cn/viewtopic.php?f=116&amp;t=345288</a></li>
+<li>ping <hostname> 默认会解析全域名
+可以在 /etc/resolv.conf 中进行修改，将 search 修改为 正确的域后缀</li>
+</ol>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">seavers</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-02-21T18:23:00+08:00" pubdate data-updated="true">Feb 21<span>st</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/ubuntu/'>ubuntu</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013-02-17-1801066.html" title="Previous Post: git的本质">&laquo; git的本质</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2013-02-28-1817854.html" title="Next Post: chrome  support for sass">chrome  support for sass &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="comments" aria-live="polite"><!-- Duoshuo Comment BEGIN -->
+<div class="ds-thread" data-title=""></div>
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"lianghaijun"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+<!-- Duoshuo Comment END -->
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Categories</h1>
+  <ul id="categories">
+    <li class='category'><a href='/blog/categories/android/'>android (2)</a></li>
+<li class='category'><a href='/blog/categories/chrome/'>chrome (1)</a></li>
+<li class='category'><a href='/blog/categories/css/'>css (3)</a></li>
+<li class='category'><a href='/blog/categories/cubieboard/'>cubieboard (3)</a></li>
+<li class='category'><a href='/blog/categories/git/'>git (2)</a></li>
+<li class='category'><a href='/blog/categories/hive/'>hive (1)</a></li>
+<li class='category'><a href='/blog/categories/html5/'>html5 (1)</a></li>
+<li class='category'><a href='/blog/categories/java/'>java (8)</a></li>
+<li class='category'><a href='/blog/categories/javascript/'>javascript (10)</a></li>
+<li class='category'><a href='/blog/categories/maven/'>maven (5)</a></li>
+<li class='category'><a href='/blog/categories/nginx/'>nginx (1)</a></li>
+<li class='category'><a href='/blog/categories/octopress/'>octopress (2)</a></li>
+<li class='category'><a href='/blog/categories/php/'>php (1)</a></li>
+<li class='category'><a href='/blog/categories/ruby/'>ruby (1)</a></li>
+<li class='category'><a href='/blog/categories/ubuntu/'>ubuntu (20)</a></li>
+<li class='category'><a href='/blog/categories/思考/'>思考 (9)</a></li>
+
+  </ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013-12-31-iteye-blog-migration.html">iteye 博客迁移</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013-12-23-ruby-spider.html">ruby spider</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013-12-16-fullscreen-picture-viewer.html">全屏图片查看器 fullscreen picture viewer</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013-12-13-hive-skill.html">hive 常用技巧</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013-12-04-linux-repeat.html">linux repeat</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>大牛博客</h1>
+  <ul>
+    <li>
+      <a href="http://ithans.com/">ithans</a>
+    </li>
+  </ul>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - seavers -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+</footer>
+  <script src="/javascripts/libs/jquery.min.js"></script>
+<script src="/javascripts/octopress.js"></script>
+
+<script src=" http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=3919158905" charset="utf-8"></script>
+<script src="/javascripts/blog.js"></script>
+<script src='http://hm.baidu.com/h.js?f1e7ae48ee023d8ed983af30c485b5ce'></script>
+
+
+</body>
+</html>

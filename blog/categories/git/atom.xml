@@ -4,7 +4,7 @@
   <title><![CDATA[Category: git | lianghaijun的博客]]></title>
   <link href="http://lianghaijun.com/blog/categories/git/atom.xml" rel="self"/>
   <link href="http://lianghaijun.com/"/>
-  <updated>2013-12-31T14:35:25+08:00</updated>
+  <updated>2013-12-31T15:36:55+08:00</updated>
   <id>http://lianghaijun.com/</id>
   <author>
     <name><![CDATA[seavers]]></name>
@@ -15,7 +15,7 @@
   
   <entry>
     <title type="html"><![CDATA[git 与 svn 同步]]></title>
-    <link href="http://lianghaijun.com/blog/1894735"/>
+    <link href="http://lianghaijun.com/blog/2013-06-26-1894735.html"/>
     <updated>2013-06-26T15:44:00+08:00</updated>
     <id>http://lianghaijun.com/blog/1894735</id>
     <content type="html"><![CDATA[<p>svn 与 git 保持同步</p>
@@ -49,7 +49,7 @@
 <p>ignore.txt 中 加入  .git .gitignore
 .gitignore 中 加入  .svn</p>
 
-<p>[code=&ldquo;.gitignore&rdquo;]
+<p>```
 .svn
 bin
 target
@@ -64,12 +64,12 @@ target
   
   <entry>
     <title type="html"><![CDATA[git的本质]]></title>
-    <link href="http://lianghaijun.com/blog/1801066"/>
+    <link href="http://lianghaijun.com/blog/2013-02-17-1801066.html"/>
     <updated>2013-02-17T00:33:00+08:00</updated>
     <id>http://lianghaijun.com/blog/1801066</id>
     <content type="html"><![CDATA[<p>git 的本质</p>
 
-<p>[size=large]配置:
+<p>配置:
 git的配置操作，本质上，都是在修改config文件 (.git/config)
 * git config -l</p>
 
@@ -93,7 +93,7 @@ branch.master.remote 与  branch.master.merge 即是 branch的配置</p>
 </ul>
 
 
-<p>[size=large]分支名:
+<p>分支名:
 git 命令，使用分支时，需要一个名字， 如origin/master, refs/remotes/origin/HEAD等
 其实，可以参考 .git/refs目录， 就明白了</p>
 
@@ -113,7 +113,7 @@ git 命令，使用分支时，需要一个名字， 如origin/master, refs/remo
 而 tag 只是将 commitId 取了一个容易记忆的名字
 而 分支，远程分支，可以理解为是一个 commitId 的有序列表（可变数组）</p>
 
-<p>[size=large]分支操作:
+<p>分支操作:
 假如将远程仓库也看成是一个个本地分支的话， 就会明白了</p>
 
 <ul>
@@ -123,19 +123,19 @@ git 命令，使用分支时，需要一个名字， 如origin/master, refs/remo
 </ul>
 
 
-<p>[size=large]操作index
+<p>操作index
 * git add    追加 index
 * git rm     删除文件，以追加index
 * git mv     移动文件，并追加index
 * git reset  清除uncommit的index</p>
 
-<p>[size=large]clone
+<p>clone
 * 这个大家都知道了，就是一系列git操作的组合</p>
 
-<p>[size=large]checkout
+<p>checkout
 * 就是在操作HEAD的位置</p>
 
-<p>[size=large]git
+<p>git
 * git的所有操作，如果理解清每个命令， 是如何操作 file, index, commit, branch 的，就都理解了</p>
 ]]></content>
   </entry>

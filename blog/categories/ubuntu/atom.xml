@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ubuntu | lianghaijun的博客]]></title>
   <link href="http://lianghaijun.com/blog/categories/ubuntu/atom.xml" rel="self"/>
   <link href="http://lianghaijun.com/"/>
-  <updated>2013-12-31T14:35:25+08:00</updated>
+  <updated>2013-12-31T15:36:55+08:00</updated>
   <id>http://lianghaijun.com/</id>
   <author>
     <name><![CDATA[seavers]]></name>
@@ -15,7 +15,7 @@
   
   <entry>
     <title type="html"><![CDATA[linux repeat]]></title>
-    <link href="http://lianghaijun.com/blog/linux-repeat"/>
+    <link href="http://lianghaijun.com/blog/2013-12-04-linux-repeat.html"/>
     <updated>2013-12-04T15:32:01+08:00</updated>
     <id>http://lianghaijun.com/blog/linux-repeat</id>
     <content type="html"><![CDATA[<p>linux下循环执行命令</p>
@@ -80,7 +80,7 @@ repeat -n 3 -s 0.5 sh -c "curl -I -s 'http://www.lianghaijun.com' | head -1"
   
   <entry>
     <title type="html"><![CDATA[utuntu group]]></title>
-    <link href="http://lianghaijun.com/blog/utuntu-group"/>
+    <link href="http://lianghaijun.com/blog/2013-12-02-utuntu-group.html"/>
     <updated>2013-12-02T14:28:53+08:00</updated>
     <id>http://lianghaijun.com/blog/utuntu-group</id>
     <content type="html"><![CDATA[<p>linux用户管理中, 一直都有分组的概念, 然而我们总感觉使用场景较少, 其实是因为我们不了解</p>
@@ -139,7 +139,7 @@ uid=1000(seavers) gid=1000(seavers) groups=1000(seavers),4(adm),24(cdrom),27(sud
   
   <entry>
     <title type="html"><![CDATA[sed]]></title>
-    <link href="http://lianghaijun.com/blog/sed"/>
+    <link href="http://lianghaijun.com/blog/2013-11-28-sed.html"/>
     <updated>2013-11-28T16:50:01+08:00</updated>
     <id>http://lianghaijun.com/blog/sed</id>
     <content type="html"><![CDATA[<p>sed是基于行进行文本替换的神器, 这里记录一些自己常用的功能</p>
@@ -197,7 +197,7 @@ sed 's/1|2|3/*/g' //在GNU里将不管是1或2或者是3替换成*
   
   <entry>
     <title type="html"><![CDATA[wget 整站下载]]></title>
-    <link href="http://lianghaijun.com/blog/1980761"/>
+    <link href="http://lianghaijun.com/blog/2013-11-26-1980761.html"/>
     <updated>2013-11-26T10:22:00+08:00</updated>
     <id>http://lianghaijun.com/blog/1980761</id>
     <content type="html"><![CDATA[<p>下载整站
@@ -217,10 +217,10 @@ wget -r -nv -c --restrict-file-names=nocontrol http://seavers.iteye.com/
 
 <ul>
 <li><p>&mdash;restrict-file-names=nocontrol 用来解决中文乱码问题</p></li>
-<li><p>[url]<a href="http://aotee.com/using-wget-recursive-download-the-entire-station">http://aotee.com/using-wget-recursive-download-the-entire-station</a>[/url]</p></li>
-<li>[url]<a href="http://www.cnblogs.com/lybeta/archive/2012/05/23/2514759.html">http://www.cnblogs.com/lybeta/archive/2012/05/23/2514759.html</a>[/url]</li>
-<li>[url]<a href="http://blog.csdn.net/flyskywhy/article/details/7777972">http://blog.csdn.net/flyskywhy/article/details/7777972</a>[/url]</li>
-<li>[url]<a href="http://www.butian.org/knowledge/linux/254.html">http://www.butian.org/knowledge/linux/254.html</a>[/url]</li>
+<li><p><a href="http://aotee.com/using-wget-recursive-download-the-entire-station">http://aotee.com/using-wget-recursive-download-the-entire-station</a></p></li>
+<li><a href="http://www.cnblogs.com/lybeta/archive/2012/05/23/2514759.html">http://www.cnblogs.com/lybeta/archive/2012/05/23/2514759.html</a></li>
+<li><a href="http://blog.csdn.net/flyskywhy/article/details/7777972">http://blog.csdn.net/flyskywhy/article/details/7777972</a></li>
+<li><a href="http://www.butian.org/knowledge/linux/254.html">http://www.butian.org/knowledge/linux/254.html</a></li>
 </ul>
 
 ]]></content>
@@ -228,12 +228,12 @@ wget -r -nv -c --restrict-file-names=nocontrol http://seavers.iteye.com/
   
   <entry>
     <title type="html"><![CDATA[ubuntu ipconfig]]></title>
-    <link href="http://lianghaijun.com/blog/1972028"/>
+    <link href="http://lianghaijun.com/blog/2013-11-06-1972028.html"/>
     <updated>2013-11-06T13:45:00+08:00</updated>
     <id>http://lianghaijun.com/blog/1972028</id>
     <content type="html"><![CDATA[<p>sudo vi /sbin/ipconfig</p>
 
-<p>[code=&ldquo;bash&rdquo;]</p>
+<p>```</p>
 
 <h1>! /bin/bash</h1>
 

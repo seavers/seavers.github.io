@@ -4,7 +4,7 @@
   <title><![CDATA[Category: chrome | lianghaijun的博客]]></title>
   <link href="http://lianghaijun.com/blog/categories/chrome/atom.xml" rel="self"/>
   <link href="http://lianghaijun.com/"/>
-  <updated>2013-12-31T14:35:25+08:00</updated>
+  <updated>2013-12-31T15:36:55+08:00</updated>
   <id>http://lianghaijun.com/</id>
   <author>
     <name><![CDATA[seavers]]></name>
@@ -15,7 +15,7 @@
   
   <entry>
     <title type="html"><![CDATA[全屏图片查看器 fullscreen picture viewer]]></title>
-    <link href="http://lianghaijun.com/blog/fullscreen-picture-viewer"/>
+    <link href="http://lianghaijun.com/blog/2013-12-16-fullscreen-picture-viewer.html"/>
     <updated>2013-12-16T23:54:34+08:00</updated>
     <id>http://lianghaijun.com/blog/fullscreen-picture-viewer</id>
     <content type="html"><![CDATA[<h2>全屏图片查看器是一个chrome扩展</h2>

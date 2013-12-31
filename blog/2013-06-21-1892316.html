@@ -1,0 +1,255 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>curlftpfs - lianghaijun的博客</title>
+  <meta name="author" content="seavers">
+
+  
+  <meta name="description" content="多数curlftpfs的例子是这样的 1
+sudo curlftpfs –o rw,allow_other ftp://username:password@192.168.1.111 /ftp 这种写法,有一个缺点,就是,当mount查看时, 会显示出密码 换成另一种写法吧: 1
+sudo &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://lianghaijun.com/blog/2013-06-21-1892316.html">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+  <link href="/atom.xml" rel="alternate" title="lianghaijun的博客" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <div id="wb_connect_btn"></div>
+  <h1><a href="/">lianghaijun的博客</a></h1>
+  
+    <h2>Looking for Interest</h2>
+  
+</hgroup>
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:lianghaijun.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/picture">picture</a><li>
+  <li><a href="/blog/link">link</a></li>
+  <li><a href="/blog/about">about</a></li>
+</ul>
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">curlftpfs</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-21T22:06:00+08:00" pubdate data-updated="true">Jun 21<span>st</span>, 2013</time>
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>多数curlftpfs的例子是这样的</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo curlftpfs –o rw,allow_other ftp://username:password@192.168.1.111 /ftp</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这种写法,有一个缺点,就是,当mount查看时, 会显示出密码</p>
+
+<p>换成另一种写法吧:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo curlftpfs -o rw,allow_other,user=username:password ftp://192.168.1.111 /ftp</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">seavers</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-21T22:06:00+08:00" pubdate data-updated="true">Jun 21<span>st</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/ubuntu/'>ubuntu</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013-06-21-1891105.html" title="Previous Post: umount">&laquo; umount</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2013-06-22-1892343.html" title="Next Post: nginx expires 绝对过期时间">nginx expires 绝对过期时间 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="comments" aria-live="polite"><!-- Duoshuo Comment BEGIN -->
+<div class="ds-thread" data-title=""></div>
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"lianghaijun"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+<!-- Duoshuo Comment END -->
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Categories</h1>
+  <ul id="categories">
+    <li class='category'><a href='/blog/categories/android/'>android (2)</a></li>
+<li class='category'><a href='/blog/categories/chrome/'>chrome (1)</a></li>
+<li class='category'><a href='/blog/categories/css/'>css (3)</a></li>
+<li class='category'><a href='/blog/categories/cubieboard/'>cubieboard (3)</a></li>
+<li class='category'><a href='/blog/categories/git/'>git (2)</a></li>
+<li class='category'><a href='/blog/categories/hive/'>hive (1)</a></li>
+<li class='category'><a href='/blog/categories/html5/'>html5 (1)</a></li>
+<li class='category'><a href='/blog/categories/java/'>java (8)</a></li>
+<li class='category'><a href='/blog/categories/javascript/'>javascript (10)</a></li>
+<li class='category'><a href='/blog/categories/maven/'>maven (5)</a></li>
+<li class='category'><a href='/blog/categories/nginx/'>nginx (1)</a></li>
+<li class='category'><a href='/blog/categories/octopress/'>octopress (2)</a></li>
+<li class='category'><a href='/blog/categories/php/'>php (1)</a></li>
+<li class='category'><a href='/blog/categories/ruby/'>ruby (1)</a></li>
+<li class='category'><a href='/blog/categories/ubuntu/'>ubuntu (20)</a></li>
+<li class='category'><a href='/blog/categories/思考/'>思考 (9)</a></li>
+
+  </ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013-12-31-iteye-blog-migration.html">iteye 博客迁移</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013-12-23-ruby-spider.html">ruby spider</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013-12-16-fullscreen-picture-viewer.html">全屏图片查看器 fullscreen picture viewer</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013-12-13-hive-skill.html">hive 常用技巧</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013-12-04-linux-repeat.html">linux repeat</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>大牛博客</h1>
+  <ul>
+    <li>
+      <a href="http://ithans.com/">ithans</a>
+    </li>
+  </ul>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - seavers -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+</footer>
+  <script src="/javascripts/libs/jquery.min.js"></script>
+<script src="/javascripts/octopress.js"></script>
+
+<script src=" http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=3919158905" charset="utf-8"></script>
+<script src="/javascripts/blog.js"></script>
+<script src='http://hm.baidu.com/h.js?f1e7ae48ee023d8ed983af30c485b5ce'></script>
+
+
+</body>
+</html>

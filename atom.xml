@@ -4,7 +4,7 @@
   <title><![CDATA[lianghaijun的博客]]></title>
   <link href="http://lianghaijun.com/atom.xml" rel="self"/>
   <link href="http://lianghaijun.com/"/>
-  <updated>2013-12-31T13:26:53+08:00</updated>
+  <updated>2013-12-31T15:36:55+08:00</updated>
   <id>http://lianghaijun.com/</id>
   <author>
     <name><![CDATA[seavers]]></name>
@@ -14,8 +14,208 @@
 
   
   <entry>
+    <title type="html"><![CDATA[iteye 博客迁移]]></title>
+    <link href="http://lianghaijun.com/blog/2013-12-31-iteye-blog-migration.html"/>
+    <updated>2013-12-31T15:16:16+08:00</updated>
+    <id>http://lianghaijun.com/blog/iteye-blog-migration</id>
+    <content type="html"><![CDATA[<p>之前一直是在iteye上写博客的, 后来建立了本博客系统后, 就希望将博客从iteye上迁移过来</p>
+
+<p>然而iteye上博客的文章太多了, 手动一篇一篇拷贝很不现实, 所以写了个工具来辅助迁移</p>
+
+<p>iteye2markdown是一款博客迁移工具,可以将博客从iteye迁移至octopress</p>
+
+<ul>
+<li>此工具会自动下载iteye博客上的所有文章</li>
+<li>接着会将博客中的bbcode代码转换成markdown</li>
+<li>下载转换后的markdown可用于octopress,迁移至自己的博客系统上</li>
+</ul>
+
+
+<p>使用方式:</p>
+
+<ul>
+<li>修改download.rb中的cookie配置, cookie将用于连接iteye.com的后台系统, 下载博客内容</li>
+<li>修改download.rb中的博客地址</li>
+<li>使用以下命令</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ruby download.rb</span></code></pre></td></tr></table></div></figure>
+
+
+<p>执行下载转换, 结果保存于blog目录中</p>
+
+<p>源代码见:  <a href="https://github.com/seavers/iteye2markdown">github</a></p>
+
+<p>核心代码如下:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>re 'open-uri'
+</span><span class='line'>require 'nokogiri'
+</span><span class='line'>
+</span><span class='line'>def process(id, date)
+</span><span class='line'>  host = 'http://seavers.iteye.com'
+</span><span class='line'>  cookie = ''      #IO.read('cookie.txt')
+</span><span class='line'>  agent = 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/30.0.1599.14 Safari/537.36'
+</span><span class='line'>
+</span><span class='line'>  html = open(host + '/admin/blogs/' + id + '/edit', 'User-Agent'=&gt;agent, 'Cookie'=&gt;cookie).read
+</span><span class='line'>  doc = Nokogiri::HTML(html)
+</span><span class='line'>
+</span><span class='line'>  title = doc.search('#blog_title').attr('value').to_s
+</span><span class='line'>  text = doc.search('#editor_body').text
+</span><span class='line'>  category = doc.search('#blog_category_list').attr('value').to_s
+</span><span class='line'>  tag = doc.search('#blog_tag_list').attr('value').to_s
+</span><span class='line'>  
+</span><span class='line'>
+</span><span class='line'>  content = text
+</span><span class='line'>      .gsub('[size=xx-large]', '#')
+</span><span class='line'>      .gsub('[size=x-large]', '##')
+</span><span class='line'>      .gsub('[size=large]', '###')
+</span><span class='line'>      .gsub('[size=medium]', '####')
+</span><span class='line'>      .gsub('[size=small]', '')
+</span><span class='line'>      .gsub('[size=x-small]', '')
+</span><span class='line'>      .gsub('[size=xx-small]', '')
+</span><span class='line'>      .gsub('[/size]', '')
+</span><span class='line'>      .gsub(/\[url=(.*)\](.*)\[\/url\]/, '[\2](\1)')
+</span><span class='line'>      .gsub('[url]', '').gsub('[/url]', '')
+</span><span class='line'>      .gsub('[b]', '*').gsub('[/b]', '*')
+</span><span class='line'>      .gsub('[list]', '').gsub('[/list]', '')
+</span><span class='line'>      .gsub('[b]', '*').gsub('[/b]', '*')
+</span><span class='line'>      .gsub('[*]', '* ')
+</span><span class='line'>      .gsub('[code]', '```').gsub('[ne/code]', '```')
+</span><span class='line'>      .gsub(/\[code="(.*)"\]/, '```')
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>  filename = date[0..9] + '-' + id + '.markdown'
+</span><span class='line'>  File.open('blog/' + filename, 'w') { |file|
+</span><span class='line'>      file.puts '---'
+</span><span class='line'>      file.puts 'layout: post'
+</span><span class='line'>      file.puts 'title: "' + title.to_s + '"'
+</span><span class='line'>      file.puts 'date: ' + date + ':00 +0800'
+</span><span class='line'>      file.puts 'comments: true'
+</span><span class='line'>      file.puts 'categories:'
+</span><span class='line'>      file.puts '- ' + category.to_s
+</span><span class='line'>      file.puts 'tags:'
+</span><span class='line'>      tag.split(',').each {|x|
+</span><span class='line'>          file.puts '- ' + x
+</span><span class='line'>      }
+</span><span class='line'>      file.puts '---'
+</span><span class='line'>
+</span><span class='line'>      file.puts ''
+</span><span class='line'>      file.puts content 
+</span><span class='line'>  }
+</span><span class='line'>
+</span><span class='line'>end
+</span><span class='line'>
+</span><span class='line'>def spider(page)
+</span><span class='line'>  agent = 'Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/30.0.1599.14 Safari/537.36'
+</span><span class='line'>
+</span><span class='line'>  url = 'http://seavers.iteye.com/?page='+page.to_s
+</span><span class='line'>  html = open(url, 'User-Agent'=&gt;agent)
+</span><span class='line'>
+</span><span class='line'>  doc = Nokogiri::HTML(html)
+</span><span class='line'>  doc.search('.blog_main').each {|x|
+</span><span class='line'>      id = x.search('h3 a').attr('href').text[/[0-9]+/, 0]
+</span><span class='line'>      date = x.search('.blog_bottom .date').text
+</span><span class='line'>      puts id + "\t" + date
+</span><span class='line'>      process(id, date)
+</span><span class='line'>  }
+</span><span class='line'>
+</span><span class='line'>  return doc.search('.pagination a.next_page').length == 0
+</span><span class='line'>end
+</span><span class='line'>
+</span><span class='line'>##process('1416013', '2013-12-31 14:01')
+</span><span class='line'>(1..100).each {|page|
+</span><span class='line'>  break if spider(page)
+</span><span class='line'>}
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[ruby spider]]></title>
-    <link href="http://lianghaijun.com/blog/ruby-spider"/>
+    <link href="http://lianghaijun.com/blog/2013-12-23-ruby-spider.html"/>
     <updated>2013-12-23T21:19:09+08:00</updated>
     <id>http://lianghaijun.com/blog/ruby-spider</id>
     <content type="html"><![CDATA[<p>最近开始喜欢上研究ruby了,正好手头有一些抓取的需求,正好练练手</p>
@@ -86,7 +286,7 @@
   
   <entry>
     <title type="html"><![CDATA[全屏图片查看器 fullscreen picture viewer]]></title>
-    <link href="http://lianghaijun.com/blog/fullscreen-picture-viewer"/>
+    <link href="http://lianghaijun.com/blog/2013-12-16-fullscreen-picture-viewer.html"/>
     <updated>2013-12-16T23:54:34+08:00</updated>
     <id>http://lianghaijun.com/blog/fullscreen-picture-viewer</id>
     <content type="html"><![CDATA[<h2>全屏图片查看器是一个chrome扩展</h2>
@@ -126,7 +326,7 @@
   
   <entry>
     <title type="html"><![CDATA[hive 常用技巧]]></title>
-    <link href="http://lianghaijun.com/blog/hive-skill"/>
+    <link href="http://lianghaijun.com/blog/2013-12-13-hive-skill.html"/>
     <updated>2013-12-13T10:52:07+08:00</updated>
     <id>http://lianghaijun.com/blog/hive-skill</id>
     <content type="html"><![CDATA[<p>最近在使用hive来处理些大数据,偶有心得,记录之</p>
@@ -206,7 +406,7 @@
   
   <entry>
     <title type="html"><![CDATA[linux repeat]]></title>
-    <link href="http://lianghaijun.com/blog/linux-repeat"/>
+    <link href="http://lianghaijun.com/blog/2013-12-04-linux-repeat.html"/>
     <updated>2013-12-04T15:32:01+08:00</updated>
     <id>http://lianghaijun.com/blog/linux-repeat</id>
     <content type="html"><![CDATA[<p>linux下循环执行命令</p>
@@ -295,7 +495,7 @@
   
   <entry>
     <title type="html"><![CDATA[utuntu group]]></title>
-    <link href="http://lianghaijun.com/blog/utuntu-group"/>
+    <link href="http://lianghaijun.com/blog/2013-12-02-utuntu-group.html"/>
     <updated>2013-12-02T14:28:53+08:00</updated>
     <id>http://lianghaijun.com/blog/utuntu-group</id>
     <content type="html"><![CDATA[<p>linux用户管理中, 一直都有分组的概念, 然而我们总感觉使用场景较少, 其实是因为我们不了解</p>
@@ -352,7 +552,7 @@
   
   <entry>
     <title type="html"><![CDATA[octopress 自动部署方案]]></title>
-    <link href="http://lianghaijun.com/blog/octopress-deploy"/>
+    <link href="http://lianghaijun.com/blog/2013-11-28-octopress-deploy.html"/>
     <updated>2013-11-28T22:20:52+08:00</updated>
     <id>http://lianghaijun.com/blog/octopress-deploy</id>
     <content type="html"><![CDATA[<p>今天准备实现 octopress 的自动部署, 完成以下功能</p>
@@ -477,7 +677,7 @@ deploy会触发git commit, commit再触发hook, hook里再deploy,再commit, 如�
   
   <entry>
     <title type="html"><![CDATA[sed]]></title>
-    <link href="http://lianghaijun.com/blog/sed"/>
+    <link href="http://lianghaijun.com/blog/2013-11-28-sed.html"/>
     <updated>2013-11-28T16:50:01+08:00</updated>
     <id>http://lianghaijun.com/blog/sed</id>
     <content type="html"><![CDATA[<p>sed是基于行进行文本替换的神器, 这里记录一些自己常用的功能</p>
@@ -560,7 +760,7 @@ deploy会触发git commit, commit再触发hook, hook里再deploy,再commit, 如�
   
   <entry>
     <title type="html"><![CDATA[html5版仙剑]]></title>
-    <link href="http://lianghaijun.com/blog/xianjian"/>
+    <link href="http://lianghaijun.com/blog/2013-11-27-xianjian.html"/>
     <updated>2013-11-27T23:20:11+08:00</updated>
     <id>http://lianghaijun.com/blog/xianjian</id>
     <content type="html"><![CDATA[<p>刚学习html5时, 为了练手, 基于html5写了版仙剑, <a href="http://xianjian.github.com/">http://xianjian.github.com/</a></p>
@@ -584,7 +784,7 @@ deploy会触发git commit, commit再触发hook, hook里再deploy,再commit, 如�
   
   <entry>
     <title type="html"><![CDATA[about octopress]]></title>
-    <link href="http://lianghaijun.com/blog/about-octopress"/>
+    <link href="http://lianghaijun.com/blog/2013-11-27-about-octopress.html"/>
     <updated>2013-11-27T18:30:41+08:00</updated>
     <id>http://lianghaijun.com/blog/about-octopress</id>
     <content type="html"><![CDATA[<p>一直以来, 都使用javaeye来记录博客, 见 <a href="http://seavers.iteye.com/">http://seavers.iteye.com/</a>, 偶有心得, 必记录之</p>
@@ -616,12 +816,558 @@ deploy会触发git commit, commit再触发hook, hook里再deploy,再commit, 如�
   
   <entry>
     <title type="html"><![CDATA[hello octopress]]></title>
-    <link href="http://lianghaijun.com/blog/hello-octopress"/>
+    <link href="http://lianghaijun.com/blog/2013-11-27-hello-octopress.html"/>
     <updated>2013-11-27T17:56:47+08:00</updated>
     <id>http://lianghaijun.com/blog/hello-octopress</id>
     <content type="html"><![CDATA[<p>hello octopress</p>
 
 <p>2013-11-27</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[小清新网站标准]]></title>
+    <link href="http://lianghaijun.com/blog/2013-11-26-1981188.html"/>
+    <updated>2013-11-26T23:19:00+08:00</updated>
+    <id>http://lianghaijun.com/blog/1981188</id>
+    <content type="html"><![CDATA[<p><em>小清新网站标准</em>        纯属YY</p>
+
+<ul>
+<li>采用微博登录</li>
+<li>提供iphone,android,html5版本</li>
+<li>采用小新清设计原则:  色块背景, 图文混排, 配色明亮, 合适留白</li>
+<li>新删改采用ajax请求, 支持滚动式翻页</li>
+<li>restful url</li>
+<li>icon式文字, 文字式按钮</li>
+<li>赞, 评论, 分享, 收藏, 加关注</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[wget 整站下载]]></title>
+    <link href="http://lianghaijun.com/blog/2013-11-26-1980761.html"/>
+    <updated>2013-11-26T10:22:00+08:00</updated>
+    <id>http://lianghaijun.com/blog/1980761</id>
+    <content type="html"><![CDATA[<p>下载整站</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>wget -r -nv --restrict-file-names=nocontrol http://seavers.iteye.com/</span></code></pre></td></tr></table></div></figure>
+
+
+<p>下载时可以加 -np, 不下载父目录</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>wget -r -nv --restrict-file-names=nocontrol -np http://seavers.iteye.com/blog/</span></code></pre></td></tr></table></div></figure>
+
+
+<p>下载时, 加入断点续传</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>wget -r -nv -c --restrict-file-names=nocontrol http://seavers.iteye.com/</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><p>&mdash;restrict-file-names=nocontrol 用来解决中文乱码问题</p></li>
+<li><p><a href="http://aotee.com/using-wget-recursive-download-the-entire-station">http://aotee.com/using-wget-recursive-download-the-entire-station</a></p></li>
+<li><a href="http://www.cnblogs.com/lybeta/archive/2012/05/23/2514759.html">http://www.cnblogs.com/lybeta/archive/2012/05/23/2514759.html</a></li>
+<li><a href="http://blog.csdn.net/flyskywhy/article/details/7777972">http://blog.csdn.net/flyskywhy/article/details/7777972</a></li>
+<li><a href="http://www.butian.org/knowledge/linux/254.html">http://www.butian.org/knowledge/linux/254.html</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[ubuntu ipconfig]]></title>
+    <link href="http://lianghaijun.com/blog/2013-11-06-1972028.html"/>
+    <updated>2013-11-06T13:45:00+08:00</updated>
+    <id>http://lianghaijun.com/blog/1972028</id>
+    <content type="html"><![CDATA[<p>sudo vi /sbin/ipconfig</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#! /bin/bash
+</span><span class='line'>for word in `ifconfig eth0 | grep "inet addr" | sed  's/          inet addr/addr/g'`; do echo $word | sed 's/:/\t/g'; done
+</span><span class='line'>route -n | awk '/UG/ {printf "gateway    %-21s %s\n", $2,$8}' ;
+</span><span class='line'>grep nameserver /etc/resolv.conf ;</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo chmod +x /sbin/ipconfig
+</span><span class='line'>
+</span><span class='line'>ipconfig
+</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<p>待改进</p>
+
+<ul>
+<li>支持eth0 与 wlan0</li>
+<li>支持dnsmasq</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[ubuntu 注册 wins]]></title>
+    <link href="http://lianghaijun.com/blog/2013-11-06-1972001.html"/>
+    <updated>2013-11-06T12:17:00+08:00</updated>
+    <id>http://lianghaijun.com/blog/1972001</id>
+    <content type="html"><![CDATA[<p>以下是为了让ubuntu进入windows网络,实现互ping,互连</p>
+
+<ol>
+<li>ubuntu进入windows网络,必须安装samba</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install samba</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>修改/etc/samba/smb.conf, 将wins server修改为正确的ip
+   可以在windows上, 敲入ipconfig /all得到具体ip</li>
+<li>重启服务</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo service nmbd restart</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>验证下</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>nmblookup -R -U &lt;wins_server_ip&gt; &lt;hostname&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>这时windows就可访问ubuntu,可以直接ping通</li>
+<li>ubuntu互ping, 需要设置search domain</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>echo 'search abc.com' &gt;&gt; /etc/resolv.conf</span></code></pre></td></tr></table></div></figure>
+
+
+<hr />
+
+<ol>
+<li>如果IP改变后, wins_server的缓存的ip不正确了,
+可以删除以下两个文件
+/var/cache/samba/wins.dat
+/var/cache/samba/browse.dat
+然后重启 nmbd 即可</li>
+<li>如果ubuntu ping 时, ip仍然不正确, 检查下dns server
+   (这块还没有搞清楚, 试试换备用server, 或者等等dns同步)</li>
+<li></li>
+</ol>
+
+
+<hr />
+
+<p>如果只是为了互连互通,只需要 nmbd 服务即可
+如果还需要windows共享文件的服务, 需启动smbd</p>
+
+<p>===========================================================</p>
+
+<p>nsswitch.conf是SUN公司开发的一种扩充（name services switch）</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># /etc/nsswitch.conf
+</span><span class='line'>#
+</span><span class='line'># Example configuration of GNU Name Service Switch functionality.
+</span><span class='line'># If you have the `glibc-doc-reference' and `info' packages installed, try:
+</span><span class='line'># `info libc "Name Service Switch"' for information about this file.
+</span><span class='line'>
+</span><span class='line'>aliases:    邮件别名, sendmail(8) 使用该文件. 
+</span><span class='line'>ethers:     以太网号. 
+</span><span class='line'>group:      用户组, getgrent(3) 函数使用该文件. 
+</span><span class='line'>hosts:      主机名和主机号, gethostbyname(3) 以及类似的函数使用了该文件. 
+</span><span class='line'>netgroup:   网络内主机及其用户的列表, 访问规则使用该文件. 
+</span><span class='line'>network:    网络名及网络号, getnetent(3) 函数使用该文件. 
+</span><span class='line'>passwd:     用户口令, getpwent(3) 函数使用该文件. 
+</span><span class='line'>protocols:  网络协议, getprotoent(3) 函数使用该文件. 
+</span><span class='line'>publickey:  NIS+及NFS 所使用的secure_rpc的公开密匙. 
+</span><span class='line'>rpc:        远程过程调用名及调用号, getrpcbyname(3) 及类似函数使用该文件. 
+</span><span class='line'>services:   网络服务, getservent(3) 函数使用该文件. 
+</span><span class='line'>shadow:     shadow用户口令, getspnam(3) 函数使用该文件.</span></code></pre></td></tr></table></div></figure>
+
+
+<p>=====================</p>
+
+<p>hosts: files mdns4_minimal [NOTFOUND=return] dns mdns4</p>
+
+<ul>
+<li>files:  /etc/hosts</li>
+<li>mdns :  dnsmasq  avahi-daemon</li>
+<li>dns  :  dns server</li>
+</ul>
+
+
+<p>===================</p>
+
+<p>dnsmasq</p>
+
+<p>Dnsmasq is a lightweight, easy to configure DNS forwarder and DHCP server.
+<a href="https://wiki.archlinux.org/index.php/Dnsmasq_">https://wiki.archlinux.org/index.php/Dnsmasq_</a>(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)</p>
+
+<p>stop dnsmasq:
+1. sudo vi /etc/NetworkManager/NetworkManager.conf
+2. comment  dns=dnsmasq
+3. sudo service network-manager restart</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[ubuntu 五笔]]></title>
+    <link href="http://lianghaijun.com/blog/2013-11-04-1969731.html"/>
+    <updated>2013-11-04T15:36:00+08:00</updated>
+    <id>http://lianghaijun.com/blog/1969731</id>
+    <content type="html"><![CDATA[<p>ubuntu 使用五笔输入法
+ubuntu 13.10 测试通过</p>
+
+<ul>
+<li>sudo apt-get install ibus-table-wubi</li>
+<li>ibus-daemon -x -r -d</li>
+<li>选择五笔输入,生效</li>
+</ul>
+
+
+<p>使用SHIFT+SPACE切换全半角
+使用SHIFT切换中英文输入</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[pycompile not found]]></title>
+    <link href="http://lianghaijun.com/blog/2013-10-17-1959997.html"/>
+    <updated>2013-10-17T16:10:00+08:00</updated>
+    <id>http://lianghaijun.com/blog/1959997</id>
+    <content type="html"><![CDATA[<p>sudo apt-get remove python 后, 出现了很多错误, 导致后续的无法进行</p>
+
+<p>pycompile not found
+解决方案: 删掉 /usr/bin/pycompile, 然后继续apt-get -f install / remove</p>
+
+<p>gconf2 not found 错误
+sudo dpkg-reconfigure gconf2
+sudo apt-get &mdash;purge remove gconf2</p>
+
+<p>gconf2安装时 gconf-schemas not found
+因安装gconf2时,需执行脚本,脚本中需要python,而python需要gconf2
+导致了这个地方的问题</p>
+
+<p>解决方案: 注掉报错的脚本中的那几行命令,然后重新执行
+或:  如果已经安装了python的话, ln -s 下python即可</p>
+
+<p>==============================</p>
+
+<p>ubuntu从13.04升级至13.10时,报/usr/bin/python错误,不知原因
+修改/usr/bin/python链接位置时,也无法通过
+故直接remove python python3, 然后就出现上面的错误了
+修复后, 可以执行do-release-upgrade了</p>
+
+<p>ubuntu的包管理,要赞一下</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[maven的全局去除依赖]]></title>
+    <link href="http://lianghaijun.com/blog/2013-09-22-1944892.html"/>
+    <updated>2013-09-22T15:01:00+08:00</updated>
+    <id>http://lianghaijun.com/blog/1944892</id>
+    <content type="html"><![CDATA[<p>我们在maven中有时候希望将某个依赖包彻底去除</p>
+
+<p>如我们的系统使用的是spring3.1.2, 但是依赖的二方包中, 总是或多或少依赖了spring2.5.6, 希望有个方法, 能全局去除掉</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;!-- globally exclusion --&gt;
+</span><span class='line'>&lt;dependency&gt;
+</span><span class='line'>  &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+</span><span class='line'>  &lt;artifactId&gt;spring&lt;/artifactId&gt;
+</span><span class='line'>  &lt;version&gt;2.5.6.SEC03&lt;/version&gt;
+</span><span class='line'>  &lt;scope&gt;provided&lt;/scope&gt;
+</span><span class='line'>&lt;/dependency&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>以上方式, 有个弊端, 就是eclipse中, 还是会依赖, 且容易用混</p>
+
+<p>有三个方案(建议使用第三种)</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;dependency&gt;
+</span><span class='line'>  &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+</span><span class='line'>  &lt;artifactId&gt;spring&lt;/artifactId&gt;
+</span><span class='line'>  &lt;version&gt;99.0-does-not-exist&lt;/version&gt;
+</span><span class='line'>  &lt;scope&gt;provided&lt;/scope&gt;
+</span><span class='line'>&lt;/dependency&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;dependency&gt;
+</span><span class='line'>  &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+</span><span class='line'>  &lt;artifactId&gt;spring&lt;/artifactId&gt;
+</span><span class='line'>  &lt;version&gt;2.5.6&lt;/version&gt;
+</span><span class='line'>  &lt;scope&gt;system&lt;/scope&gt;
+</span><span class='line'>  &lt;systemPath&gt;${basedir}/lib/empty.jar&lt;/systemPath&gt;
+</span><span class='line'>&lt;/dependency&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>     &lt;plugin&gt;
+</span><span class='line'>          &lt;artifactId&gt;maven-eclipse-plugin&lt;/artifactId&gt;
+</span><span class='line'>          &lt;configuration&gt;
+</span><span class='line'>              &lt;downloadSources&gt;true&lt;/downloadSources&gt;
+</span><span class='line'>              &lt;downloadJavadocs&gt;true&lt;/downloadJavadocs&gt;
+</span><span class='line'>              &lt;classpathContainers&gt;
+</span><span class='line'>                  &lt;classpathContainer&gt;org.eclipse.jdt.launching.JRE_CONTAINER&lt;/classpathContainer&gt;
+</span><span class='line'>              &lt;/classpathContainers&gt;
+</span><span class='line'>              &lt;excludes&gt;
+</span><span class='line'>                  &lt;exclude&gt;org.springframework:spring&lt;/exclude&gt;
+</span><span class='line'>              &lt;/excludes&gt;
+</span><span class='line'>          &lt;/configuration&gt;
+</span><span class='line'>      &lt;/plugin&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Class.forName 返回 String[].class]]></title>
+    <link href="http://lianghaijun.com/blog/2013-08-13-1923887.html"/>
+    <updated>2013-08-13T11:38:00+08:00</updated>
+    <id>http://lianghaijun.com/blog/1923887</id>
+    <content type="html"><![CDATA[<p>A: 如何通过Class.forName 返回 String[].class
+Q: Class.forName(&ldquo;[Ljava.lang.String;&rdquo;)</p>
+
+<p>因为 String[].class.getName() => &ldquo;[Ljava.lang.String;&rdquo;
+经测试, 反过来, 也成立</p>
+
+<p>因此:
+在sqlmap-config.xml可以这样写</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;typeHandler javaType="[Ljava.util.String;" callback="xxxxxx.StringArrayTypeHandler" /&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[ibatis typehandler]]></title>
+    <link href="http://lianghaijun.com/blog/2013-08-09-1922745.html"/>
+    <updated>2013-08-09T18:57:00+08:00</updated>
+    <id>http://lianghaijun.com/blog/1922745</id>
+    <content type="html"><![CDATA[<p>今天配置typehandler时碰到一个问题</p>
+
+<p>主要解决的问题是
+java.sql.SQLException: Cannot convert value &lsquo;0000-00-00 00:00:00&rsquo; from column 18 to TIMESTAMP</p>
+
+<p>解决方案: 替换掉系统默认的 typehandler, 抛出异常时,改为null</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;?xml version="1.0" encoding="GBK"?&gt;
+</span><span class='line'>&lt;!DOCTYPE sqlMapConfig
+</span><span class='line'> PUBLIC "-//iBATIS.com//DTD SQL Map Config 2.0//EN"
+</span><span class='line'> "http://www.ibatis.com/dtd/sql-map-config-2.dtd"&gt;
+</span><span class='line'>&lt;sqlMapConfig&gt;
+</span><span class='line'>  &lt;settings 
+</span><span class='line'>      cacheModelsEnabled="true" 
+</span><span class='line'>  /&gt;
+</span><span class='line'>  &lt;typeHandler javaType="java.util.Date" callback="xxxxxxxxx.CustomDateTypeHandler" /&gt;
+</span><span class='line'>  
+</span><span class='line'>  &lt;sqlMap resource="sqlmap/sqlmap-price.xml" /&gt; 
+</span><span class='line'>&lt;/sqlMapConfig&gt;
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这里需要注意的是</p>
+
+<ol>
+<li>typeHandler 中的 jdbcType 取值应为 null, DATE, TIME, 这里用的null</li>
+<li>typehandler 必须要在 sqlmap 前面, 否则sqlmap中的类型handler就会用默认的</li>
+</ol>
+
+
+<p>下面是自定义的datetypehandler</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>package xxxxxxxxx;
+</span><span class='line'>
+</span><span class='line'>import java.sql.CallableStatement;
+</span><span class='line'>import java.sql.ResultSet;
+</span><span class='line'>import java.sql.SQLException;
+</span><span class='line'>
+</span><span class='line'>import com.ibatis.sqlmap.engine.type.DateTypeHandler;
+</span><span class='line'>
+</span><span class='line'>public class CustomDateTypeHandler extends DateTypeHandler {
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>  @Override
+</span><span class='line'>  public Object getResult(ResultSet rs, String columnName) throws SQLException {
+</span><span class='line'>      try {
+</span><span class='line'>          return super.getResult(rs, columnName);
+</span><span class='line'>      } catch(SQLException e) {
+</span><span class='line'>          if("S1009".equals(e.getSQLState())) {
+</span><span class='line'>              return null;
+</span><span class='line'>          }
+</span><span class='line'>          throw e;
+</span><span class='line'>      }
+</span><span class='line'>  }
+</span><span class='line'>
+</span><span class='line'>  @Override
+</span><span class='line'>  public Object getResult(ResultSet rs, int columnIndex) throws SQLException {
+</span><span class='line'>      try {
+</span><span class='line'>          return super.getResult(rs, columnIndex);
+</span><span class='line'>      } catch(SQLException e) {
+</span><span class='line'>          if("S1009".equals(e.getSQLState())) {
+</span><span class='line'>              return null;
+</span><span class='line'>          }
+</span><span class='line'>          throw e;
+</span><span class='line'>      }
+</span><span class='line'>  }
+</span><span class='line'>
+</span><span class='line'>  @Override
+</span><span class='line'>  public Object getResult(CallableStatement cs, int columnIndex) throws SQLException {
+</span><span class='line'>      try {
+</span><span class='line'>          return super.getResult(cs, columnIndex);
+</span><span class='line'>      } catch(SQLException e) {
+</span><span class='line'>          if("S1009".equals(e.getSQLState())) {
+</span><span class='line'>              return null;
+</span><span class='line'>          }
+</span><span class='line'>          throw e;
+</span><span class='line'>      }
+</span><span class='line'>  }
+</span><span class='line'>
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+
 ]]></content>
   </entry>
   

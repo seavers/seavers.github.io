@@ -4,7 +4,7 @@
   <title><![CDATA[Category: android | lianghaijun的博客]]></title>
   <link href="http://lianghaijun.com/blog/categories/android/atom.xml" rel="self"/>
   <link href="http://lianghaijun.com/"/>
-  <updated>2013-12-31T14:35:25+08:00</updated>
+  <updated>2013-12-31T15:36:55+08:00</updated>
   <id>http://lianghaijun.com/</id>
   <author>
     <name><![CDATA[seavers]]></name>
@@ -15,23 +15,25 @@
   
   <entry>
     <title type="html"><![CDATA[android 整合 maven 环境]]></title>
-    <link href="http://lianghaijun.com/blog/1857184"/>
+    <link href="http://lianghaijun.com/blog/2013-04-30-1857184.html"/>
     <updated>2013-04-30T14:33:00+08:00</updated>
     <id>http://lianghaijun.com/blog/1857184</id>
     <content type="html"><![CDATA[<p>我们再先整理一下思路:</p>
 
-<p>使用eclipse:
-1. 创建:  adt自带的android创建插件  New &ndash;> android application project
-2. 引入:  import &ndash;> existing project into workspace
-3. 打包:  run as &ndash;>  android application</p>
-
-<p>使用maven:
-1. 创建: maven archetype:generate (99: de.akquinet.android.archetypes:android-quickstart)</p>
-
-<pre><code>  [url]https://github.com/akquinet/android-archetypes[/url]
-</code></pre>
+<p>使用eclipse:</p>
 
 <ol>
+<li>创建:  adt自带的android创建插件  New &ndash;> android application project</li>
+<li>引入:  import &ndash;> existing project into workspace</li>
+<li>打包:  run as &ndash;>  android application</li>
+</ol>
+
+
+<p>使用maven:</p>
+
+<ol>
+<li>创建: maven archetype:generate (99: de.akquinet.android.archetypes:android-quickstart)
+   <a href="https://github.com/akquinet/android-archetypes">https://github.com/akquinet/android-archetypes</a></li>
 <li>运行: maven clean package android:deploy android:run    (android-maven-plugin)</li>
 <li>引入eclipse:
     a).  mvn eclipse:eclipse
@@ -89,7 +91,7 @@
   
   <entry>
     <title type="html"><![CDATA[android开发环境]]></title>
-    <link href="http://lianghaijun.com/blog/1857067"/>
+    <link href="http://lianghaijun.com/blog/2013-04-29-1857067.html"/>
     <updated>2013-04-29T23:06:00+08:00</updated>
     <id>http://lianghaijun.com/blog/1857067</id>
     <content type="html"><![CDATA[<p>android 开发环境搭建</p>
@@ -100,13 +102,13 @@
 
 <ol>
 <li>下载android sdk
-[url]<a href="http://developer.android.com/sdk/index.html">http://developer.android.com/sdk/index.html</a>[/url]
+<a href="http://developer.android.com/sdk/index.html">http://developer.android.com/sdk/index.html</a>
 下载后的sdk, 包括了 eclipse 以及 sdk</li>
 <li>解压, 并切换至 eclipse 目录, 打开 eclipse</li>
 <li>eclipse打开菜单window-android SDK Manager下载SDK sources</li>
 <li>安装m2e-android 用于maven工程    (当然没有使用maven就算了)
-web: [url]<a href="http://rgladwell.github.com/m2e-android/">http://rgladwell.github.com/m2e-android/</a>[/url]
-update: [url]<a href="http://rgladwell.github.com/m2e-android/updates/">http://rgladwell.github.com/m2e-android/updates/</a>[/url]</li>
+web: <a href="http://rgladwell.github.com/m2e-android/">http://rgladwell.github.com/m2e-android/</a>
+update: <a href="http://rgladwell.github.com/m2e-android/updates/">http://rgladwell.github.com/m2e-android/updates/</a></li>
 <li>import导入 maven版的android工程</li>
 </ol>
 

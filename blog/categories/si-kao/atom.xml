@@ -4,7 +4,7 @@
   <title><![CDATA[Category: 思考 | lianghaijun的博客]]></title>
   <link href="http://lianghaijun.com/blog/categories/si-kao/atom.xml" rel="self"/>
   <link href="http://lianghaijun.com/"/>
-  <updated>2013-12-31T14:35:25+08:00</updated>
+  <updated>2013-12-31T15:36:55+08:00</updated>
   <id>http://lianghaijun.com/</id>
   <author>
     <name><![CDATA[seavers]]></name>
@@ -15,10 +15,10 @@
   
   <entry>
     <title type="html"><![CDATA[小清新网站标准]]></title>
-    <link href="http://lianghaijun.com/blog/1981188"/>
+    <link href="http://lianghaijun.com/blog/2013-11-26-1981188.html"/>
     <updated>2013-11-26T23:19:00+08:00</updated>
     <id>http://lianghaijun.com/blog/1981188</id>
-    <content type="html"><![CDATA[<p>[size=large]<em>小清新网站标准</em>        纯属YY</p>
+    <content type="html"><![CDATA[<p><em>小清新网站标准</em>        纯属YY</p>
 
 <ul>
 <li>采用微博登录</li>
@@ -35,7 +35,7 @@
   
   <entry>
     <title type="html"><![CDATA[思考方法论]]></title>
-    <link href="http://lianghaijun.com/blog/1881714"/>
+    <link href="http://lianghaijun.com/blog/2013-06-03-1881714.html"/>
     <updated>2013-06-03T19:56:00+08:00</updated>
     <id>http://lianghaijun.com/blog/1881714</id>
     <content type="html"><![CDATA[<ol>
@@ -55,7 +55,7 @@
   
   <entry>
     <title type="html"><![CDATA[使用符号链接提高工作效率]]></title>
-    <link href="http://lianghaijun.com/blog/1825519"/>
+    <link href="http://lianghaijun.com/blog/2013-03-07-1825519.html"/>
     <updated>2013-03-07T14:23:00+08:00</updated>
     <id>http://lianghaijun.com/blog/1825519</id>
     <content type="html"><![CDATA[<p>使用符号链接提高工作效率</p>
@@ -63,7 +63,7 @@
 <p>目标
 本文主要阐述一种理念，如何使用符号链接来提高工作效率</p>
 
-<p>[size=large]什么是符号链接
+<p>什么是符号链接
 1. windows下使用junction或者mklink /J创建的符号链接 (非快捷方式)
 2. linux下使用ln -s创建的符号链接</p>
 
@@ -127,7 +127,7 @@ win7引入的库，其实也是一个别名，也是一个符号链接的应用<
   
   <entry>
     <title type="html"><![CDATA[包管理软件]]></title>
-    <link href="http://lianghaijun.com/blog/1820183"/>
+    <link href="http://lianghaijun.com/blog/2013-03-01-1820183.html"/>
     <updated>2013-03-01T22:38:00+08:00</updated>
     <id>http://lianghaijun.com/blog/1820183</id>
     <content type="html"><![CDATA[<p>常见的各类包管理软件对比</p>
@@ -190,7 +190,7 @@ win7引入的库，其实也是一个别名，也是一个符号链接的应用<
   
   <entry>
     <title type="html"><![CDATA[关于平台]]></title>
-    <link href="http://lianghaijun.com/blog/1782749"/>
+    <link href="http://lianghaijun.com/blog/2013-02-01-1782749.html"/>
     <updated>2013-02-01T16:15:00+08:00</updated>
     <id>http://lianghaijun.com/blog/1782749</id>
     <content type="html"><![CDATA[<p>所谓“平台”就是能够独立运行并自主存在，为其所支撑的上层系统和应用提供运行所依赖的环境。 (来自百度百科)</p>

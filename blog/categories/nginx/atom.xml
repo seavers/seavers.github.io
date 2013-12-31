@@ -4,7 +4,7 @@
   <title><![CDATA[Category: nginx | lianghaijun的博客]]></title>
   <link href="http://lianghaijun.com/blog/categories/nginx/atom.xml" rel="self"/>
   <link href="http://lianghaijun.com/"/>
-  <updated>2013-12-31T14:35:25+08:00</updated>
+  <updated>2013-12-31T15:36:55+08:00</updated>
   <id>http://lianghaijun.com/</id>
   <author>
     <name><![CDATA[seavers]]></name>
@@ -15,21 +15,21 @@
   
   <entry>
     <title type="html"><![CDATA[nginx expires 绝对过期时间]]></title>
-    <link href="http://lianghaijun.com/blog/1892343"/>
+    <link href="http://lianghaijun.com/blog/2013-06-22-1892343.html"/>
     <updated>2013-06-22T00:09:00+08:00</updated>
     <id>http://lianghaijun.com/blog/1892343</id>
-    <content type="html"><![CDATA[<p>[size=large]nginx expires 绝对过期时间</p>
+    <content type="html"><![CDATA[<p>nginx expires 绝对过期时间</p>
 
 <p>参考: <a href="http://wiki.nginx.org/HttpHeadersModule">http://wiki.nginx.org/HttpHeadersModule</a></p>
 
-<p>[code=&ldquo;conf&rdquo;]
+<p><code>
   expires       24h;
   expires       modified +24h;
   expires       @15h30m;
   expires       0;
   expires       -1;
   expires       epoch;
-```</p>
+</code></p>
 
 <p>@time 表示绝对过期时间, 基于一天的某个时间点来过期</p>
 

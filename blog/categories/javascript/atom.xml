@@ -4,7 +4,7 @@
   <title><![CDATA[Category: javascript | lianghaijun的博客]]></title>
   <link href="http://lianghaijun.com/blog/categories/javascript/atom.xml" rel="self"/>
   <link href="http://lianghaijun.com/"/>
-  <updated>2013-12-31T14:35:25+08:00</updated>
+  <updated>2013-12-31T15:36:55+08:00</updated>
   <id>http://lianghaijun.com/</id>
   <author>
     <name><![CDATA[seavers]]></name>
@@ -15,13 +15,13 @@
   
   <entry>
     <title type="html"><![CDATA[insertBefore]]></title>
-    <link href="http://lianghaijun.com/blog/1743767"/>
+    <link href="http://lianghaijun.com/blog/2012-12-07-1743767.html"/>
     <updated>2012-12-07T15:10:00+08:00</updated>
     <id>http://lianghaijun.com/blog/1743767</id>
     <content type="html"><![CDATA[<p>insertBefore</p>
 
 <p>经常看到这样的写法:
-[code=&ldquo;js&rdquo;]
+```
 if (head.firstChild) {</p>
 
 <pre><code>head.insertBefore(node, head.firstChild);
@@ -35,9 +35,9 @@ if (head.firstChild) {</p>
 <p>}
 <code>
 其实可以改为:
-[code="js"]
+</code>
 head.insertBefore(node, head.firstChild);
-</code></p>
+```</p>
 
 <ul>
 <li>insertBefore的第二参数为空时, 相当于appendChild</li>
@@ -60,13 +60,13 @@ head.insertBefore(node, head.firstChild);
   
   <entry>
     <title type="html"><![CDATA[isFunction]]></title>
-    <link href="http://lianghaijun.com/blog/1743758"/>
+    <link href="http://lianghaijun.com/blog/2012-12-07-1743758.html"/>
     <updated>2012-12-07T15:03:00+08:00</updated>
     <id>http://lianghaijun.com/blog/1743758</id>
     <content type="html"><![CDATA[<p>[size=xx-large]isFunction</p>
 
-<p>[size=large]标准写法是:
-[code=&ldquo;js&rdquo;]
+<p>标准写法是:
+```
  var isFunction = function(obj) {</p>
 
 <pre><code>   return Object.prototype.toString.call(obj) === '[object Function]'
@@ -75,7 +75,7 @@ head.insertBefore(node, head.firstChild);
 <p> }
 ```</p>
 
-<p>[size=large]深层次:</p>
+<p>深层次:</p>
 
 <ul>
 <li>有博客说, 之前的chrome会识别 new Regexp()为function, 没有测试之前的chrome, 现在的不会了</li>
@@ -91,12 +91,12 @@ head.insertBefore(node, head.firstChild);
 </code></li>
 <li>jquery中的 type(obj), 即是  Object.prototype.toString.call(obj)</li>
 <li>jquery已经不支持DOM方法,以及像alert这样的方法, 因为他们在IE都返回false,无法区分</li>
-<li><h1>2968 见 [url]<a href="http://bugs.jquery.com/ticket/2968">http://bugs.jquery.com/ticket/2968</a>[/url]</h1></li>
+<li>#2968 见 <a href="http://bugs.jquery.com/ticket/2968">http://bugs.jquery.com/ticket/2968</a></li>
 </ul>
 
 
-<p>[size=large]最简单的写法:
-[code=&ldquo;js&rdquo;]
+<p>最简单的写法:
+```
  var isFunction = function(obj) {</p>
 
 <pre><code>   return typeof obj === 'function'
@@ -106,13 +106,13 @@ head.insertBefore(node, head.firstChild);
 ```</p>
 
 <ul>
-<li>这个写法, 在jquery的isFunction测试用例中, 全部通过  [url]<a href="https://code.google.com/p/jqueryjs/source/browse/trunk/jquery/test/unit/core.js">https://code.google.com/p/jqueryjs/source/browse/trunk/jquery/test/unit/core.js</a>[/url]</li>
+<li>这个写法, 在jquery的isFunction测试用例中, 全部通过  <a href="https://code.google.com/p/jqueryjs/source/browse/trunk/jquery/test/unit/core.js">https://code.google.com/p/jqueryjs/source/browse/trunk/jquery/test/unit/core.js</a></li>
 <li>简单的就是最好的~~</li>
 </ul>
 
 
-<p>[size=large]测试用例 (修改自jquery的isFunction测试用例)
-[code=&ldquo;html&rdquo;]
+<p>测试用例 (修改自jquery的isFunction测试用例)
+```
 <body></p>
 
 <ul id="result"></ul>
@@ -229,7 +229,7 @@ test();
   
   <entry>
     <title type="html"><![CDATA[function 工具集]]></title>
-    <link href="http://lianghaijun.com/blog/1729814"/>
+    <link href="http://lianghaijun.com/blog/2012-11-19-1729814.html"/>
     <updated>2012-11-19T22:09:00+08:00</updated>
     <id>http://lianghaijun.com/blog/1729814</id>
     <content type="html"><![CDATA[<p>function 工具集</p>
@@ -241,7 +241,7 @@ test();
 
 <p>你需要以下的方法来解决此类问题</p>
 
-<p>[code=&ldquo;js&rdquo;]</p>
+<p>```</p>
 
 <p>$(&lsquo;a.load&rsquo;).on(&lsquo;click&rsquo;, $.once(function() {</p>
 
@@ -268,7 +268,7 @@ test();
 
 <p>工具集源码如下：</p>
 
-<p>[code=&ldquo;js&rdquo;]
+<p>```
 $.bind = function(func, context) {</p>
 
 <pre><code>  var args = Array.prototype.slice.call(arguments, 2);
@@ -338,14 +338,14 @@ $.debounce = function(func, ms) {</p>
   
   <entry>
     <title type="html"><![CDATA[判断两个字符串的相似度(js)]]></title>
-    <link href="http://lianghaijun.com/blog/1681794"/>
+    <link href="http://lianghaijun.com/blog/2012-09-19-1681794.html"/>
     <updated>2012-09-19T20:48:00+08:00</updated>
     <id>http://lianghaijun.com/blog/1681794</id>
-    <content type="html"><![CDATA[<p>问题来源于 [url]<a href="http://weibo.com/1748374882/yavpCkc31">http://weibo.com/1748374882/yavpCkc31</a>[/url]</p>
+    <content type="html"><![CDATA[<p>问题来源于 <a href="http://weibo.com/1748374882/yavpCkc31">http://weibo.com/1748374882/yavpCkc31</a></p>
 
 <p>问题：有两个字符串 A 和 B，如何简单高效的判断 A 和 B 的相似度？A 和 B 完全一样，相似度为 100, A 和 B 完全不一样，相似度为 0. A 和 B 中有一半文字相同，相似度为 50. 依此类推。文字中包含中英文，空白字符也算。哪位用 JS 挑战下？性能第一，代码长短无所谓。</p>
 
-<p>[code=&ldquo;javascript&rdquo;]
+<p>```
 function compare(x, y) {</p>
 
 <pre><code>var z = 0;
@@ -384,12 +384,12 @@ console.log(compare([&lsquo;123&rsquo;, &lsquo;中3文&rsquo;, &lsquo;hello&rsqu
   
   <entry>
     <title type="html"><![CDATA[js的简单串行加载方案]]></title>
-    <link href="http://lianghaijun.com/blog/1676290"/>
+    <link href="http://lianghaijun.com/blog/2012-09-12-1676290.html"/>
     <updated>2012-09-12T00:29:00+08:00</updated>
     <id>http://lianghaijun.com/blog/1676290</id>
     <content type="html"><![CDATA[<p>写了一个超简单的串行加载工具, 不想引入框架时, 可以试用下</p>
 
-<p>[code=&ldquo;javascript&rdquo;]
+<p>```
 (function (all) {</p>
 
 <pre><code>var callee = arguments.callee;

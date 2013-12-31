@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ruby | lianghaijun的博客]]></title>
   <link href="http://lianghaijun.com/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://lianghaijun.com/"/>
-  <updated>2013-12-31T14:35:25+08:00</updated>
+  <updated>2013-12-31T15:36:55+08:00</updated>
   <id>http://lianghaijun.com/</id>
   <author>
     <name><![CDATA[seavers]]></name>
@@ -15,7 +15,7 @@
   
   <entry>
     <title type="html"><![CDATA[ruby spider]]></title>
-    <link href="http://lianghaijun.com/blog/ruby-spider"/>
+    <link href="http://lianghaijun.com/blog/2013-12-23-ruby-spider.html"/>
     <updated>2013-12-23T21:19:09+08:00</updated>
     <id>http://lianghaijun.com/blog/ruby-spider</id>
     <content type="html"><![CDATA[<p>最近开始喜欢上研究ruby了,正好手头有一些抓取的需求,正好练练手</p>

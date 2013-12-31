@@ -1,0 +1,320 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>ubuntu name server - lianghaijun的博客</title>
+  <meta name="author" content="seavers">
+
+  
+  <meta name="description" content="我们在ubuntu下经常会遇到以下问题 windows下ping ubuntu的机器名ping不到
+ubuntu下ping windows下的机器名 ping 不到
+ubuntu下ping ubuntu下的机器名ping不到 以上就是碰到了name server的问题了 首先, &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://lianghaijun.com/blog/2013-03-23-1835389.html">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet">
+  <link href="/atom.xml" rel="alternate" title="lianghaijun的博客" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <div id="wb_connect_btn"></div>
+  <h1><a href="/">lianghaijun的博客</a></h1>
+  
+    <h2>Looking for Interest</h2>
+  
+</hgroup>
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:lianghaijun.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/blog/picture">picture</a><li>
+  <li><a href="/blog/link">link</a></li>
+  <li><a href="/blog/about">about</a></li>
+</ul>
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">ubuntu name server</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-23T14:47:00+08:00" pubdate data-updated="true">Mar 23<span>rd</span>, 2013</time>
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>我们在ubuntu下经常会遇到以下问题</p>
+
+<ol>
+<li>windows下ping ubuntu的机器名ping不到</li>
+<li>ubuntu下ping windows下的机器名 ping 不到</li>
+<li>ubuntu下ping ubuntu下的机器名ping不到</li>
+</ol>
+
+
+<p>以上就是碰到了name server的问题了</p>
+
+<p>首先, 我们要理清楚以下几个问题</p>
+
+<ol>
+<li>windows是如何根据name寻找ip的</li>
+<li>ubuntu是如何根据name寻找ip的</li>
+<li>mac呢</li>
+</ol>
+
+
+<p>name到ip的映射有以下几个方式
+1. /etc/hosts的方式, 用户自行配置的, 优先级最高
+2. wins  windows用于解析名字的服务
+3. mdns 是apple发明的, ubuntu下也可以使用
+4. dns服务, 通常由ISP提供,  一般局域网搜不到, 就要去外网搜了
+另外:
+wins 的服务, 有时会有域服务器来提供服务</p>
+
+<p>由此: windows 与 ubuntu 下互通name, 需要敲定要走 wins还是mdns
+1. windows 下默认支持 wins 服务, 有服务器,也有客户端支持
+2. ubuntu下走wins,  可以安装 samba , 由 nmbd服务器提供服务端
+3. ubuntu 下 ping wins, 可以在 smb.conf 下配置 wins server
+4. windows 下走 mdns 服务, 可以安装apple的itunes, 由bonjour提供服务端
+5. ubuntu 下安装 mdns服务, 可使用 avahi-demon 来提供 mdns 服务
+6. ubuntu 下解析 mdns, 可以在 /etc/resolv.conf 中配置, 由 dnsmasq 来提供解析
+7. mac 上默认提供了 mdns 与 wins</p>
+
+<p>因此, 不动 windows, 可以在 ubuntu 中安装以下服务</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install samba
+</span><span class='line'>sudo apt-get install avahi-daemon
+</span><span class='line'>sudo apt-get install libnss-mdns             ##necessary?
+</span><span class='line'>
+</span><span class='line'>sudo vi /etc/nsswitch.conf   (hosts:          files mdns4_minimal dns)
+</span><span class='line'>sudo vi /etc/samba/smb.conf
+</span><span class='line'>
+</span><span class='line'>sudo service smbd restart
+</span><span class='line'>sudo service nmbd restart
+</span><span class='line'>//sudo service avahi-daemon restart
+</span><span class='line'>sudo dnsmasq
+</span><span class='line'>
+</span><span class='line'>sudo service networking restart</span></code></pre></td></tr></table></div></figure>
+
+
+<p>如果ubuntu一直ping不通mac.local or ipad.local,请尝试重启
+这样, 在 windows, ubuntu, mac 下互相ping hostname就OK了
+补: mdns 的ping时, 要加 .local</p>
+
+<p>相关的命令有:  ping nslookup host dig nbtscan nmblookup nmap
+sudo netstat -ntp
+sudo ss -nlt</p>
+
+<p>相关的文件有:
+/etc/resolv.conf
+/etc/nsswitch.conf
+/etc/NetworkManager/NetworkManager.conf
+<a href="https://wiki.archlinux.org/index.php/Avahi">https://wiki.archlinux.org/index.php/Avahi</a></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">seavers</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-23T14:47:00+08:00" pubdate data-updated="true">Mar 23<span>rd</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/ubuntu/'>ubuntu</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013-03-22-1834993.html" title="Previous Post: maven常用技巧">&laquo; maven常用技巧</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2013-03-26-1836490.html" title="Next Post: ubuntu 支持无线网卡">ubuntu 支持无线网卡 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="comments" aria-live="polite"><!-- Duoshuo Comment BEGIN -->
+<div class="ds-thread" data-title=""></div>
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"lianghaijun"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+<!-- Duoshuo Comment END -->
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Categories</h1>
+  <ul id="categories">
+    <li class='category'><a href='/blog/categories/android/'>android (2)</a></li>
+<li class='category'><a href='/blog/categories/chrome/'>chrome (1)</a></li>
+<li class='category'><a href='/blog/categories/css/'>css (3)</a></li>
+<li class='category'><a href='/blog/categories/cubieboard/'>cubieboard (3)</a></li>
+<li class='category'><a href='/blog/categories/git/'>git (2)</a></li>
+<li class='category'><a href='/blog/categories/hive/'>hive (1)</a></li>
+<li class='category'><a href='/blog/categories/html5/'>html5 (1)</a></li>
+<li class='category'><a href='/blog/categories/java/'>java (8)</a></li>
+<li class='category'><a href='/blog/categories/javascript/'>javascript (10)</a></li>
+<li class='category'><a href='/blog/categories/maven/'>maven (5)</a></li>
+<li class='category'><a href='/blog/categories/nginx/'>nginx (1)</a></li>
+<li class='category'><a href='/blog/categories/octopress/'>octopress (2)</a></li>
+<li class='category'><a href='/blog/categories/php/'>php (1)</a></li>
+<li class='category'><a href='/blog/categories/ruby/'>ruby (1)</a></li>
+<li class='category'><a href='/blog/categories/ubuntu/'>ubuntu (20)</a></li>
+<li class='category'><a href='/blog/categories/思考/'>思考 (9)</a></li>
+
+  </ul>
+</section>
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013-12-31-iteye-blog-migration.html">iteye 博客迁移</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013-12-23-ruby-spider.html">ruby spider</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013-12-16-fullscreen-picture-viewer.html">全屏图片查看器 fullscreen picture viewer</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013-12-13-hive-skill.html">hive 常用技巧</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013-12-04-linux-repeat.html">linux repeat</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>大牛博客</h1>
+  <ul>
+    <li>
+      <a href="http://ithans.com/">ithans</a>
+    </li>
+  </ul>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - seavers -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+</footer>
+  <script src="/javascripts/libs/jquery.min.js"></script>
+<script src="/javascripts/octopress.js"></script>
+
+<script src=" http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=3919158905" charset="utf-8"></script>
+<script src="/javascripts/blog.js"></script>
+<script src='http://hm.baidu.com/h.js?f1e7ae48ee023d8ed983af30c485b5ce'></script>
+
+
+</body>
+</html>

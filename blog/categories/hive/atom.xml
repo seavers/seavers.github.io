@@ -4,7 +4,7 @@
   <title><![CDATA[Category: hive | lianghaijun的博客]]></title>
   <link href="http://lianghaijun.com/blog/categories/hive/atom.xml" rel="self"/>
   <link href="http://lianghaijun.com/"/>
-  <updated>2013-12-31T14:35:25+08:00</updated>
+  <updated>2013-12-31T15:36:55+08:00</updated>
   <id>http://lianghaijun.com/</id>
   <author>
     <name><![CDATA[seavers]]></name>
@@ -15,7 +15,7 @@
   
   <entry>
     <title type="html"><![CDATA[hive 常用技巧]]></title>
-    <link href="http://lianghaijun.com/blog/hive-skill"/>
+    <link href="http://lianghaijun.com/blog/2013-12-13-hive-skill.html"/>
     <updated>2013-12-13T10:52:07+08:00</updated>
     <id>http://lianghaijun.com/blog/hive-skill</id>
     <content type="html"><![CDATA[<p>最近在使用hive来处理些大数据,偶有心得,记录之</p>

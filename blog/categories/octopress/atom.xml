@@ -4,7 +4,7 @@
   <title><![CDATA[Category: octopress | lianghaijun的博客]]></title>
   <link href="http://lianghaijun.com/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://lianghaijun.com/"/>
-  <updated>2013-12-31T14:35:25+08:00</updated>
+  <updated>2013-12-31T15:36:55+08:00</updated>
   <id>http://lianghaijun.com/</id>
   <author>
     <name><![CDATA[seavers]]></name>
@@ -15,7 +15,7 @@
   
   <entry>
     <title type="html"><![CDATA[octopress 自动部署方案]]></title>
-    <link href="http://lianghaijun.com/blog/octopress-deploy"/>
+    <link href="http://lianghaijun.com/blog/2013-11-28-octopress-deploy.html"/>
     <updated>2013-11-28T22:20:52+08:00</updated>
     <id>http://lianghaijun.com/blog/octopress-deploy</id>
     <content type="html"><![CDATA[<p>今天准备实现 octopress 的自动部署, 完成以下功能</p>
@@ -118,7 +118,7 @@ deploy会触发git commit, commit再触发hook, hook里再deploy,再commit, 如�
   
   <entry>
     <title type="html"><![CDATA[about octopress]]></title>
-    <link href="http://lianghaijun.com/blog/about-octopress"/>
+    <link href="http://lianghaijun.com/blog/2013-11-27-about-octopress.html"/>
     <updated>2013-11-27T18:30:41+08:00</updated>
     <id>http://lianghaijun.com/blog/about-octopress</id>
     <content type="html"><![CDATA[<p>一直以来, 都使用javaeye来记录博客, 见 <a href="http://seavers.iteye.com/">http://seavers.iteye.com/</a>, 偶有心得, 必记录之</p>

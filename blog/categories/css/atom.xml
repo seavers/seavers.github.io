@@ -4,7 +4,7 @@
   <title><![CDATA[Category: css | lianghaijun的博客]]></title>
   <link href="http://lianghaijun.com/blog/categories/css/atom.xml" rel="self"/>
   <link href="http://lianghaijun.com/"/>
-  <updated>2013-12-31T14:35:25+08:00</updated>
+  <updated>2013-12-31T15:36:55+08:00</updated>
   <id>http://lianghaijun.com/</id>
   <author>
     <name><![CDATA[seavers]]></name>
@@ -15,19 +15,19 @@
   
   <entry>
     <title type="html"><![CDATA[chrome  support for sass]]></title>
-    <link href="http://lianghaijun.com/blog/1817854"/>
+    <link href="http://lianghaijun.com/blog/2013-02-28-1817854.html"/>
     <updated>2013-02-28T15:51:00+08:00</updated>
     <id>http://lianghaijun.com/blog/1817854</id>
     <content type="html"><![CDATA[<p>chrome  support for sass</p>
 
 <p>很多人说 chrome 已经支持 sass了，但是怎么个支持法，却没有提及，通过google，搜出来一些资料，共享下</p>
 
-<p>[size=large]chrome开启sass
+<p>chrome开启sass
 1. chrome://flags,   启用开发者工具实验  => 点击最下方重启
 2. chrome开发者工具(F12), 右下角setttings,experiments,support for sass => 重启
 3. OK 可以了</p>
 
-<p>[size=large]如何使用
+<p>如何使用
 1. 使用sass &mdash;watch文件夹， 实时编译 .scss 文件至 .css
 <code>
    sass --watch .:. --debug-info --line-number
@@ -36,7 +36,7 @@
 2. chrome打开页面, 页面中的link，使用编译后的 .css
 3. 开发者工具中， 查看 .css 文件， 已经变成了 .scss文件，并可以点击过去</p>
 
-<p>[size=large]注意点：
+<p>注意点：
 debug调试， .scss 文件只支持 file://</p>
 
 <p>Ps: 原以为会支持实时编译，原来不是，可惜了</p>
@@ -44,8 +44,8 @@ debug调试， .scss 文件只支持 file://</p>
 <p>参考:</p>
 
 <ul>
-<li>[url]<a href="http://sass-lang.com/docs/yardoc/file.SASS_REFERENCE.html">http://sass-lang.com/docs/yardoc/file.SASS_REFERENCE.html</a>[/url]</li>
-<li>[url]<a href="http://wiki.netbeans.org/SourceMapsExampleSASS">http://wiki.netbeans.org/SourceMapsExampleSASS</a>[/url]</li>
+<li><a href="http://sass-lang.com/docs/yardoc/file.SASS_REFERENCE.html">http://sass-lang.com/docs/yardoc/file.SASS_REFERENCE.html</a></li>
+<li><a href="http://wiki.netbeans.org/SourceMapsExampleSASS">http://wiki.netbeans.org/SourceMapsExampleSASS</a></li>
 </ul>
 
 ]]></content>
@@ -53,14 +53,14 @@ debug调试， .scss 文件只支持 file://</p>
   
   <entry>
     <title type="html"><![CDATA[inline元素上支持的css属性]]></title>
-    <link href="http://lianghaijun.com/blog/1439239"/>
+    <link href="http://lianghaijun.com/blog/2012-03-03-1439239.html"/>
     <updated>2012-03-03T22:39:00+08:00</updated>
     <id>http://lianghaijun.com/blog/1439239</id>
     <content type="html"><![CDATA[<p>今天在测试时,意外发现inline元素是可以设置background与border的, 之前有所误解, 故对其它的css属性重新回顾了下</p>
 
 <p>随手写了一个demo:</p>
 
-<p>[code=&ldquo;html&rdquo;]</p>
+<p>```</p>
 
 <h3>inline测试</h3>
 
@@ -102,17 +102,17 @@ debug调试， .scss 文件只支持 file://</p>
 
 <p>其中 border, line-height, 这两个可以多多利用</p>
 
-<p><em>[size=large]思考:</em>
+<p><em>思考:</em>
 1. inline元素的宽高是不能定义, 即宽高度是由inline元素inline内容的元素决定的,(ie6,ie7下高度会受inline-block元素的影响)
 2. 即宽高完全是自适应而得出的, 因此也不存在overflow的问题, min|max-width|height也没有影响
 3. margin四个属性, left|right 与 top|bottom 有不同的待遇
 4. margin-top, margin-bottom, 可以用line-height模拟, 但有很大不同, 与inline-block也不兼容,  另 margin:0 auto的居中效果, 也没有作用</p>
 
-<p>*[size=large]其次: *
+<p>*其次: *
 1. div元素, 使用 display:inline 以上几条也成立
 2. button元素, 使用display:inline, 样式没有变化, 等于于inline-block</p>
 
-<p>*[size=large]最后: *
+<p>*最后: *
 mdn中说: 默认 inline-level 的元素 (inline + inline-block)</p>
 
 <ul>
@@ -129,7 +129,7 @@ mdn中说: 默认 inline-level 的元素 (inline + inline-block)</p>
   
   <entry>
     <title type="html"><![CDATA[display, position, float 之间的关系]]></title>
-    <link href="http://lianghaijun.com/blog/1174269"/>
+    <link href="http://lianghaijun.com/blog/2011-09-17-1174269.html"/>
     <updated>2011-09-17T22:52:00+08:00</updated>
     <id>http://lianghaijun.com/blog/1174269</id>
     <content type="html"><![CDATA[<p>从 css2.1 规范中翻译而来
