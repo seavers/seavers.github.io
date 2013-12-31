@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Octopress | lianghaijun的博客]]></title>
+  <title><![CDATA[Category: octopress | lianghaijun的博客]]></title>
   <link href="http://lianghaijun.com/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://lianghaijun.com/"/>
-  <updated>2013-12-30T10:02:31+08:00</updated>
+  <updated>2013-12-31T13:26:53+08:00</updated>
   <id>http://lianghaijun.com/</id>
   <author>
     <name><![CDATA[seavers]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Octopress 自动部署方案]]></title>
+    <title type="html"><![CDATA[octopress 自动部署方案]]></title>
     <link href="http://lianghaijun.com/blog/octopress-deploy"/>
     <updated>2013-11-28T22:20:52+08:00</updated>
     <id>http://lianghaijun.com/blog/octopress-deploy</id>
@@ -117,7 +117,7 @@ deploy会触发git commit, commit再触发hook, hook里再deploy,再commit, 如�
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[About Octopress]]></title>
+    <title type="html"><![CDATA[about octopress]]></title>
     <link href="http://lianghaijun.com/blog/about-octopress"/>
     <updated>2013-11-27T18:30:41+08:00</updated>
     <id>http://lianghaijun.com/blog/about-octopress</id>

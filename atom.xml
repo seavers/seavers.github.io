@@ -4,7 +4,7 @@
   <title><![CDATA[lianghaijun的博客]]></title>
   <link href="http://lianghaijun.com/atom.xml" rel="self"/>
   <link href="http://lianghaijun.com/"/>
-  <updated>2013-12-30T10:02:31+08:00</updated>
+  <updated>2013-12-31T13:26:53+08:00</updated>
   <id>http://lianghaijun.com/</id>
   <author>
     <name><![CDATA[seavers]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Ruby Spider]]></title>
+    <title type="html"><![CDATA[ruby spider]]></title>
     <link href="http://lianghaijun.com/blog/ruby-spider"/>
     <updated>2013-12-23T21:19:09+08:00</updated>
     <id>http://lianghaijun.com/blog/ruby-spider</id>
@@ -85,7 +85,7 @@
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[全屏图片查看器 Fullscreen Picture Viewer]]></title>
+    <title type="html"><![CDATA[全屏图片查看器 fullscreen picture viewer]]></title>
     <link href="http://lianghaijun.com/blog/fullscreen-picture-viewer"/>
     <updated>2013-12-16T23:54:34+08:00</updated>
     <id>http://lianghaijun.com/blog/fullscreen-picture-viewer</id>
@@ -125,7 +125,7 @@
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Hive 常用技巧]]></title>
+    <title type="html"><![CDATA[hive 常用技巧]]></title>
     <link href="http://lianghaijun.com/blog/hive-skill"/>
     <updated>2013-12-13T10:52:07+08:00</updated>
     <id>http://lianghaijun.com/blog/hive-skill</id>
@@ -205,7 +205,7 @@
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Linux Repeat]]></title>
+    <title type="html"><![CDATA[linux repeat]]></title>
     <link href="http://lianghaijun.com/blog/linux-repeat"/>
     <updated>2013-12-04T15:32:01+08:00</updated>
     <id>http://lianghaijun.com/blog/linux-repeat</id>
@@ -294,7 +294,7 @@
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Utuntu Group]]></title>
+    <title type="html"><![CDATA[utuntu group]]></title>
     <link href="http://lianghaijun.com/blog/utuntu-group"/>
     <updated>2013-12-02T14:28:53+08:00</updated>
     <id>http://lianghaijun.com/blog/utuntu-group</id>
@@ -351,7 +351,7 @@
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Octopress 自动部署方案]]></title>
+    <title type="html"><![CDATA[octopress 自动部署方案]]></title>
     <link href="http://lianghaijun.com/blog/octopress-deploy"/>
     <updated>2013-11-28T22:20:52+08:00</updated>
     <id>http://lianghaijun.com/blog/octopress-deploy</id>
@@ -476,7 +476,7 @@ deploy会触发git commit, commit再触发hook, hook里再deploy,再commit, 如�
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Sed]]></title>
+    <title type="html"><![CDATA[sed]]></title>
     <link href="http://lianghaijun.com/blog/sed"/>
     <updated>2013-11-28T16:50:01+08:00</updated>
     <id>http://lianghaijun.com/blog/sed</id>
@@ -559,7 +559,7 @@ deploy会触发git commit, commit再触发hook, hook里再deploy,再commit, 如�
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Html5版仙剑]]></title>
+    <title type="html"><![CDATA[html5版仙剑]]></title>
     <link href="http://lianghaijun.com/blog/xianjian"/>
     <updated>2013-11-27T23:20:11+08:00</updated>
     <id>http://lianghaijun.com/blog/xianjian</id>
@@ -583,7 +583,7 @@ deploy会触发git commit, commit再触发hook, hook里再deploy,再commit, 如�
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[About Octopress]]></title>
+    <title type="html"><![CDATA[about octopress]]></title>
     <link href="http://lianghaijun.com/blog/about-octopress"/>
     <updated>2013-11-27T18:30:41+08:00</updated>
     <id>http://lianghaijun.com/blog/about-octopress</id>
@@ -615,7 +615,7 @@ deploy会触发git commit, commit再触发hook, hook里再deploy,再commit, 如�
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Hello Octopress]]></title>
+    <title type="html"><![CDATA[hello octopress]]></title>
     <link href="http://lianghaijun.com/blog/hello-octopress"/>
     <updated>2013-11-27T17:56:47+08:00</updated>
     <id>http://lianghaijun.com/blog/hello-octopress</id>

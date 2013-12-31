@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Ubuntu | lianghaijun的博客]]></title>
+  <title><![CDATA[Category: ubuntu | lianghaijun的博客]]></title>
   <link href="http://lianghaijun.com/blog/categories/ubuntu/atom.xml" rel="self"/>
   <link href="http://lianghaijun.com/"/>
-  <updated>2013-12-30T10:02:31+08:00</updated>
+  <updated>2013-12-31T13:26:53+08:00</updated>
   <id>http://lianghaijun.com/</id>
   <author>
     <name><![CDATA[seavers]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Linux Repeat]]></title>
+    <title type="html"><![CDATA[linux repeat]]></title>
     <link href="http://lianghaijun.com/blog/linux-repeat"/>
     <updated>2013-12-04T15:32:01+08:00</updated>
     <id>http://lianghaijun.com/blog/linux-repeat</id>
@@ -79,7 +79,7 @@ repeat -n 3 -s 0.5 sh -c "curl -I -s 'http://www.lianghaijun.com' | head -1"
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Utuntu Group]]></title>
+    <title type="html"><![CDATA[utuntu group]]></title>
     <link href="http://lianghaijun.com/blog/utuntu-group"/>
     <updated>2013-12-02T14:28:53+08:00</updated>
     <id>http://lianghaijun.com/blog/utuntu-group</id>
@@ -138,7 +138,7 @@ uid=1000(seavers) gid=1000(seavers) groups=1000(seavers),4(adm),24(cdrom),27(sud
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Sed]]></title>
+    <title type="html"><![CDATA[sed]]></title>
     <link href="http://lianghaijun.com/blog/sed"/>
     <updated>2013-11-28T16:50:01+08:00</updated>
     <id>http://lianghaijun.com/blog/sed</id>
