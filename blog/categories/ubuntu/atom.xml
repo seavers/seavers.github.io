@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ubuntu | lianghaijun的博客]]></title>
   <link href="http://lianghaijun.com/blog/categories/ubuntu/atom.xml" rel="self"/>
   <link href="http://lianghaijun.com/"/>
-  <updated>2013-12-31T15:36:55+08:00</updated>
+  <updated>2014-01-19T16:20:09+08:00</updated>
   <id>http://lianghaijun.com/</id>
   <author>
     <name><![CDATA[seavers]]></name>
@@ -18,7 +18,10 @@
     <link href="http://lianghaijun.com/blog/2013-12-04-linux-repeat.html"/>
     <updated>2013-12-04T15:32:01+08:00</updated>
     <id>http://lianghaijun.com/blog/linux-repeat</id>
-    <content type="html"><![CDATA[<p>linux下循环执行命令</p>
+    <content type="html"><![CDATA[<p>linux下循环执行命令, 小工具, 觉得有用, 可收录</p>
+
+<!--more-->
+
 
 <p>```</p>
 
@@ -94,6 +97,9 @@ repeat -n 3 -s 0.5 sh -c "curl -I -s 'http://www.lianghaijun.com' | head -1"
 </ul>
 
 
+<!--more-->
+
+
 <h2>基础</h2>
 
 <ul>
@@ -143,6 +149,9 @@ uid=1000(seavers) gid=1000(seavers) groups=1000(seavers),4(adm),24(cdrom),27(sud
     <updated>2013-11-28T16:50:01+08:00</updated>
     <id>http://lianghaijun.com/blog/sed</id>
     <content type="html"><![CDATA[<p>sed是基于行进行文本替换的神器, 这里记录一些自己常用的功能</p>
+
+<!--more-->
+
 
 <p>直接替换
 <code>

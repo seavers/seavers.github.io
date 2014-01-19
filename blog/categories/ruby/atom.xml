@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ruby | lianghaijun的博客]]></title>
   <link href="http://lianghaijun.com/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://lianghaijun.com/"/>
-  <updated>2013-12-31T15:36:55+08:00</updated>
+  <updated>2014-01-19T16:20:09+08:00</updated>
   <id>http://lianghaijun.com/</id>
   <author>
     <name><![CDATA[seavers]]></name>
@@ -12,6 +12,468 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[ruby语法糖 - 多返回值]]></title>
+    <link href="http://lianghaijun.com/blog/2014-01-19-ruby-multiple-return.html"/>
+    <updated>2014-01-19T13:01:18+08:00</updated>
+    <id>http://lianghaijun.com/blog/ruby-multiple-return</id>
+    <content type="html"><![CDATA[<p>前几天写代码的时候, 使用到了ruby的多返回值, 觉得很值得写一写</p>
+
+<p>记得第一次看见多返回值, 是在lua中, 当时觉得不过是一语法糖, 没什么特别的, 并不会带来什么特别的好处, 就没有细细研究下去</p>
+
+<p>多返回值, 比较经典的使用场景是交换数值, 最常用于排序等各类算法中, 比如</p>
+
+<p>```ruby</p>
+
+<pre><code>list[i],list[j] = list[j], list[i]
+width, height = height, width
+</code></pre>
+
+<p>```</p>
+
+<p>而实际中, 我碰到的使用场景是这样的, 解析一个文本文件</p>
+
+<p>常见的写法这样的</p>
+
+<p>```ruby</p>
+
+<pre><code>IO.read('20140119_result.txt').lines.each { |line|
+    words = line.split(',')
+    id = words[0]
+    name = words[1]
+    type = words[2]
+    status = words[3]
+
+    puts "[#{status}] #{name}/#{id}" if type == 1
+}   
+</code></pre>
+
+<p>```</p>
+
+<p>如果用多返回值, 效果就完全不同了, 而且达到了相同的效果</p>
+
+<p>```</p>
+
+<pre><code>IO.read('20140119_result.txt').lines.each { |line|
+    id,name,type,status = line.split(',')
+    puts "[#{status}] #{name}/#{id}" if type == 1
+}
+</code></pre>
+
+<p>```</p>
+
+<p>在java中, 经常见一些让我很痛苦的写法, 如</p>
+
+<p>```java</p>
+
+<pre><code>Result&lt;PairValue&gt; result = NoSql.getValue(key);
+if(!result.isSuccess || result.getResult() == null || result.getResult().getValue() == null) {
+    logger.error("......", result.getError());
+}
+Model model = result.getResult().getValue();
+</code></pre>
+
+<p>```</p>
+
+<p>单独看这行代码, 你觉得无所谓, 但是一个方法里, 只有四行逻辑, 但却有16行代码,其中12个是这种判断,你就是发疯了,看代码太累了,无法直接看到主要的逻辑</p>
+
+<p>```ruby</p>
+
+<pre><code>model, key, err = NoSql.getValue(key);
+logger.error("....", err) if err
+
+List, err = Service.query(model.itemIds)
+logger.error("....", err) if err
+</code></pre>
+
+<p>```</p>
+
+<p>纵观代码, 会把注意力集中到业务逻辑上, 而不是各种返回结果的判断上</p>
+
+<h2>本质</h2>
+
+<p>让我们来看看, ruby多返回值的本质</p>
+
+<p>```ruby</p>
+
+<pre><code>def multi
+    return 1,2,3,4,5,6
+end
+result = multi
+puts result.class   ## Array
+puts result === [1,2,3,4,5,6]  ## true 
+</code></pre>
+
+<p>```</p>
+
+<p>我们发现, 原来ruby的多返回值就是一个数组, 而且</p>
+
+<ul>
+<li>x=1,2,3,4,5,6 与 x=[1,2,3,4,5,6]  写法是一样的,结果也一样</li>
+<li>x,y=1,2,3,4,5,6 与 x,y=[1,2,3,4,5,6]  写法也是一样的,结果也一样</li>
+<li>不一样的一点是   [1,2,3,4,5,6].class 与  (1,2,3,4,5,6).class 是不一样的, 后面会报语法错误</li>
+<li>因此, 不带中括号, 其实是一种简写的方式, 只是有些地方能简单, 有些地方无法简写</li>
+<li>从另一个角度来看, []其实也是一种运算符号, 与()一样, 是为了提高运算符的优先级</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[ruby Enumerator]]></title>
+    <link href="http://lianghaijun.com/blog/2014-01-12-ruby-enumerable.html"/>
+    <updated>2014-01-12T17:33:56+08:00</updated>
+    <id>http://lianghaijun.com/blog/ruby-enumerable</id>
+    <content type="html"><![CDATA[<p>之前看到这样的API文档</p>
+
+<p>关于数组Array的</p>
+
+<p>```
+map { |item| block } → new_ary click to toggle source
+map → Enumerator
+Invokes the given block once for each element of self.</p>
+
+<p>Creates a new array containing the values returned by the block.</p>
+
+<p>See also Enumerable#collect.</p>
+
+<p>If no block is given, an Enumerator is returned instead.
+```</p>
+
+<p>当时不明白, Array的map方法不带参数时返回 Enumerator, 而Array已经支持各类迭代操作了, 为什么还要返回Enumerator, 与数组的操作有什么区别呢, 当时没有细究, 今天知道了</p>
+
+<!--more-->
+
+
+<p>我们知道数组是继承自Enumerable的
+<code>
+irb(main):077:0&gt; [].class.ancestors
+=&gt; [Array, Enumerable, Object, Kernel, BasicObject]
+</code></p>
+
+<p>数组中的方法, 会比Enumerable多一些数组特色的方法, 如insert,push,pop,fist,last</p>
+
+<p>而Enumerable调用map时, 有一些常用的方法, 无法满足, 比如</p>
+
+<p>```</p>
+
+<pre><code>[2,3,5,7,9,11].map {|item,index| item+index}
+</code></pre>
+
+<p>```</p>
+
+<p>map时, 参数中的第一个参数, 为item, 但是不支持索引位置</p>
+
+<p>而像select, count, reject 等方法时, 同样也不支持索引位置</p>
+
+<p>于是Enumerator发挥作用了, 注意这里不是Enumerable</p>
+
+<p><code>
+irb(main):071:0&gt; [].map.methods - [].methods
+=&gt; [:with_index, :with_object, :next_values, :peek_values, :next, :peek, :feed, :rewind]
+</code></p>
+
+<p>所以
+<code>
+irb(main):109:0&gt; [2,3,5,7,9,11].map.with_index {|item,index| item+index}
+=&gt; [2, 4, 7, 10, 13, 16]
+</code></p>
+
+<p>结论: Array中map,select,count,reject时, 如果不带闭包参数, 将返回Enumerator, 这时可继续使用索引参数</p>
+
+<p>这里是ruby的官方文档, <a href="http://ruby-doc.org/core-1.9.3/Enumerator.html">Enumerator的API</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[ruby 字符串与数组]]></title>
+    <link href="http://lianghaijun.com/blog/2014-01-05-ruby-string-array.html"/>
+    <updated>2014-01-05T18:55:00+08:00</updated>
+    <id>http://lianghaijun.com/blog/ruby-string-array</id>
+    <content type="html"><![CDATA[<p>ruby的字符串与数组,在API设计上,有很多的相似之处,同时方法广度上,又有所区分,这里还是有很多学问</p>
+
+<!--more-->
+
+
+<p>字符串在底层上是字符的数组, 同是数组, 我们先从相同点开始</p>
+
+<h3>比较方法名</h3>
+
+<p>让我们先单纯的比较一下</p>
+
+<p>```
+&lsquo;string&rsquo;.methods.length   ### 161
+(&lsquo;string&rsquo;.methods &ndash; Object.new.methods).length   ## 107</p>
+
+<p>[].methods.length         ### 167
+([].methods &ndash; Object.new.methods).length   ## 113</p>
+
+<p>([].methods &amp; &lsquo;string&rsquo;.methods).length    ## 76
+([].methods &amp; &lsquo;string&rsquo;.methods &ndash; Object.new.methods).length  ## 22</p>
+
+<p>[].methods &amp; &lsquo;string&rsquo;.methods &ndash; Object.new.methods
+[:[], :[]=, :concat, :&lt;&lt;, :insert, :length, :size, :empty?, :index, :rindex, :reverse, :reverse!, :delete, :replace, :clear, :include?, :slice, :slice!, :+, :*, :count, :partition]
+```</p>
+
+<ul>
+<li>字符串共有161个方法,去掉继承后, 剩107个</li>
+<li>数组共有167个方法,去掉继承后,剩113个</li>
+<li>字符串与数组相同的方法,共有76,去掉继承的54个, 只剩22个</li>
+</ul>
+
+
+<p>让我们来仔细看看这22个方法</p>
+
+<ul>
+<li>[],[]=, 下标操作</li>
+<li>[],slice,slice! 子字符串,子数组操作</li>
+<li>&lt;&lt;,insert,+,*       插入操作</li>
+<li>length,size,count,empty?   大小计算</li>
+<li>index,rindex,include?    查找</li>
+<li>reverse, reverse!  反转</li>
+<li>delete,clear          删除</li>
+<li>partition         拆分 (数组中没找到此方法????)</li>
+</ul>
+
+
+<p>汇总起来, 就是 增删改查, 子反转,大小</p>
+
+<h3>字符串</h3>
+
+<p>而字符串中去掉数组的方法, 就是真正的字符串操作了
+<code>
+irb(main):026:0&gt; 'string'.methods - [].methods
+=&gt; [:casecmp, :%, :bytesize, :match, :succ, :succ!, :next, :next!, :upto, :chr, :getbyte, :setbyte, :byteslice, :to_i, :to_f, :to_str, :dump, :upcase, :downcase, :capitalize, :swapcase, :upcase!, :downcase!, :capitalize!, :swapcase!, :hex, :oct, :split, :lines, :bytes, :chars, :codepoints, :prepend, :crypt, :intern, :to_sym, :ord, :start_with?, :end_with?, :scan, :ljust, :rjust, :center, :sub, :gsub, :chop, :chomp, :strip, :lstrip, :rstrip, :sub!, :gsub!, :chop!, :chomp!, :strip!, :lstrip!, :rstrip!, :tr, :tr_s, :squeeze, :tr!, :tr_s!, :delete!, :squeeze!, :each_line, :each_byte, :each_char, :each_codepoint, :sum, :rpartition, :encoding, :force_encoding, :b, :valid_encoding?, :ascii_only?, :unpack, :encode, :encode!, :to_r, :to_c, :&gt;, :&gt;=, :&lt;, :&lt;=, :between?]
+</code></p>
+
+<p>其中: getbyte,setbyte,byteslice,split,bytes,chars,codepoints,prepend,start_with?,end_with? ,sub,gsub,sub!,gsub!,delete!,each_line,each_byte,each_char,each_codepoint 等等,其实也是围绕这个概念,派生出来的方法,都是在"部分",&ldquo;全体&rdquo;, 在这个概念上生成的方法</p>
+
+<p>而to_i, to_f, hex, &lt; > 等, 这些是属于转换与比较的方法, 另upcase,downcase 是字符串间的转换</p>
+
+<p>除去这个概念后, 与字符串本质有关的方法, 只有encoding,force_encoding 这几个方法了</p>
+
+<p>所以字符串的方法, 我们可以归结为三类</p>
+
+<ul>
+<li>字符数组, 数组的操作方法</li>
+<li>转换与比较</li>
+<li>编码相关</li>
+</ul>
+
+
+<h3>数组</h3>
+
+<p>让我们再来看看数组</p>
+
+<p><code>
+irb(main):031:0&gt; [].methods - 'string'.methods
+=&gt; [:to_a, :to_ary, :at, :fetch, :first, :last, :push, :pop, :shift, :unshift, :each, :each_index, :reverse_each, :find_index, :join, :rotate, :rotate!, :sort, :sort!, :sort_by!, :collect, :collect!, :map, :map!, :select, :select!, :keep_if, :values_at, :delete_at, :delete_if, :reject, :reject!, :zip, :transpose, :fill, :assoc, :rassoc, :-, :&amp;, :|, :uniq, :uniq!, :compact, :compact!, :flatten, :flatten!, :shuffle!, :shuffle, :sample, :cycle, :permutation, :combination, :repeated_permutation, :repeated_combination, :product, :take, :take_while, :drop, :drop_while, :bsearch, :pack, :entries, :sort_by, :grep, :find, :detect, :find_all, :flat_map, :collect_concat, :inject, :reduce, :group_by, :all?, :any?, :one?, :none?, :min, :max, :minmax, :min_by, :max_by, :minmax_by, :member?, :each_with_index, :each_entry, :each_slice, :each_cons, :each_with_object, :chunk, :slice_before, :lazy]
+</code></p>
+
+<p>我们再来分下组</p>
+
+<ul>
+<li>常用的增删改查, 子反转,大小</li>
+<li>同样的转换与比较  to_a</li>
+<li>单项相关,   at,first,last,pop,min,max,take</li>
+<li>遍历,     each,each_index, collect, map,select, take_while,drop_while,grep,find,find_all,reduce,all?,any?,one?, each_*</li>
+</ul>
+
+
+<h3>后续</h3>
+
+<p>我们可以看出,在数组中有很多方法,并没有在字符串中体现,字符串中部分数组的方法,必定是最常用</p>
+
+<p>假如,数组里所有的方法,都放在字符串中,虽然行得通,但并不好,相反不好理解, 比如string.grep,实际意义不大</p>
+
+<p>所以我们现在可以理解, 为什么 String 不是直接继承自 Array 了, 因为Array并不是String的核心, String中最核心的应该是别的, 比如字符与编码</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[ruby 学习笔记]]></title>
+    <link href="http://lianghaijun.com/blog/2014-01-04-ruby-study-notes.html"/>
+    <updated>2014-01-04T21:39:33+08:00</updated>
+    <id>http://lianghaijun.com/blog/ruby-study-notes</id>
+    <content type="html"><![CDATA[
+
+<p>学习ruby已经有一段时间了, 抽点时间把常用的语法方法总结一下, 算是入门小笔记吧</p>
+
+<!--more-->
+
+
+<h2>简述</h2>
+
+<ul>
+<li>ruby为动态语言,弱类型,一切皆对象(就是可以.)</li>
+<li>ruby没有属性,只有方法,看似属性的,其实都只是其成员变量的读方法</li>
+<li>ruby调用方法时括号可省略, 行尾无分号, return 关键字可省略</li>
+<li>ruby支持[]语法创建变长数组, {}语法创建Hash对象, 支持闭包</li>
+</ul>
+
+
+<h2>常用的语法结构</h2>
+
+<p>```ruby</p>
+
+<h1>encoding:utf-8</h1>
+
+<p>require &lsquo;nokogiri&rsquo;</p>
+
+<h1>comment</h1>
+
+<p>return if(i==0)</p>
+
+<p>if(page==0)</p>
+
+<pre><code>page = 1
+</code></pre>
+
+<p>end</p>
+
+<p>for i in 0..10</p>
+
+<pre><code>puts i.to_s + '.'
+</code></pre>
+
+<p>end</p>
+
+<p>for step in [&lsquo;one&rsquo;,&lsquo;two&rsquo;,&lsquo;three&rsquo;]</p>
+
+<pre><code>process(step)
+</code></pre>
+
+<p>end</p>
+
+<p>list.each do |x|</p>
+
+<pre><code>puts "echo #{x}"
+</code></pre>
+
+<p>end</p>
+
+<p>list.each_index { |i|</p>
+
+<pre><code>puts "echo #{i} -&gt; #{list[i]}"
+</code></pre>
+
+<p>}</p>
+
+<p>def nilisnull</p>
+
+<pre><code>nil.to_s === ''
+</code></pre>
+
+<p>end</p>
+
+<p>case x
+when 1..10              #匹配数字</p>
+
+<pre><code>puts "First branch"
+</code></pre>
+
+<p>when foobar()           #批量方法返回的值</p>
+
+<pre><code>puts "Second branch"
+</code></pre>
+
+<p>when /^hel.*/           #匹配正则表达式</p>
+
+<pre><code>puts "Third branch"
+</code></pre>
+
+<p>else</p>
+
+<pre><code>puts "Last branch"
+</code></pre>
+
+<p>end
+```</p>
+
+<h2>方法符号</h2>
+
+<p>语法上除了一些常见的顺序,选择,循环,变量,函数,模块,类, 还有一些特有的内容</p>
+
+<p>```ruby</p>
+
+<h1>查看一个变量可以调用哪些方法</h1>
+
+<p>irb(main):108:0> &lsquo;string&rsquo;.methods
+=> [:&lt;=>, :==, :===, :eql?, :hash, :casecmp, :+, :*, :%, :[], :[]=, :insert, :length, :size, :bytesize, :empty?, :=~, :match, :succ, :succ!, :next, :next!, :upto, :index, :rindex, :replace, :clear, :chr, :getbyte, :setbyte, :byteslice, :to_i, :to_f, :to_s, :to_str, :inspect, :dump, :upcase, :downcase, :capitalize, :swapcase, :upcase!, :downcase!, :capitalize!, :swapcase!, :hex, :oct, :split, :lines, :bytes, :chars, :codepoints, :reverse, :reverse!, :concat, :&lt;&lt;, :prepend, :crypt, :intern, :to_sym, :ord, :include?, :start_with?, :end_with?, :scan, :ljust, :rjust, :center, :sub, :gsub, :chop, :chomp, :strip, :lstrip, :rstrip, :sub!, :gsub!, :chop!, :chomp!, :strip!, :lstrip!, :rstrip!, :tr, :tr_s, :delete, :squeeze, :count, :tr!, :tr_s!, :delete!, :squeeze!, :each_line, :each_byte, :each_char, :each_codepoint, :sum, :slice, :slice!, :partition, :rpartition, :encoding, :force_encoding, :b, :valid_encoding?, :ascii_only?, :unpack, :encode, :encode!, :to_r, :to_c, :>, :>=, :&lt;, :&lt;=, :between?, :nil?, :!~, :class, :singleton_class, :clone, :dup, :taint, :tainted?, :untaint, :untrust, :untrusted?, :trust, :freeze, :frozen?, :methods, :singleton_methods, :protected_methods, :private_methods, :public_methods, :instance_variables, :instance_variable_get, :instance_variable_set, :instance_variable_defined?, :remove_instance_variable, :instance_of?, :kind_of?, :is_a?, :tap, :send, :public_send, :respond_to?, :extend, :display, :method, :public_method, :define_singleton_method, :object_id, :to_enum, :enum_for, :equal?, :!, :!=, :instance_eval, :instance_exec, :<strong>send</strong>, :<strong>id</strong>]
+```</p>
+
+<p>其中:</p>
+
+<ul>
+<li>冒号: 用冒号+字符串代表Symbol(名字), 表示创建了一个Symbol对象, 常用于表示方法, 可以参考<a href="http://www.ibm.com/developerworks/cn/opensource/os-cn-rubysbl/index.html">这里</a></li>
+<li>问号: 问号也是方法名的一部分,表示这个方法,返回true或者false</li>
+<li>叹号: 叹号也是方法名的一部分,表示这个方法,与同名的方法(如gsub,gsub!)功能类似,但此方法会改变对象的内部属性, 相反, 另一个方法则不会修改</li>
+<li>下划线: 如__send__, __id__, 为特殊命名方式, 因send太常见,可能被覆盖,用__send__可避免</li>
+</ul>
+
+
+<h2>字符串操作</h2>
+
+<p>```ruby</p>
+
+<h2>简单</h2>
+
+<p>&lsquo;hello&rsquo;.length   ## 5
+&lsquo;hello&rsquo;.start_with?(&lsquo;he&rsquo;)   ## true
+&lsquo;hello&rsquo;.end_with?(&lsquo;he&rsquo;)     ## false
+&lsquo; hello &rsquo;.strip             ## &lsquo;hello&rsquo;</p>
+
+<h1>字符串连接</h1>
+
+<p>&lsquo;hello &rsquo; + &lsquo;world &rsquo; + 3.to_s  ## &lsquo;hello world 3&rsquo;</p>
+
+<h1>子字符串</h1>
+
+<p>&lsquo;hello world&rsquo;[3]     ## &lsquo;l&rsquo;
+&lsquo;hello world&rsquo;[3,5]   ## &lsquo;lo wo&rsquo;
+&lsquo;hello world&rsquo;[3..5]  ## &lsquo;lo &rsquo;</p>
+
+<h1>查找</h1>
+
+<p>&lsquo;hello world&rsquo;.index(&lsquo;orl&rsquo;)   ## 7
+&lsquo;hello world&rsquo;.index(/[ole]+/)  ## 1</p>
+
+<h1>替换</h1>
+
+<p>&lsquo;hello world&rsquo;.gsub(&lsquo;o&rsquo;, &lsquo;e&rsquo;)  ## &lsquo;helle werld&rsquo;
+&lsquo;hello world&rsquo;.gsub(/[a-z]+/, &lsquo;ok&rsquo;)   ## &lsquo;ok ok&rsquo;</p>
+
+<h1>分拆</h1>
+
+<p>&lsquo;hello world&rsquo;.lines(&lsquo; &rsquo;)     ## [&ldquo;hello &rdquo;, &ldquo;world&rdquo;]
+&ldquo; now&rsquo;s  the time&rdquo;.split(&lsquo; &rsquo;)   #=> [&ldquo;now&rsquo;s&rdquo;, &ldquo;the&rdquo;, &ldquo;time&rdquo;]
+&ldquo;hello&rdquo;.split(//)               #=> [&ldquo;h&rdquo;, &ldquo;e&rdquo;, &ldquo;l&rdquo;, &ldquo;l&rdquo;, &ldquo;o&rdquo;]</p>
+
+<p>```</p>
+
+<h2>数组操作</h2>
+
+<p>```ruby
+[&lsquo;one&rsquo;,&lsquo;two&rsquo;,&lsquo;three&rsquo;].length    ## 3
+[&lsquo;one&rsquo;,&lsquo;two&rsquo;,&lsquo;three&rsquo;].include?(&lsquo;four&rsquo;)   ## false
+[&lsquo;1&rsquo;,&lsquo;2&rsquo;,&lsquo;3&rsquo;] &lt;&lt; &lsquo;4&rsquo;            ## [&lsquo;1&rsquo;,&lsquo;2&rsquo;,&lsquo;3&rsquo;,&lsquo;4&rsquo;]
+[1,2,3,4][1..3]                 ## [2,3]
+[3,2,4,1].sort                  ## [1,2,3,4]
+[1,3,3,4].uniq                  ## [1,3,4]
+[&lsquo;one&rsquo;,&lsquo;two&rsquo;,&lsquo;three&rsquo;].join(&lsquo;,&rsquo;) ## &lsquo;one,two,three&rsquo;</p>
+
+<p>```</p>
+
+<h2>函数</h2>
+
+<p>```
+def process</p>
+
+<p>end
+```</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[ruby spider]]></title>
@@ -27,6 +489,9 @@
 <li>方便的网页分析工具,最好能提供类似css selector的元素选择器</li>
 <li>简单方便的数据处理模块</li>
 </ul>
+
+
+<!--more-->
 
 
 <p>写个简单的例子

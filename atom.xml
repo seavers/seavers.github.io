@@ -4,7 +4,7 @@
   <title><![CDATA[lianghaijun的博客]]></title>
   <link href="http://lianghaijun.com/atom.xml" rel="self"/>
   <link href="http://lianghaijun.com/"/>
-  <updated>2013-12-31T15:36:55+08:00</updated>
+  <updated>2014-01-19T16:20:09+08:00</updated>
   <id>http://lianghaijun.com/</id>
   <author>
     <name><![CDATA[seavers]]></name>
@@ -12,6 +12,543 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[ruby语法糖 - 多返回值]]></title>
+    <link href="http://lianghaijun.com/blog/2014-01-19-ruby-multiple-return.html"/>
+    <updated>2014-01-19T13:01:18+08:00</updated>
+    <id>http://lianghaijun.com/blog/ruby-multiple-return</id>
+    <content type="html"><![CDATA[<p>前几天写代码的时候, 使用到了ruby的多返回值, 觉得很值得写一写</p>
+
+<p>记得第一次看见多返回值, 是在lua中, 当时觉得不过是一语法糖, 没什么特别的, 并不会带来什么特别的好处, 就没有细细研究下去</p>
+
+<p>多返回值, 比较经典的使用场景是交换数值, 最常用于排序等各类算法中, 比如</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">list</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">,</span><span class="n">list</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="n">list</span><span class="o">[</span><span class="n">j</span><span class="o">]</span><span class="p">,</span> <span class="n">list</span><span class="o">[</span><span class="n">i</span><span class="o">]</span>
+</span><span class='line'><span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="n">height</span><span class="p">,</span> <span class="n">width</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>而实际中, 我碰到的使用场景是这样的, 解析一个文本文件</p>
+
+<p>常见的写法这样的</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">IO</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;20140119_result.txt&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">lines</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span> <span class="o">|</span><span class="n">line</span><span class="o">|</span>
+</span><span class='line'>    <span class="n">words</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+</span><span class='line'>    <span class="nb">id</span> <span class="o">=</span> <span class="n">words</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span>
+</span><span class='line'>    <span class="nb">name</span> <span class="o">=</span> <span class="n">words</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span>
+</span><span class='line'>    <span class="n">type</span> <span class="o">=</span> <span class="n">words</span><span class="o">[</span><span class="mi">2</span><span class="o">]</span>
+</span><span class='line'>    <span class="n">status</span> <span class="o">=</span> <span class="n">words</span><span class="o">[</span><span class="mi">3</span><span class="o">]</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nb">puts</span> <span class="s2">&quot;[</span><span class="si">#{</span><span class="n">status</span><span class="si">}</span><span class="s2">] </span><span class="si">#{</span><span class="nb">name</span><span class="si">}</span><span class="s2">/</span><span class="si">#{</span><span class="nb">id</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">if</span> <span class="n">type</span> <span class="o">==</span> <span class="mi">1</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>如果用多返回值, 效果就完全不同了, 而且达到了相同的效果</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">IO</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;20140119_result.txt&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">lines</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span> <span class="o">|</span><span class="n">line</span><span class="o">|</span>
+</span><span class='line'>  <span class="nb">id</span><span class="p">,</span><span class="nb">name</span><span class="p">,</span><span class="n">type</span><span class="p">,</span><span class="n">status</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+</span><span class='line'>  <span class="nb">puts</span> <span class="s2">&quot;[</span><span class="si">#{</span><span class="n">status</span><span class="si">}</span><span class="s2">] </span><span class="si">#{</span><span class="nb">name</span><span class="si">}</span><span class="s2">/</span><span class="si">#{</span><span class="nb">id</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">if</span> <span class="n">type</span> <span class="o">==</span> <span class="mi">1</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>在java中, 经常见一些让我很痛苦的写法, 如</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">Result</span><span class="o">&lt;</span><span class="n">PairValue</span><span class="o">&gt;</span> <span class="n">result</span> <span class="o">=</span> <span class="n">NoSql</span><span class="o">.</span><span class="na">getValue</span><span class="o">(</span><span class="n">key</span><span class="o">);</span>
+</span><span class='line'><span class="k">if</span><span class="o">(!</span><span class="n">result</span><span class="o">.</span><span class="na">isSuccess</span> <span class="o">||</span> <span class="n">result</span><span class="o">.</span><span class="na">getResult</span><span class="o">()</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">result</span><span class="o">.</span><span class="na">getResult</span><span class="o">().</span><span class="na">getValue</span><span class="o">()</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>  <span class="n">logger</span><span class="o">.</span><span class="na">error</span><span class="o">(</span><span class="s">&quot;......&quot;</span><span class="o">,</span> <span class="n">result</span><span class="o">.</span><span class="na">getError</span><span class="o">());</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'><span class="n">Model</span> <span class="n">model</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="na">getResult</span><span class="o">().</span><span class="na">getValue</span><span class="o">();</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>单独看这行代码, 你觉得无所谓, 但是一个方法里, 只有四行逻辑, 但却有16行代码,其中12个是这种判断,你就是发疯了,看代码太累了,无法直接看到主要的逻辑</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">model</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">err</span> <span class="o">=</span> <span class="no">NoSql</span><span class="o">.</span><span class="n">getValue</span><span class="p">(</span><span class="n">key</span><span class="p">);</span>
+</span><span class='line'><span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;....&quot;</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span> <span class="k">if</span> <span class="n">err</span>
+</span><span class='line'>
+</span><span class='line'><span class="no">List</span><span class="p">,</span> <span class="n">err</span> <span class="o">=</span> <span class="no">Service</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">itemIds</span><span class="p">)</span>
+</span><span class='line'><span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;....&quot;</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span> <span class="k">if</span> <span class="n">err</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>纵观代码, 会把注意力集中到业务逻辑上, 而不是各种返回结果的判断上</p>
+
+<h2>本质</h2>
+
+<p>让我们来看看, ruby多返回值的本质</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">multi</span>
+</span><span class='line'>  <span class="k">return</span> <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'><span class="n">result</span> <span class="o">=</span> <span class="n">multi</span>
+</span><span class='line'><span class="nb">puts</span> <span class="n">result</span><span class="o">.</span><span class="n">class</span>   <span class="c1">## Array</span>
+</span><span class='line'><span class="nb">puts</span> <span class="n">result</span> <span class="o">===</span> <span class="o">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="o">]</span>  <span class="c1">## true </span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>我们发现, 原来ruby的多返回值就是一个数组, 而且</p>
+
+<ul>
+<li>x=1,2,3,4,5,6 与 x=[1,2,3,4,5,6]  写法是一样的,结果也一样</li>
+<li>x,y=1,2,3,4,5,6 与 x,y=[1,2,3,4,5,6]  写法也是一样的,结果也一样</li>
+<li>不一样的一点是   [1,2,3,4,5,6].class 与  (1,2,3,4,5,6).class 是不一样的, 后面会报语法错误</li>
+<li>因此, 不带中括号, 其实是一种简写的方式, 只是有些地方能简单, 有些地方无法简写</li>
+<li>从另一个角度来看, []其实也是一种运算符号, 与()一样, 是为了提高运算符的优先级</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[ruby Enumerator]]></title>
+    <link href="http://lianghaijun.com/blog/2014-01-12-ruby-enumerable.html"/>
+    <updated>2014-01-12T17:33:56+08:00</updated>
+    <id>http://lianghaijun.com/blog/ruby-enumerable</id>
+    <content type="html"><![CDATA[<p>之前看到这样的API文档</p>
+
+<p>关于数组Array的</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>map { |item| block } → new_ary click to toggle source
+</span><span class='line'>map → Enumerator
+</span><span class='line'>Invokes the given block once for each element of self.
+</span><span class='line'>
+</span><span class='line'>Creates a new array containing the values returned by the block.
+</span><span class='line'>
+</span><span class='line'>See also Enumerable#collect.
+</span><span class='line'>
+</span><span class='line'>If no block is given, an Enumerator is returned instead.</span></code></pre></td></tr></table></div></figure>
+
+
+<p>当时不明白, Array的map方法不带参数时返回 Enumerator, 而Array已经支持各类迭代操作了, 为什么还要返回Enumerator, 与数组的操作有什么区别呢, 当时没有细究, 今天知道了</p>
+
+<!--more-->
+
+
+<p>我们知道数组是继承自Enumerable的</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>irb(main):077:0&gt; [].class.ancestors
+</span><span class='line'>=&gt; [Array, Enumerable, Object, Kernel, BasicObject]</span></code></pre></td></tr></table></div></figure>
+
+
+<p>数组中的方法, 会比Enumerable多一些数组特色的方法, 如insert,push,pop,fist,last</p>
+
+<p>而Enumerable调用map时, 有一些常用的方法, 无法满足, 比如</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[2,3,5,7,9,11].map {|item,index| item+index}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>map时, 参数中的第一个参数, 为item, 但是不支持索引位置</p>
+
+<p>而像select, count, reject 等方法时, 同样也不支持索引位置</p>
+
+<p>于是Enumerator发挥作用了, 注意这里不是Enumerable</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>irb(main):071:0&gt; [].map.methods - [].methods
+</span><span class='line'>=&gt; [:with_index, :with_object, :next_values, :peek_values, :next, :peek, :feed, :rewind]</span></code></pre></td></tr></table></div></figure>
+
+
+<p>所以</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>irb(main):109:0&gt; [2,3,5,7,9,11].map.with_index {|item,index| item+index}
+</span><span class='line'>=&gt; [2, 4, 7, 10, 13, 16]</span></code></pre></td></tr></table></div></figure>
+
+
+<p>结论: Array中map,select,count,reject时, 如果不带闭包参数, 将返回Enumerator, 这时可继续使用索引参数</p>
+
+<p>这里是ruby的官方文档, <a href="http://ruby-doc.org/core-1.9.3/Enumerator.html">Enumerator的API</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[ruby 字符串与数组]]></title>
+    <link href="http://lianghaijun.com/blog/2014-01-05-ruby-string-array.html"/>
+    <updated>2014-01-05T18:55:00+08:00</updated>
+    <id>http://lianghaijun.com/blog/ruby-string-array</id>
+    <content type="html"><![CDATA[<p>ruby的字符串与数组,在API设计上,有很多的相似之处,同时方法广度上,又有所区分,这里还是有很多学问</p>
+
+<!--more-->
+
+
+<p>字符串在底层上是字符的数组, 同是数组, 我们先从相同点开始</p>
+
+<h3>比较方法名</h3>
+
+<p>让我们先单纯的比较一下</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>'string'.methods.length   ### 161
+</span><span class='line'>('string'.methods - Object.new.methods).length   ## 107
+</span><span class='line'>
+</span><span class='line'>[].methods.length         ### 167
+</span><span class='line'>([].methods - Object.new.methods).length   ## 113
+</span><span class='line'>
+</span><span class='line'>([].methods & 'string'.methods).length    ## 76
+</span><span class='line'>([].methods & 'string'.methods - Object.new.methods).length  ## 22
+</span><span class='line'>
+</span><span class='line'>[].methods & 'string'.methods - Object.new.methods
+</span><span class='line'>[:[], :[]=, :concat, :&lt;&lt;, :insert, :length, :size, :empty?, :index, :rindex, :reverse, :reverse!, :delete, :replace, :clear, :include?, :slice, :slice!, :+, :*, :count, :partition]</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>字符串共有161个方法,去掉继承后, 剩107个</li>
+<li>数组共有167个方法,去掉继承后,剩113个</li>
+<li>字符串与数组相同的方法,共有76,去掉继承的54个, 只剩22个</li>
+</ul>
+
+
+<p>让我们来仔细看看这22个方法</p>
+
+<ul>
+<li>[],[]=, 下标操作</li>
+<li>[],slice,slice! 子字符串,子数组操作</li>
+<li>&lt;&lt;,insert,+,*       插入操作</li>
+<li>length,size,count,empty?   大小计算</li>
+<li>index,rindex,include?    查找</li>
+<li>reverse, reverse!  反转</li>
+<li>delete,clear          删除</li>
+<li>partition         拆分 (数组中没找到此方法????)</li>
+</ul>
+
+
+<p>汇总起来, 就是 增删改查, 子反转,大小</p>
+
+<h3>字符串</h3>
+
+<p>而字符串中去掉数组的方法, 就是真正的字符串操作了</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>irb(main):026:0&gt; 'string'.methods - [].methods
+</span><span class='line'>=&gt; [:casecmp, :%, :bytesize, :match, :succ, :succ!, :next, :next!, :upto, :chr, :getbyte, :setbyte, :byteslice, :to_i, :to_f, :to_str, :dump, :upcase, :downcase, :capitalize, :swapcase, :upcase!, :downcase!, :capitalize!, :swapcase!, :hex, :oct, :split, :lines, :bytes, :chars, :codepoints, :prepend, :crypt, :intern, :to_sym, :ord, :start_with?, :end_with?, :scan, :ljust, :rjust, :center, :sub, :gsub, :chop, :chomp, :strip, :lstrip, :rstrip, :sub!, :gsub!, :chop!, :chomp!, :strip!, :lstrip!, :rstrip!, :tr, :tr_s, :squeeze, :tr!, :tr_s!, :delete!, :squeeze!, :each_line, :each_byte, :each_char, :each_codepoint, :sum, :rpartition, :encoding, :force_encoding, :b, :valid_encoding?, :ascii_only?, :unpack, :encode, :encode!, :to_r, :to_c, :&gt;, :&gt;=, :&lt;, :&lt;=, :between?]</span></code></pre></td></tr></table></div></figure>
+
+
+<p>其中: getbyte,setbyte,byteslice,split,bytes,chars,codepoints,prepend,start_with?,end_with? ,sub,gsub,sub!,gsub!,delete!,each_line,each_byte,each_char,each_codepoint 等等,其实也是围绕这个概念,派生出来的方法,都是在&#8221;部分&#8221;,&ldquo;全体&rdquo;, 在这个概念上生成的方法</p>
+
+<p>而to_i, to_f, hex, &lt; > 等, 这些是属于转换与比较的方法, 另upcase,downcase 是字符串间的转换</p>
+
+<p>除去这个概念后, 与字符串本质有关的方法, 只有encoding,force_encoding 这几个方法了</p>
+
+<p>所以字符串的方法, 我们可以归结为三类</p>
+
+<ul>
+<li>字符数组, 数组的操作方法</li>
+<li>转换与比较</li>
+<li>编码相关</li>
+</ul>
+
+
+<h3>数组</h3>
+
+<p>让我们再来看看数组</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>irb(main):031:0&gt; [].methods - 'string'.methods
+</span><span class='line'>=&gt; [:to_a, :to_ary, :at, :fetch, :first, :last, :push, :pop, :shift, :unshift, :each, :each_index, :reverse_each, :find_index, :join, :rotate, :rotate!, :sort, :sort!, :sort_by!, :collect, :collect!, :map, :map!, :select, :select!, :keep_if, :values_at, :delete_at, :delete_if, :reject, :reject!, :zip, :transpose, :fill, :assoc, :rassoc, :-, :&, :|, :uniq, :uniq!, :compact, :compact!, :flatten, :flatten!, :shuffle!, :shuffle, :sample, :cycle, :permutation, :combination, :repeated_permutation, :repeated_combination, :product, :take, :take_while, :drop, :drop_while, :bsearch, :pack, :entries, :sort_by, :grep, :find, :detect, :find_all, :flat_map, :collect_concat, :inject, :reduce, :group_by, :all?, :any?, :one?, :none?, :min, :max, :minmax, :min_by, :max_by, :minmax_by, :member?, :each_with_index, :each_entry, :each_slice, :each_cons, :each_with_object, :chunk, :slice_before, :lazy]</span></code></pre></td></tr></table></div></figure>
+
+
+<p>我们再来分下组</p>
+
+<ul>
+<li>常用的增删改查, 子反转,大小</li>
+<li>同样的转换与比较  to_a</li>
+<li>单项相关,   at,first,last,pop,min,max,take</li>
+<li>遍历,     each,each_index, collect, map,select, take_while,drop_while,grep,find,find_all,reduce,all?,any?,one?, each_*</li>
+</ul>
+
+
+<h3>后续</h3>
+
+<p>我们可以看出,在数组中有很多方法,并没有在字符串中体现,字符串中部分数组的方法,必定是最常用</p>
+
+<p>假如,数组里所有的方法,都放在字符串中,虽然行得通,但并不好,相反不好理解, 比如string.grep,实际意义不大</p>
+
+<p>所以我们现在可以理解, 为什么 String 不是直接继承自 Array 了, 因为Array并不是String的核心, String中最核心的应该是别的, 比如字符与编码</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[ruby 学习笔记]]></title>
+    <link href="http://lianghaijun.com/blog/2014-01-04-ruby-study-notes.html"/>
+    <updated>2014-01-04T21:39:33+08:00</updated>
+    <id>http://lianghaijun.com/blog/ruby-study-notes</id>
+    <content type="html"><![CDATA[
+
+<p>学习ruby已经有一段时间了, 抽点时间把常用的语法方法总结一下, 算是入门小笔记吧</p>
+
+<!--more-->
+
+
+<h2>简述</h2>
+
+<ul>
+<li>ruby为动态语言,弱类型,一切皆对象(就是可以.)</li>
+<li>ruby没有属性,只有方法,看似属性的,其实都只是其成员变量的读方法</li>
+<li>ruby调用方法时括号可省略, 行尾无分号, return 关键字可省略</li>
+<li>ruby支持[]语法创建变长数组, {}语法创建Hash对象, 支持闭包</li>
+</ul>
+
+
+<h2>常用的语法结构</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1">#encoding:utf-8</span>
+</span><span class='line'><span class="nb">require</span> <span class="s1">&#39;nokogiri&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># comment</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">return</span> <span class="k">if</span><span class="p">(</span><span class="n">i</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span><span class="p">(</span><span class="n">page</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">page</span> <span class="o">=</span> <span class="mi">1</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">0</span><span class="o">.</span><span class="n">.</span><span class="mi">10</span>
+</span><span class='line'>  <span class="nb">puts</span> <span class="n">i</span><span class="o">.</span><span class="n">to_s</span> <span class="o">+</span> <span class="s1">&#39;.&#39;</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">for</span> <span class="n">step</span> <span class="k">in</span> <span class="o">[</span><span class="s1">&#39;one&#39;</span><span class="p">,</span><span class="s1">&#39;two&#39;</span><span class="p">,</span><span class="s1">&#39;three&#39;</span><span class="o">]</span>
+</span><span class='line'>  <span class="n">process</span><span class="p">(</span><span class="n">step</span><span class="p">)</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">list</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span>
+</span><span class='line'>  <span class="nb">puts</span> <span class="s2">&quot;echo </span><span class="si">#{</span><span class="n">x</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">list</span><span class="o">.</span><span class="n">each_index</span> <span class="p">{</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="s2">&quot;echo </span><span class="si">#{</span><span class="n">i</span><span class="si">}</span><span class="s2"> -&gt; </span><span class="si">#{</span><span class="n">list</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">def</span> <span class="nf">nilisnull</span>
+</span><span class='line'>  <span class="kp">nil</span><span class="o">.</span><span class="n">to_s</span> <span class="o">===</span> <span class="s1">&#39;&#39;</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">case</span> <span class="n">x</span>
+</span><span class='line'><span class="k">when</span> <span class="mi">1</span><span class="o">.</span><span class="n">.</span><span class="mi">10</span>              <span class="c1">#匹配数字</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="s2">&quot;First branch&quot;</span>
+</span><span class='line'><span class="k">when</span> <span class="n">foobar</span><span class="p">()</span>           <span class="c1">#批量方法返回的值</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="s2">&quot;Second branch&quot;</span>
+</span><span class='line'><span class="k">when</span> <span class="sr">/^hel.*/</span>           <span class="c1">#匹配正则表达式</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="s2">&quot;Third branch&quot;</span>
+</span><span class='line'><span class="k">else</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="s2">&quot;Last branch&quot;</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>方法符号</h2>
+
+<p>语法上除了一些常见的顺序,选择,循环,变量,函数,模块,类, 还有一些特有的内容</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># 查看一个变量可以调用哪些方法</span>
+</span><span class='line'><span class="n">irb</span><span class="p">(</span><span class="n">main</span><span class="p">):</span><span class="mi">108</span><span class="p">:</span><span class="mi">0</span><span class="o">&gt;</span> <span class="s1">&#39;string&#39;</span><span class="o">.</span><span class="n">methods</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="o">[</span><span class="ss">:&lt;=&gt;</span><span class="p">,</span> <span class="ss">:==</span><span class="p">,</span> <span class="ss">:===</span><span class="p">,</span> <span class="ss">:eql?</span><span class="p">,</span> <span class="ss">:hash</span><span class="p">,</span> <span class="ss">:casecmp</span><span class="p">,</span> <span class="ss">:+</span><span class="p">,</span> <span class="ss">:*</span><span class="p">,</span> <span class="ss">:%</span><span class="p">,</span> <span class="ss">:[]</span><span class="p">,</span> <span class="ss">:[]=</span><span class="p">,</span> <span class="ss">:insert</span><span class="p">,</span> <span class="ss">:length</span><span class="p">,</span> <span class="ss">:size</span><span class="p">,</span> <span class="ss">:bytesize</span><span class="p">,</span> <span class="ss">:empty?</span><span class="p">,</span> <span class="p">:</span><span class="o">=~</span><span class="p">,</span> <span class="ss">:match</span><span class="p">,</span> <span class="ss">:succ</span><span class="p">,</span> <span class="ss">:succ!</span><span class="p">,</span> <span class="ss">:next</span><span class="p">,</span> <span class="ss">:next!</span><span class="p">,</span> <span class="ss">:upto</span><span class="p">,</span> <span class="ss">:index</span><span class="p">,</span> <span class="ss">:rindex</span><span class="p">,</span> <span class="ss">:replace</span><span class="p">,</span> <span class="ss">:clear</span><span class="p">,</span> <span class="ss">:chr</span><span class="p">,</span> <span class="ss">:getbyte</span><span class="p">,</span> <span class="ss">:setbyte</span><span class="p">,</span> <span class="ss">:byteslice</span><span class="p">,</span> <span class="ss">:to_i</span><span class="p">,</span> <span class="ss">:to_f</span><span class="p">,</span> <span class="ss">:to_s</span><span class="p">,</span> <span class="ss">:to_str</span><span class="p">,</span> <span class="ss">:inspect</span><span class="p">,</span> <span class="ss">:dump</span><span class="p">,</span> <span class="ss">:upcase</span><span class="p">,</span> <span class="ss">:downcase</span><span class="p">,</span> <span class="ss">:capitalize</span><span class="p">,</span> <span class="ss">:swapcase</span><span class="p">,</span> <span class="ss">:upcase!</span><span class="p">,</span> <span class="ss">:downcase!</span><span class="p">,</span> <span class="ss">:capitalize!</span><span class="p">,</span> <span class="ss">:swapcase!</span><span class="p">,</span> <span class="ss">:hex</span><span class="p">,</span> <span class="ss">:oct</span><span class="p">,</span> <span class="ss">:split</span><span class="p">,</span> <span class="ss">:lines</span><span class="p">,</span> <span class="ss">:bytes</span><span class="p">,</span> <span class="ss">:chars</span><span class="p">,</span> <span class="ss">:codepoints</span><span class="p">,</span> <span class="ss">:reverse</span><span class="p">,</span> <span class="ss">:reverse!</span><span class="p">,</span> <span class="ss">:concat</span><span class="p">,</span> <span class="ss">:&lt;&lt;</span><span class="p">,</span> <span class="ss">:prepend</span><span class="p">,</span> <span class="ss">:crypt</span><span class="p">,</span> <span class="ss">:intern</span><span class="p">,</span> <span class="ss">:to_sym</span><span class="p">,</span> <span class="ss">:ord</span><span class="p">,</span> <span class="ss">:include?</span><span class="p">,</span> <span class="ss">:start_with?</span><span class="p">,</span> <span class="ss">:end_with?</span><span class="p">,</span> <span class="ss">:scan</span><span class="p">,</span> <span class="ss">:ljust</span><span class="p">,</span> <span class="ss">:rjust</span><span class="p">,</span> <span class="ss">:center</span><span class="p">,</span> <span class="ss">:sub</span><span class="p">,</span> <span class="ss">:gsub</span><span class="p">,</span> <span class="ss">:chop</span><span class="p">,</span> <span class="ss">:chomp</span><span class="p">,</span> <span class="ss">:strip</span><span class="p">,</span> <span class="ss">:lstrip</span><span class="p">,</span> <span class="ss">:rstrip</span><span class="p">,</span> <span class="ss">:sub!</span><span class="p">,</span> <span class="ss">:gsub!</span><span class="p">,</span> <span class="ss">:chop!</span><span class="p">,</span> <span class="ss">:chomp!</span><span class="p">,</span> <span class="ss">:strip!</span><span class="p">,</span> <span class="ss">:lstrip!</span><span class="p">,</span> <span class="ss">:rstrip!</span><span class="p">,</span> <span class="ss">:tr</span><span class="p">,</span> <span class="ss">:tr_s</span><span class="p">,</span> <span class="ss">:delete</span><span class="p">,</span> <span class="ss">:squeeze</span><span class="p">,</span> <span class="ss">:count</span><span class="p">,</span> <span class="ss">:tr!</span><span class="p">,</span> <span class="ss">:tr_s!</span><span class="p">,</span> <span class="ss">:delete!</span><span class="p">,</span> <span class="ss">:squeeze!</span><span class="p">,</span> <span class="ss">:each_line</span><span class="p">,</span> <span class="ss">:each_byte</span><span class="p">,</span> <span class="ss">:each_char</span><span class="p">,</span> <span class="ss">:each_codepoint</span><span class="p">,</span> <span class="ss">:sum</span><span class="p">,</span> <span class="ss">:slice</span><span class="p">,</span> <span class="ss">:slice!</span><span class="p">,</span> <span class="ss">:partition</span><span class="p">,</span> <span class="ss">:rpartition</span><span class="p">,</span> <span class="ss">:encoding</span><span class="p">,</span> <span class="ss">:force_encoding</span><span class="p">,</span> <span class="ss">:b</span><span class="p">,</span> <span class="ss">:valid_encoding?</span><span class="p">,</span> <span class="ss">:ascii_only?</span><span class="p">,</span> <span class="ss">:unpack</span><span class="p">,</span> <span class="ss">:encode</span><span class="p">,</span> <span class="ss">:encode!</span><span class="p">,</span> <span class="ss">:to_r</span><span class="p">,</span> <span class="ss">:to_c</span><span class="p">,</span> <span class="ss">:&gt;</span><span class="p">,</span> <span class="ss">:&gt;=</span><span class="p">,</span> <span class="p">:</span><span class="o">&lt;</span><span class="p">,</span> <span class="p">:</span><span class="o">&lt;=</span><span class="p">,</span> <span class="ss">:between?</span><span class="p">,</span> <span class="ss">:nil?</span><span class="p">,</span> <span class="p">:</span><span class="o">!~</span><span class="p">,</span> <span class="ss">:class</span><span class="p">,</span> <span class="ss">:singleton_class</span><span class="p">,</span> <span class="ss">:clone</span><span class="p">,</span> <span class="ss">:dup</span><span class="p">,</span> <span class="ss">:taint</span><span class="p">,</span> <span class="ss">:tainted?</span><span class="p">,</span> <span class="ss">:untaint</span><span class="p">,</span> <span class="ss">:untrust</span><span class="p">,</span> <span class="ss">:untrusted?</span><span class="p">,</span> <span class="ss">:trust</span><span class="p">,</span> <span class="ss">:freeze</span><span class="p">,</span> <span class="ss">:frozen?</span><span class="p">,</span> <span class="ss">:methods</span><span class="p">,</span> <span class="ss">:singleton_methods</span><span class="p">,</span> <span class="ss">:protected_methods</span><span class="p">,</span> <span class="ss">:private_methods</span><span class="p">,</span> <span class="ss">:public_methods</span><span class="p">,</span> <span class="ss">:instance_variables</span><span class="p">,</span> <span class="ss">:instance_variable_get</span><span class="p">,</span> <span class="ss">:instance_variable_set</span><span class="p">,</span> <span class="ss">:instance_variable_defined?</span><span class="p">,</span> <span class="ss">:remove_instance_variable</span><span class="p">,</span> <span class="ss">:instance_of?</span><span class="p">,</span> <span class="ss">:kind_of?</span><span class="p">,</span> <span class="ss">:is_a?</span><span class="p">,</span> <span class="ss">:tap</span><span class="p">,</span> <span class="ss">:send</span><span class="p">,</span> <span class="ss">:public_send</span><span class="p">,</span> <span class="ss">:respond_to?</span><span class="p">,</span> <span class="ss">:extend</span><span class="p">,</span> <span class="ss">:display</span><span class="p">,</span> <span class="ss">:method</span><span class="p">,</span> <span class="ss">:public_method</span><span class="p">,</span> <span class="ss">:define_singleton_method</span><span class="p">,</span> <span class="ss">:object_id</span><span class="p">,</span> <span class="ss">:to_enum</span><span class="p">,</span> <span class="ss">:enum_for</span><span class="p">,</span> <span class="ss">:equal?</span><span class="p">,</span> <span class="p">:</span><span class="o">!</span><span class="p">,</span> <span class="p">:</span><span class="o">!=</span><span class="p">,</span> <span class="ss">:instance_eval</span><span class="p">,</span> <span class="ss">:instance_exec</span><span class="p">,</span> <span class="ss">:__send__</span><span class="p">,</span> <span class="ss">:__id__</span><span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>其中:</p>
+
+<ul>
+<li>冒号: 用冒号+字符串代表Symbol(名字), 表示创建了一个Symbol对象, 常用于表示方法, 可以参考<a href="http://www.ibm.com/developerworks/cn/opensource/os-cn-rubysbl/index.html">这里</a></li>
+<li>问号: 问号也是方法名的一部分,表示这个方法,返回true或者false</li>
+<li>叹号: 叹号也是方法名的一部分,表示这个方法,与同名的方法(如gsub,gsub!)功能类似,但此方法会改变对象的内部属性, 相反, 另一个方法则不会修改</li>
+<li>下划线: 如__send__, __id__, 为特殊命名方式, 因send太常见,可能被覆盖,用__send__可避免</li>
+</ul>
+
+
+<h2>字符串操作</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1">## 简单</span>
+</span><span class='line'><span class="s1">&#39;hello&#39;</span><span class="o">.</span><span class="n">length</span>   <span class="c1">## 5</span>
+</span><span class='line'><span class="s1">&#39;hello&#39;</span><span class="o">.</span><span class="n">start_with?</span><span class="p">(</span><span class="s1">&#39;he&#39;</span><span class="p">)</span>   <span class="c1">## true</span>
+</span><span class='line'><span class="s1">&#39;hello&#39;</span><span class="o">.</span><span class="n">end_with?</span><span class="p">(</span><span class="s1">&#39;he&#39;</span><span class="p">)</span>     <span class="c1">## false</span>
+</span><span class='line'><span class="s1">&#39; hello &#39;</span><span class="o">.</span><span class="n">strip</span>             <span class="c1">## &#39;hello&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># 字符串连接</span>
+</span><span class='line'><span class="s1">&#39;hello &#39;</span> <span class="o">+</span> <span class="s1">&#39;world &#39;</span> <span class="o">+</span> <span class="mi">3</span><span class="o">.</span><span class="n">to_s</span>  <span class="c1">## &#39;hello world 3&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># 子字符串</span>
+</span><span class='line'><span class="s1">&#39;hello world&#39;</span><span class="o">[</span><span class="mi">3</span><span class="o">]</span>     <span class="c1">## &#39;l&#39;</span>
+</span><span class='line'><span class="s1">&#39;hello world&#39;</span><span class="o">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="o">]</span>   <span class="c1">## &#39;lo wo&#39;</span>
+</span><span class='line'><span class="s1">&#39;hello world&#39;</span><span class="o">[</span><span class="mi">3</span><span class="o">.</span><span class="n">.</span><span class="mi">5</span><span class="o">]</span>  <span class="c1">## &#39;lo &#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># 查找</span>
+</span><span class='line'><span class="s1">&#39;hello world&#39;</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;orl&#39;</span><span class="p">)</span>   <span class="c1">## 7</span>
+</span><span class='line'><span class="s1">&#39;hello world&#39;</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="sr">/[ole]+/</span><span class="p">)</span>  <span class="c1">## 1</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># 替换</span>
+</span><span class='line'><span class="s1">&#39;hello world&#39;</span><span class="o">.</span><span class="n">gsub</span><span class="p">(</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="s1">&#39;e&#39;</span><span class="p">)</span>  <span class="c1">## &#39;helle werld&#39;</span>
+</span><span class='line'><span class="s1">&#39;hello world&#39;</span><span class="o">.</span><span class="n">gsub</span><span class="p">(</span><span class="sr">/[a-z]+/</span><span class="p">,</span> <span class="s1">&#39;ok&#39;</span><span class="p">)</span>   <span class="c1">## &#39;ok ok&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># 分拆</span>
+</span><span class='line'><span class="s1">&#39;hello world&#39;</span><span class="o">.</span><span class="n">lines</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span>     <span class="c1">## [&quot;hello &quot;, &quot;world&quot;]</span>
+</span><span class='line'><span class="s2">&quot; now&#39;s  the time&quot;</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span>   <span class="c1">#=&gt; [&quot;now&#39;s&quot;, &quot;the&quot;, &quot;time&quot;]</span>
+</span><span class='line'><span class="s2">&quot;hello&quot;</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="sr">//</span><span class="p">)</span>               <span class="c1">#=&gt; [&quot;h&quot;, &quot;e&quot;, &quot;l&quot;, &quot;l&quot;, &quot;o&quot;]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>数组操作</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">[</span><span class="s1">&#39;one&#39;</span><span class="p">,</span><span class="s1">&#39;two&#39;</span><span class="p">,</span><span class="s1">&#39;three&#39;</span><span class="o">].</span><span class="n">length</span>    <span class="c1">## 3</span>
+</span><span class='line'><span class="o">[</span><span class="s1">&#39;one&#39;</span><span class="p">,</span><span class="s1">&#39;two&#39;</span><span class="p">,</span><span class="s1">&#39;three&#39;</span><span class="o">].</span><span class="n">include?</span><span class="p">(</span><span class="s1">&#39;four&#39;</span><span class="p">)</span>   <span class="c1">## false</span>
+</span><span class='line'><span class="o">[</span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="s1">&#39;2&#39;</span><span class="p">,</span><span class="s1">&#39;3&#39;</span><span class="o">]</span> <span class="o">&lt;&lt;</span> <span class="s1">&#39;4&#39;</span>            <span class="c1">## [&#39;1&#39;,&#39;2&#39;,&#39;3&#39;,&#39;4&#39;]</span>
+</span><span class='line'><span class="o">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="o">][</span><span class="mi">1</span><span class="o">.</span><span class="n">.</span><span class="mi">3</span><span class="o">]</span>                 <span class="c1">## [2,3]</span>
+</span><span class='line'><span class="o">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="o">].</span><span class="n">sort</span>                  <span class="c1">## [1,2,3,4]</span>
+</span><span class='line'><span class="o">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="o">].</span><span class="n">uniq</span>                  <span class="c1">## [1,3,4]</span>
+</span><span class='line'><span class="o">[</span><span class="s1">&#39;one&#39;</span><span class="p">,</span><span class="s1">&#39;two&#39;</span><span class="p">,</span><span class="s1">&#39;three&#39;</span><span class="o">].</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span> <span class="c1">## &#39;one,two,three&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>函数</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">process</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[iteye 博客迁移]]></title>
@@ -29,6 +566,9 @@
 <li>接着会将博客中的bbcode代码转换成markdown</li>
 <li>下载转换后的markdown可用于octopress,迁移至自己的博客系统上</li>
 </ul>
+
+
+<!--more-->
 
 
 <p>使用方式:</p>
@@ -229,6 +769,9 @@
 </ul>
 
 
+<!--more-->
+
+
 <p>写个简单的例子</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -293,6 +836,9 @@
 
 <p>  可以用于全屏查看图片,当查看网页时,按f键后,会隐藏掉网页里的其它内容,只留下大图</p>
 
+<!--more-->
+
+
 <h2>举一些实际的使用场景</h2>
 
 <ul>
@@ -330,6 +876,9 @@
     <updated>2013-12-13T10:52:07+08:00</updated>
     <id>http://lianghaijun.com/blog/hive-skill</id>
     <content type="html"><![CDATA[<p>最近在使用hive来处理些大数据,偶有心得,记录之</p>
+
+<!--more-->
+
 
 <p>建表</p>
 
@@ -409,7 +958,12 @@
     <link href="http://lianghaijun.com/blog/2013-12-04-linux-repeat.html"/>
     <updated>2013-12-04T15:32:01+08:00</updated>
     <id>http://lianghaijun.com/blog/linux-repeat</id>
-    <content type="html"><![CDATA[<p>linux下循环执行命令</p>
+    <content type="html"><![CDATA[<p>linux下循环执行命令, 小工具, 觉得有用, 可收录</p>
+
+<!--more-->
+
+
+
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>vi ~/.bash_aliases</span></code></pre></td></tr></table></div></figure>
@@ -509,6 +1063,9 @@
 </ul>
 
 
+<!--more-->
+
+
 <h2>基础</h2>
 
 <ul>
@@ -561,6 +1118,9 @@
 <li>在github.com提交markdown文件后,自动触发服务器打包更新</li>
 <li>服务器打包更新后, 同步至github.io, 以及服务器展示</li>
 </ul>
+
+
+<!--more-->
 
 
 <p>实现之前, 参考了下这篇, <a href="http://imxylz.com/blog/2013/11/27/build-octopress-with-github-hook/">监听github，自动编译octopress博客</a>, 写的蛮不错的
@@ -682,6 +1242,9 @@ deploy会触发git commit, commit再触发hook, hook里再deploy,再commit, 如�
     <id>http://lianghaijun.com/blog/sed</id>
     <content type="html"><![CDATA[<p>sed是基于行进行文本替换的神器, 这里记录一些自己常用的功能</p>
 
+<!--more-->
+
+
 <p>直接替换</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -764,6 +1327,9 @@ deploy会触发git commit, commit再触发hook, hook里再deploy,再commit, 如�
     <updated>2013-11-27T23:20:11+08:00</updated>
     <id>http://lianghaijun.com/blog/xianjian</id>
     <content type="html"><![CDATA[<p>刚学习html5时, 为了练手, 基于html5写了版仙剑, <a href="http://xianjian.github.com/">http://xianjian.github.com/</a></p>
+
+<!--more-->
+
 
 <p>当时花了不少心血, 也解决了不少算法问题, 可用度80%, 然而后来比较忙, 就停止了</p>
 
@@ -1068,306 +1634,6 @@ ubuntu 13.10 测试通过</p>
 
 <p>使用SHIFT+SPACE切换全半角
 使用SHIFT切换中英文输入</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[pycompile not found]]></title>
-    <link href="http://lianghaijun.com/blog/2013-10-17-1959997.html"/>
-    <updated>2013-10-17T16:10:00+08:00</updated>
-    <id>http://lianghaijun.com/blog/1959997</id>
-    <content type="html"><![CDATA[<p>sudo apt-get remove python 后, 出现了很多错误, 导致后续的无法进行</p>
-
-<p>pycompile not found
-解决方案: 删掉 /usr/bin/pycompile, 然后继续apt-get -f install / remove</p>
-
-<p>gconf2 not found 错误
-sudo dpkg-reconfigure gconf2
-sudo apt-get &mdash;purge remove gconf2</p>
-
-<p>gconf2安装时 gconf-schemas not found
-因安装gconf2时,需执行脚本,脚本中需要python,而python需要gconf2
-导致了这个地方的问题</p>
-
-<p>解决方案: 注掉报错的脚本中的那几行命令,然后重新执行
-或:  如果已经安装了python的话, ln -s 下python即可</p>
-
-<p>==============================</p>
-
-<p>ubuntu从13.04升级至13.10时,报/usr/bin/python错误,不知原因
-修改/usr/bin/python链接位置时,也无法通过
-故直接remove python python3, 然后就出现上面的错误了
-修复后, 可以执行do-release-upgrade了</p>
-
-<p>ubuntu的包管理,要赞一下</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[maven的全局去除依赖]]></title>
-    <link href="http://lianghaijun.com/blog/2013-09-22-1944892.html"/>
-    <updated>2013-09-22T15:01:00+08:00</updated>
-    <id>http://lianghaijun.com/blog/1944892</id>
-    <content type="html"><![CDATA[<p>我们在maven中有时候希望将某个依赖包彻底去除</p>
-
-<p>如我们的系统使用的是spring3.1.2, 但是依赖的二方包中, 总是或多或少依赖了spring2.5.6, 希望有个方法, 能全局去除掉</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;!-- globally exclusion --&gt;
-</span><span class='line'>&lt;dependency&gt;
-</span><span class='line'>  &lt;groupId&gt;org.springframework&lt;/groupId&gt;
-</span><span class='line'>  &lt;artifactId&gt;spring&lt;/artifactId&gt;
-</span><span class='line'>  &lt;version&gt;2.5.6.SEC03&lt;/version&gt;
-</span><span class='line'>  &lt;scope&gt;provided&lt;/scope&gt;
-</span><span class='line'>&lt;/dependency&gt;</span></code></pre></td></tr></table></div></figure>
-
-
-<p>以上方式, 有个弊端, 就是eclipse中, 还是会依赖, 且容易用混</p>
-
-<p>有三个方案(建议使用第三种)</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;dependency&gt;
-</span><span class='line'>  &lt;groupId&gt;org.springframework&lt;/groupId&gt;
-</span><span class='line'>  &lt;artifactId&gt;spring&lt;/artifactId&gt;
-</span><span class='line'>  &lt;version&gt;99.0-does-not-exist&lt;/version&gt;
-</span><span class='line'>  &lt;scope&gt;provided&lt;/scope&gt;
-</span><span class='line'>&lt;/dependency&gt;</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;dependency&gt;
-</span><span class='line'>  &lt;groupId&gt;org.springframework&lt;/groupId&gt;
-</span><span class='line'>  &lt;artifactId&gt;spring&lt;/artifactId&gt;
-</span><span class='line'>  &lt;version&gt;2.5.6&lt;/version&gt;
-</span><span class='line'>  &lt;scope&gt;system&lt;/scope&gt;
-</span><span class='line'>  &lt;systemPath&gt;${basedir}/lib/empty.jar&lt;/systemPath&gt;
-</span><span class='line'>&lt;/dependency&gt;</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>     &lt;plugin&gt;
-</span><span class='line'>          &lt;artifactId&gt;maven-eclipse-plugin&lt;/artifactId&gt;
-</span><span class='line'>          &lt;configuration&gt;
-</span><span class='line'>              &lt;downloadSources&gt;true&lt;/downloadSources&gt;
-</span><span class='line'>              &lt;downloadJavadocs&gt;true&lt;/downloadJavadocs&gt;
-</span><span class='line'>              &lt;classpathContainers&gt;
-</span><span class='line'>                  &lt;classpathContainer&gt;org.eclipse.jdt.launching.JRE_CONTAINER&lt;/classpathContainer&gt;
-</span><span class='line'>              &lt;/classpathContainers&gt;
-</span><span class='line'>              &lt;excludes&gt;
-</span><span class='line'>                  &lt;exclude&gt;org.springframework:spring&lt;/exclude&gt;
-</span><span class='line'>              &lt;/excludes&gt;
-</span><span class='line'>          &lt;/configuration&gt;
-</span><span class='line'>      &lt;/plugin&gt;</span></code></pre></td></tr></table></div></figure>
-
-
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Class.forName 返回 String[].class]]></title>
-    <link href="http://lianghaijun.com/blog/2013-08-13-1923887.html"/>
-    <updated>2013-08-13T11:38:00+08:00</updated>
-    <id>http://lianghaijun.com/blog/1923887</id>
-    <content type="html"><![CDATA[<p>A: 如何通过Class.forName 返回 String[].class
-Q: Class.forName(&ldquo;[Ljava.lang.String;&rdquo;)</p>
-
-<p>因为 String[].class.getName() => &ldquo;[Ljava.lang.String;&rdquo;
-经测试, 反过来, 也成立</p>
-
-<p>因此:
-在sqlmap-config.xml可以这样写</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;typeHandler javaType="[Ljava.util.String;" callback="xxxxxx.StringArrayTypeHandler" /&gt;</span></code></pre></td></tr></table></div></figure>
-
-
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[ibatis typehandler]]></title>
-    <link href="http://lianghaijun.com/blog/2013-08-09-1922745.html"/>
-    <updated>2013-08-09T18:57:00+08:00</updated>
-    <id>http://lianghaijun.com/blog/1922745</id>
-    <content type="html"><![CDATA[<p>今天配置typehandler时碰到一个问题</p>
-
-<p>主要解决的问题是
-java.sql.SQLException: Cannot convert value &lsquo;0000-00-00 00:00:00&rsquo; from column 18 to TIMESTAMP</p>
-
-<p>解决方案: 替换掉系统默认的 typehandler, 抛出异常时,改为null</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;?xml version="1.0" encoding="GBK"?&gt;
-</span><span class='line'>&lt;!DOCTYPE sqlMapConfig
-</span><span class='line'> PUBLIC "-//iBATIS.com//DTD SQL Map Config 2.0//EN"
-</span><span class='line'> "http://www.ibatis.com/dtd/sql-map-config-2.dtd"&gt;
-</span><span class='line'>&lt;sqlMapConfig&gt;
-</span><span class='line'>  &lt;settings 
-</span><span class='line'>      cacheModelsEnabled="true" 
-</span><span class='line'>  /&gt;
-</span><span class='line'>  &lt;typeHandler javaType="java.util.Date" callback="xxxxxxxxx.CustomDateTypeHandler" /&gt;
-</span><span class='line'>  
-</span><span class='line'>  &lt;sqlMap resource="sqlmap/sqlmap-price.xml" /&gt; 
-</span><span class='line'>&lt;/sqlMapConfig&gt;
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>这里需要注意的是</p>
-
-<ol>
-<li>typeHandler 中的 jdbcType 取值应为 null, DATE, TIME, 这里用的null</li>
-<li>typehandler 必须要在 sqlmap 前面, 否则sqlmap中的类型handler就会用默认的</li>
-</ol>
-
-
-<p>下面是自定义的datetypehandler</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>package xxxxxxxxx;
-</span><span class='line'>
-</span><span class='line'>import java.sql.CallableStatement;
-</span><span class='line'>import java.sql.ResultSet;
-</span><span class='line'>import java.sql.SQLException;
-</span><span class='line'>
-</span><span class='line'>import com.ibatis.sqlmap.engine.type.DateTypeHandler;
-</span><span class='line'>
-</span><span class='line'>public class CustomDateTypeHandler extends DateTypeHandler {
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'>  @Override
-</span><span class='line'>  public Object getResult(ResultSet rs, String columnName) throws SQLException {
-</span><span class='line'>      try {
-</span><span class='line'>          return super.getResult(rs, columnName);
-</span><span class='line'>      } catch(SQLException e) {
-</span><span class='line'>          if("S1009".equals(e.getSQLState())) {
-</span><span class='line'>              return null;
-</span><span class='line'>          }
-</span><span class='line'>          throw e;
-</span><span class='line'>      }
-</span><span class='line'>  }
-</span><span class='line'>
-</span><span class='line'>  @Override
-</span><span class='line'>  public Object getResult(ResultSet rs, int columnIndex) throws SQLException {
-</span><span class='line'>      try {
-</span><span class='line'>          return super.getResult(rs, columnIndex);
-</span><span class='line'>      } catch(SQLException e) {
-</span><span class='line'>          if("S1009".equals(e.getSQLState())) {
-</span><span class='line'>              return null;
-</span><span class='line'>          }
-</span><span class='line'>          throw e;
-</span><span class='line'>      }
-</span><span class='line'>  }
-</span><span class='line'>
-</span><span class='line'>  @Override
-</span><span class='line'>  public Object getResult(CallableStatement cs, int columnIndex) throws SQLException {
-</span><span class='line'>      try {
-</span><span class='line'>          return super.getResult(cs, columnIndex);
-</span><span class='line'>      } catch(SQLException e) {
-</span><span class='line'>          if("S1009".equals(e.getSQLState())) {
-</span><span class='line'>              return null;
-</span><span class='line'>          }
-</span><span class='line'>          throw e;
-</span><span class='line'>      }
-</span><span class='line'>  }
-</span><span class='line'>
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
-
-
-
 ]]></content>
   </entry>
   

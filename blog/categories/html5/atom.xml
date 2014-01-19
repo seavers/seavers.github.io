@@ -4,7 +4,7 @@
   <title><![CDATA[Category: html5 | lianghaijun的博客]]></title>
   <link href="http://lianghaijun.com/blog/categories/html5/atom.xml" rel="self"/>
   <link href="http://lianghaijun.com/"/>
-  <updated>2013-12-31T15:36:55+08:00</updated>
+  <updated>2014-01-19T16:20:09+08:00</updated>
   <id>http://lianghaijun.com/</id>
   <author>
     <name><![CDATA[seavers]]></name>
@@ -19,6 +19,9 @@
     <updated>2013-11-27T23:20:11+08:00</updated>
     <id>http://lianghaijun.com/blog/xianjian</id>
     <content type="html"><![CDATA[<p>刚学习html5时, 为了练手, 基于html5写了版仙剑, <a href="http://xianjian.github.com/">http://xianjian.github.com/</a></p>
+
+<!--more-->
+
 
 <p>当时花了不少心血, 也解决了不少算法问题, 可用度80%, 然而后来比较忙, 就停止了</p>
 

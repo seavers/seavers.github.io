@@ -9,8 +9,8 @@
   <meta name="author" content="seavers">
 
   
-  <meta name="description" content="hello octopress 2013-11-27
-">
+  <meta name="description" content="今天准备实现 octopress 的自动部署, 完成以下功能 在github.com提交markdown文件后,自动触发服务器打包更新
+服务器打包更新后, 同步至github.io, 以及服务器展示 ">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -49,16 +49,200 @@
   
 <ul class="main-navigation">
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
-  <li><a href="/blog/picture">picture</a><li>
-  <li><a href="/blog/link">link</a></li>
-  <li><a href="/blog/about">about</a></li>
+  <li><a href="/blog/archives/">Archives</a></li>
+  <li><a href="/blog/picture/">picture</a><li>
+  <li><a href="/blog/link/">link</a></li>
+  <li><a href="/blog/about/">about</a></li>
 </ul>
 </nav>
   <div id="main">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013-11-28-octopress-deploy.html">octopress 自动部署方案</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-28T22:20:52+08:00" pubdate data-updated="true">Nov 28<span>th</span>, 2013</time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>今天准备实现 octopress 的自动部署, 完成以下功能</p>
+
+<ul>
+<li>在github.com提交markdown文件后,自动触发服务器打包更新</li>
+<li>服务器打包更新后, 同步至github.io, 以及服务器展示</li>
+</ul>
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013-11-28-octopress-deploy.html">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013-11-28-sed.html">sed</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-28T16:50:01+08:00" pubdate data-updated="true">Nov 28<span>th</span>, 2013</time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>sed是基于行进行文本替换的神器, 这里记录一些自己常用的功能</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013-11-28-sed.html">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013-11-27-xianjian.html">html5版仙剑</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-27T23:20:11+08:00" pubdate data-updated="true">Nov 27<span>th</span>, 2013</time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>刚学习html5时, 为了练手, 基于html5写了版仙剑, <a href="http://xianjian.github.com/">http://xianjian.github.com/</a></p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013-11-27-xianjian.html">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013-11-27-about-octopress.html">about octopress</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-27T18:30:41+08:00" pubdate data-updated="true">Nov 27<span>th</span>, 2013</time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>一直以来, 都使用javaeye来记录博客, 见 <a href="http://seavers.iteye.com/">http://seavers.iteye.com/</a>, 偶有心得, 必记录之</p>
+
+<p>然, 随着时间积累, 发现只依赖博客, 很多的需求无法满足, 如一个DEMO, 一个作品, 甚至是自定义样式
+每遇新技术时, 总想折腾下, 无奈博客只能写写文字, 不能充分自主设计
+现在好了, 服务器,域名 都已经OK了, 开始折腾了~~~</p>
+
+<p>不过, 博客还是要先建起来, 前段时间, 曾折腾过 jekyll , 却半途而废了
+今天突然发现 [<a href="http://www.ithans.com|yize">http://www.ithans.com|yize</a>] 改用 octopress 了, 尝试了下</p>
+
+<p>发现 octopress 是基于ruby 写的, 还是挺好用的</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rake --help
+</span><span class='line'>rake --tasks
+</span><span class='line'>rake new_post[title]
+</span><span class='line'>rake generate
+</span><span class='line'>rake deploy</span></code></pre></td></tr></table></div></figure>
+
+
+<p>后续试试自动化, 外加git同步, 自动部署至服务器</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -473,410 +657,6 @@ ubuntu 13.10 测试通过</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013-10-17-1959997.html">pycompile not found</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-10-17T16:10:00+08:00" pubdate data-updated="true">Oct 17<span>th</span>, 2013</time>
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>sudo apt-get remove python 后, 出现了很多错误, 导致后续的无法进行</p>
-
-<p>pycompile not found
-解决方案: 删掉 /usr/bin/pycompile, 然后继续apt-get -f install / remove</p>
-
-<p>gconf2 not found 错误
-sudo dpkg-reconfigure gconf2
-sudo apt-get &mdash;purge remove gconf2</p>
-
-<p>gconf2安装时 gconf-schemas not found
-因安装gconf2时,需执行脚本,脚本中需要python,而python需要gconf2
-导致了这个地方的问题</p>
-
-<p>解决方案: 注掉报错的脚本中的那几行命令,然后重新执行
-或:  如果已经安装了python的话, ln -s 下python即可</p>
-
-<p>==============================</p>
-
-<p>ubuntu从13.04升级至13.10时,报/usr/bin/python错误,不知原因
-修改/usr/bin/python链接位置时,也无法通过
-故直接remove python python3, 然后就出现上面的错误了
-修复后, 可以执行do-release-upgrade了</p>
-
-<p>ubuntu的包管理,要赞一下</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013-09-22-1944892.html">maven的全局去除依赖</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-09-22T15:01:00+08:00" pubdate data-updated="true">Sep 22<span>nd</span>, 2013</time>
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>我们在maven中有时候希望将某个依赖包彻底去除</p>
-
-<p>如我们的系统使用的是spring3.1.2, 但是依赖的二方包中, 总是或多或少依赖了spring2.5.6, 希望有个方法, 能全局去除掉</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;!-- globally exclusion --&gt;
-</span><span class='line'>&lt;dependency&gt;
-</span><span class='line'>  &lt;groupId&gt;org.springframework&lt;/groupId&gt;
-</span><span class='line'>  &lt;artifactId&gt;spring&lt;/artifactId&gt;
-</span><span class='line'>  &lt;version&gt;2.5.6.SEC03&lt;/version&gt;
-</span><span class='line'>  &lt;scope&gt;provided&lt;/scope&gt;
-</span><span class='line'>&lt;/dependency&gt;</span></code></pre></td></tr></table></div></figure>
-
-
-<p>以上方式, 有个弊端, 就是eclipse中, 还是会依赖, 且容易用混</p>
-
-<p>有三个方案(建议使用第三种)</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;dependency&gt;
-</span><span class='line'>  &lt;groupId&gt;org.springframework&lt;/groupId&gt;
-</span><span class='line'>  &lt;artifactId&gt;spring&lt;/artifactId&gt;
-</span><span class='line'>  &lt;version&gt;99.0-does-not-exist&lt;/version&gt;
-</span><span class='line'>  &lt;scope&gt;provided&lt;/scope&gt;
-</span><span class='line'>&lt;/dependency&gt;</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;dependency&gt;
-</span><span class='line'>  &lt;groupId&gt;org.springframework&lt;/groupId&gt;
-</span><span class='line'>  &lt;artifactId&gt;spring&lt;/artifactId&gt;
-</span><span class='line'>  &lt;version&gt;2.5.6&lt;/version&gt;
-</span><span class='line'>  &lt;scope&gt;system&lt;/scope&gt;
-</span><span class='line'>  &lt;systemPath&gt;${basedir}/lib/empty.jar&lt;/systemPath&gt;
-</span><span class='line'>&lt;/dependency&gt;</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>     &lt;plugin&gt;
-</span><span class='line'>          &lt;artifactId&gt;maven-eclipse-plugin&lt;/artifactId&gt;
-</span><span class='line'>          &lt;configuration&gt;
-</span><span class='line'>              &lt;downloadSources&gt;true&lt;/downloadSources&gt;
-</span><span class='line'>              &lt;downloadJavadocs&gt;true&lt;/downloadJavadocs&gt;
-</span><span class='line'>              &lt;classpathContainers&gt;
-</span><span class='line'>                  &lt;classpathContainer&gt;org.eclipse.jdt.launching.JRE_CONTAINER&lt;/classpathContainer&gt;
-</span><span class='line'>              &lt;/classpathContainers&gt;
-</span><span class='line'>              &lt;excludes&gt;
-</span><span class='line'>                  &lt;exclude&gt;org.springframework:spring&lt;/exclude&gt;
-</span><span class='line'>              &lt;/excludes&gt;
-</span><span class='line'>          &lt;/configuration&gt;
-</span><span class='line'>      &lt;/plugin&gt;</span></code></pre></td></tr></table></div></figure>
-
-
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013-08-13-1923887.html">Class.forName 返回 String[].class</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-08-13T11:38:00+08:00" pubdate data-updated="true">Aug 13<span>th</span>, 2013</time>
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>A: 如何通过Class.forName 返回 String[].class
-Q: Class.forName(&ldquo;[Ljava.lang.String;&rdquo;)</p>
-
-<p>因为 String[].class.getName() => &ldquo;[Ljava.lang.String;&rdquo;
-经测试, 反过来, 也成立</p>
-
-<p>因此:
-在sqlmap-config.xml可以这样写</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;typeHandler javaType="[Ljava.util.String;" callback="xxxxxx.StringArrayTypeHandler" /&gt;</span></code></pre></td></tr></table></div></figure>
-
-
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013-08-09-1922745.html">ibatis typehandler</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-08-09T18:57:00+08:00" pubdate data-updated="true">Aug 9<span>th</span>, 2013</time>
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>今天配置typehandler时碰到一个问题</p>
-
-<p>主要解决的问题是
-java.sql.SQLException: Cannot convert value &lsquo;0000-00-00 00:00:00&rsquo; from column 18 to TIMESTAMP</p>
-
-<p>解决方案: 替换掉系统默认的 typehandler, 抛出异常时,改为null</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;?xml version="1.0" encoding="GBK"?&gt;
-</span><span class='line'>&lt;!DOCTYPE sqlMapConfig
-</span><span class='line'> PUBLIC "-//iBATIS.com//DTD SQL Map Config 2.0//EN"
-</span><span class='line'> "http://www.ibatis.com/dtd/sql-map-config-2.dtd"&gt;
-</span><span class='line'>&lt;sqlMapConfig&gt;
-</span><span class='line'>  &lt;settings 
-</span><span class='line'>      cacheModelsEnabled="true" 
-</span><span class='line'>  /&gt;
-</span><span class='line'>  &lt;typeHandler javaType="java.util.Date" callback="xxxxxxxxx.CustomDateTypeHandler" /&gt;
-</span><span class='line'>  
-</span><span class='line'>  &lt;sqlMap resource="sqlmap/sqlmap-price.xml" /&gt; 
-</span><span class='line'>&lt;/sqlMapConfig&gt;
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>这里需要注意的是</p>
-
-<ol>
-<li>typeHandler 中的 jdbcType 取值应为 null, DATE, TIME, 这里用的null</li>
-<li>typehandler 必须要在 sqlmap 前面, 否则sqlmap中的类型handler就会用默认的</li>
-</ol>
-
-
-<p>下面是自定义的datetypehandler</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>package xxxxxxxxx;
-</span><span class='line'>
-</span><span class='line'>import java.sql.CallableStatement;
-</span><span class='line'>import java.sql.ResultSet;
-</span><span class='line'>import java.sql.SQLException;
-</span><span class='line'>
-</span><span class='line'>import com.ibatis.sqlmap.engine.type.DateTypeHandler;
-</span><span class='line'>
-</span><span class='line'>public class CustomDateTypeHandler extends DateTypeHandler {
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'>  @Override
-</span><span class='line'>  public Object getResult(ResultSet rs, String columnName) throws SQLException {
-</span><span class='line'>      try {
-</span><span class='line'>          return super.getResult(rs, columnName);
-</span><span class='line'>      } catch(SQLException e) {
-</span><span class='line'>          if("S1009".equals(e.getSQLState())) {
-</span><span class='line'>              return null;
-</span><span class='line'>          }
-</span><span class='line'>          throw e;
-</span><span class='line'>      }
-</span><span class='line'>  }
-</span><span class='line'>
-</span><span class='line'>  @Override
-</span><span class='line'>  public Object getResult(ResultSet rs, int columnIndex) throws SQLException {
-</span><span class='line'>      try {
-</span><span class='line'>          return super.getResult(rs, columnIndex);
-</span><span class='line'>      } catch(SQLException e) {
-</span><span class='line'>          if("S1009".equals(e.getSQLState())) {
-</span><span class='line'>              return null;
-</span><span class='line'>          }
-</span><span class='line'>          throw e;
-</span><span class='line'>      }
-</span><span class='line'>  }
-</span><span class='line'>
-</span><span class='line'>  @Override
-</span><span class='line'>  public Object getResult(CallableStatement cs, int columnIndex) throws SQLException {
-</span><span class='line'>      try {
-</span><span class='line'>          return super.getResult(cs, columnIndex);
-</span><span class='line'>      } catch(SQLException e) {
-</span><span class='line'>          if("S1009".equals(e.getSQLState())) {
-</span><span class='line'>              return null;
-</span><span class='line'>          }
-</span><span class='line'>          throw e;
-</span><span class='line'>      }
-</span><span class='line'>  }
-</span><span class='line'>
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
-
-
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -903,9 +683,9 @@ java.sql.SQLException: Cannot convert value &lsquo;0000-00-00 00:00:00&rsquo; fr
 <li class='category'><a href='/blog/categories/javascript/'>javascript (10)</a></li>
 <li class='category'><a href='/blog/categories/maven/'>maven (5)</a></li>
 <li class='category'><a href='/blog/categories/nginx/'>nginx (1)</a></li>
-<li class='category'><a href='/blog/categories/octopress/'>octopress (2)</a></li>
+<li class='category'><a href='/blog/categories/octopress/'>octopress (3)</a></li>
 <li class='category'><a href='/blog/categories/php/'>php (1)</a></li>
-<li class='category'><a href='/blog/categories/ruby/'>ruby (1)</a></li>
+<li class='category'><a href='/blog/categories/ruby/'>ruby (5)</a></li>
 <li class='category'><a href='/blog/categories/ubuntu/'>ubuntu (20)</a></li>
 <li class='category'><a href='/blog/categories/思考/'>思考 (9)</a></li>
 
@@ -916,23 +696,23 @@ java.sql.SQLException: Cannot convert value &lsquo;0000-00-00 00:00:00&rsquo; fr
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014-01-19-ruby-multiple-return.html">ruby语法糖 - 多返回值</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014-01-12-ruby-enumerable.html">ruby Enumerator</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014-01-05-ruby-string-array.html">ruby 字符串与数组</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014-01-04-ruby-study-notes.html">ruby 学习笔记</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013-12-31-iteye-blog-migration.html">iteye 博客迁移</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013-12-23-ruby-spider.html">ruby spider</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013-12-16-fullscreen-picture-viewer.html">全屏图片查看器 fullscreen picture viewer</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013-12-13-hive-skill.html">hive 常用技巧</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013-12-04-linux-repeat.html">linux repeat</a>
       </li>
     
   </ul>
@@ -952,7 +732,7 @@ java.sql.SQLException: Cannot convert value &lsquo;0000-00-00 00:00:00&rsquo; fr
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2013 - seavers -
+  Copyright &copy; 2014 - seavers -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 </footer>

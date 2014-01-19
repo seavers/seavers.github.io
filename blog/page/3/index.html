@@ -9,9 +9,8 @@
   <meta name="author" content="seavers">
 
   
-  <meta name="description" content="ubuntu下 apt-get update 时,报错
-下列签名无效： NODATA 1 NODATA 2 原因是: 网络连接出错了, 对应的网址连不上去 比如: archive.ubuntu.com, 连接不上, 可换成 cn.archive.ubuntu.com
-或者: 网络有代理, &hellip;">
+  <meta name="description" content="sudo apt-get remove python 后, 出现了很多错误, 导致后续的无法进行 pycompile not found
+解决方案: 删掉 /usr/bin/pycompile, 然后继续apt-get -f install / remove gconf2 not found 错误 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -50,16 +49,420 @@
   
 <ul class="main-navigation">
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
-  <li><a href="/blog/picture">picture</a><li>
-  <li><a href="/blog/link">link</a></li>
-  <li><a href="/blog/about">about</a></li>
+  <li><a href="/blog/archives/">Archives</a></li>
+  <li><a href="/blog/picture/">picture</a><li>
+  <li><a href="/blog/link/">link</a></li>
+  <li><a href="/blog/about/">about</a></li>
 </ul>
 </nav>
   <div id="main">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013-10-17-1959997.html">pycompile not found</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-17T16:10:00+08:00" pubdate data-updated="true">Oct 17<span>th</span>, 2013</time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>sudo apt-get remove python 后, 出现了很多错误, 导致后续的无法进行</p>
+
+<p>pycompile not found
+解决方案: 删掉 /usr/bin/pycompile, 然后继续apt-get -f install / remove</p>
+
+<p>gconf2 not found 错误
+sudo dpkg-reconfigure gconf2
+sudo apt-get &mdash;purge remove gconf2</p>
+
+<p>gconf2安装时 gconf-schemas not found
+因安装gconf2时,需执行脚本,脚本中需要python,而python需要gconf2
+导致了这个地方的问题</p>
+
+<p>解决方案: 注掉报错的脚本中的那几行命令,然后重新执行
+或:  如果已经安装了python的话, ln -s 下python即可</p>
+
+<p>==============================</p>
+
+<p>ubuntu从13.04升级至13.10时,报/usr/bin/python错误,不知原因
+修改/usr/bin/python链接位置时,也无法通过
+故直接remove python python3, 然后就出现上面的错误了
+修复后, 可以执行do-release-upgrade了</p>
+
+<p>ubuntu的包管理,要赞一下</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013-09-22-1944892.html">maven的全局去除依赖</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-22T15:01:00+08:00" pubdate data-updated="true">Sep 22<span>nd</span>, 2013</time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>我们在maven中有时候希望将某个依赖包彻底去除</p>
+
+<p>如我们的系统使用的是spring3.1.2, 但是依赖的二方包中, 总是或多或少依赖了spring2.5.6, 希望有个方法, 能全局去除掉</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;!-- globally exclusion --&gt;
+</span><span class='line'>&lt;dependency&gt;
+</span><span class='line'>  &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+</span><span class='line'>  &lt;artifactId&gt;spring&lt;/artifactId&gt;
+</span><span class='line'>  &lt;version&gt;2.5.6.SEC03&lt;/version&gt;
+</span><span class='line'>  &lt;scope&gt;provided&lt;/scope&gt;
+</span><span class='line'>&lt;/dependency&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>以上方式, 有个弊端, 就是eclipse中, 还是会依赖, 且容易用混</p>
+
+<p>有三个方案(建议使用第三种)</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;dependency&gt;
+</span><span class='line'>  &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+</span><span class='line'>  &lt;artifactId&gt;spring&lt;/artifactId&gt;
+</span><span class='line'>  &lt;version&gt;99.0-does-not-exist&lt;/version&gt;
+</span><span class='line'>  &lt;scope&gt;provided&lt;/scope&gt;
+</span><span class='line'>&lt;/dependency&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;dependency&gt;
+</span><span class='line'>  &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+</span><span class='line'>  &lt;artifactId&gt;spring&lt;/artifactId&gt;
+</span><span class='line'>  &lt;version&gt;2.5.6&lt;/version&gt;
+</span><span class='line'>  &lt;scope&gt;system&lt;/scope&gt;
+</span><span class='line'>  &lt;systemPath&gt;${basedir}/lib/empty.jar&lt;/systemPath&gt;
+</span><span class='line'>&lt;/dependency&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>     &lt;plugin&gt;
+</span><span class='line'>          &lt;artifactId&gt;maven-eclipse-plugin&lt;/artifactId&gt;
+</span><span class='line'>          &lt;configuration&gt;
+</span><span class='line'>              &lt;downloadSources&gt;true&lt;/downloadSources&gt;
+</span><span class='line'>              &lt;downloadJavadocs&gt;true&lt;/downloadJavadocs&gt;
+</span><span class='line'>              &lt;classpathContainers&gt;
+</span><span class='line'>                  &lt;classpathContainer&gt;org.eclipse.jdt.launching.JRE_CONTAINER&lt;/classpathContainer&gt;
+</span><span class='line'>              &lt;/classpathContainers&gt;
+</span><span class='line'>              &lt;excludes&gt;
+</span><span class='line'>                  &lt;exclude&gt;org.springframework:spring&lt;/exclude&gt;
+</span><span class='line'>              &lt;/excludes&gt;
+</span><span class='line'>          &lt;/configuration&gt;
+</span><span class='line'>      &lt;/plugin&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013-08-13-1923887.html">Class.forName 返回 String[].class</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-08-13T11:38:00+08:00" pubdate data-updated="true">Aug 13<span>th</span>, 2013</time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>A: 如何通过Class.forName 返回 String[].class
+Q: Class.forName(&ldquo;[Ljava.lang.String;&rdquo;)</p>
+
+<p>因为 String[].class.getName() => &ldquo;[Ljava.lang.String;&rdquo;
+经测试, 反过来, 也成立</p>
+
+<p>因此:
+在sqlmap-config.xml可以这样写</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;typeHandler javaType="[Ljava.util.String;" callback="xxxxxx.StringArrayTypeHandler" /&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013-08-09-1922745.html">ibatis typehandler</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-08-09T18:57:00+08:00" pubdate data-updated="true">Aug 9<span>th</span>, 2013</time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>今天配置typehandler时碰到一个问题</p>
+
+<p>主要解决的问题是
+java.sql.SQLException: Cannot convert value &lsquo;0000-00-00 00:00:00&rsquo; from column 18 to TIMESTAMP</p>
+
+<p>解决方案: 替换掉系统默认的 typehandler, 抛出异常时,改为null</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;?xml version="1.0" encoding="GBK"?&gt;
+</span><span class='line'>&lt;!DOCTYPE sqlMapConfig
+</span><span class='line'> PUBLIC "-//iBATIS.com//DTD SQL Map Config 2.0//EN"
+</span><span class='line'> "http://www.ibatis.com/dtd/sql-map-config-2.dtd"&gt;
+</span><span class='line'>&lt;sqlMapConfig&gt;
+</span><span class='line'>  &lt;settings 
+</span><span class='line'>      cacheModelsEnabled="true" 
+</span><span class='line'>  /&gt;
+</span><span class='line'>  &lt;typeHandler javaType="java.util.Date" callback="xxxxxxxxx.CustomDateTypeHandler" /&gt;
+</span><span class='line'>  
+</span><span class='line'>  &lt;sqlMap resource="sqlmap/sqlmap-price.xml" /&gt; 
+</span><span class='line'>&lt;/sqlMapConfig&gt;
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这里需要注意的是</p>
+
+<ol>
+<li>typeHandler 中的 jdbcType 取值应为 null, DATE, TIME, 这里用的null</li>
+<li>typehandler 必须要在 sqlmap 前面, 否则sqlmap中的类型handler就会用默认的</li>
+</ol>
+
+
+<p>下面是自定义的datetypehandler</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>package xxxxxxxxx;
+</span><span class='line'>
+</span><span class='line'>import java.sql.CallableStatement;
+</span><span class='line'>import java.sql.ResultSet;
+</span><span class='line'>import java.sql.SQLException;
+</span><span class='line'>
+</span><span class='line'>import com.ibatis.sqlmap.engine.type.DateTypeHandler;
+</span><span class='line'>
+</span><span class='line'>public class CustomDateTypeHandler extends DateTypeHandler {
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>  @Override
+</span><span class='line'>  public Object getResult(ResultSet rs, String columnName) throws SQLException {
+</span><span class='line'>      try {
+</span><span class='line'>          return super.getResult(rs, columnName);
+</span><span class='line'>      } catch(SQLException e) {
+</span><span class='line'>          if("S1009".equals(e.getSQLState())) {
+</span><span class='line'>              return null;
+</span><span class='line'>          }
+</span><span class='line'>          throw e;
+</span><span class='line'>      }
+</span><span class='line'>  }
+</span><span class='line'>
+</span><span class='line'>  @Override
+</span><span class='line'>  public Object getResult(ResultSet rs, int columnIndex) throws SQLException {
+</span><span class='line'>      try {
+</span><span class='line'>          return super.getResult(rs, columnIndex);
+</span><span class='line'>      } catch(SQLException e) {
+</span><span class='line'>          if("S1009".equals(e.getSQLState())) {
+</span><span class='line'>              return null;
+</span><span class='line'>          }
+</span><span class='line'>          throw e;
+</span><span class='line'>      }
+</span><span class='line'>  }
+</span><span class='line'>
+</span><span class='line'>  @Override
+</span><span class='line'>  public Object getResult(CallableStatement cs, int columnIndex) throws SQLException {
+</span><span class='line'>      try {
+</span><span class='line'>          return super.getResult(cs, columnIndex);
+</span><span class='line'>      } catch(SQLException e) {
+</span><span class='line'>          if("S1009".equals(e.getSQLState())) {
+</span><span class='line'>              return null;
+</span><span class='line'>          }
+</span><span class='line'>          throw e;
+</span><span class='line'>      }
+</span><span class='line'>  }
+</span><span class='line'>
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -406,261 +809,6 @@ Times written with an @ prefix represent an absolute time-of-day expiry, written
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013-06-03-1881714.html">思考方法论</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-06-03T19:56:00+08:00" pubdate data-updated="true">Jun 3<span>rd</span>, 2013</time>
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><ol>
-<li>客户是谁？客户细分？</li>
-<li>客户需要我们解决的问题？</li>
-<li>什么情况和标志出现才体现我们解决了客户的问题？</li>
-<li>独特卖点？与众不同的引起客户关注的是什么？</li>
-<li>为解决客户的问题，我们需要聚焦的突破点和瓶颈是什么？</li>
-<li>客户现有的能力即制或习惯是什么？</li>
-<li>解决方案</li>
-<li>产品最重要的三个功能？</li>
-<li>客户参与的动力在哪？</li>
-</ol>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013-05-08-1863348.html">ubuntu 无法载入支持的服务器方式列表  请检查您的gvfs安装</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-05-08T11:10:00+08:00" pubdate data-updated="true">May 8<span>th</span>, 2013</time>
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>ubuntu &ldquo;无法载入支持的服务器方式列表  请检查您的gvfs安装&rdquo; 的解决方案</p>
-
-<p>碰到两次这个错误了,记录下解决方案</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get remove gvfs
-</span><span class='line'>sudo apt-get install ubuntu-desktop</span></code></pre></td></tr></table></div></figure>
-
-
-<p>原因不明,重装解决问题</p>
-
-<p>补: 如果有些ubuntu底层的组件,类似gvfs, libgtk2.0等被卸载掉,又不想重装系统,直接install ubuntu-desktop就可以了</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013-05-02-1858898.html">批量转换GBK到UTF-8</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-05-02T18:58:00+08:00" pubdate data-updated="true">May 2<span>nd</span>, 2013</time>
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>批量转换GBK到UTF-8</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>find src | grep ".java" | grep -v ".svn" | xargs -I% echo "iconv -f GBK -t UTF-8 % &gt; %.temp " | bash
-</span><span class='line'>find src | grep ".java" | grep -v ".svn" | grep -v ".temp" | xargs -I% echo "cp %.temp %" | bash
-</span><span class='line'>find src | grep ".java" | grep -v ".svn" | grep ".temp" | xargs -I% echo "rm %" | bash</span></code></pre></td></tr></table></div></figure>
-
-
-<p>注意, 如果直接用</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>iconv -f GBK -t UTF-8 filename &gt; filename</span></code></pre></td></tr></table></div></figure>
-
-
-<p>会挂掉的, 导致filename清空,所以用的.temp</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013-04-30-1857184.html">android 整合 maven 环境</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-04-30T14:33:00+08:00" pubdate data-updated="true">Apr 30<span>th</span>, 2013</time>
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>我们再先整理一下思路:</p>
-
-<p>使用eclipse:</p>
-
-<ol>
-<li>创建:  adt自带的android创建插件  New &ndash;> android application project</li>
-<li>引入:  import &ndash;> existing project into workspace</li>
-<li>打包:  run as &ndash;>  android application</li>
-</ol>
-
-
-<p>使用maven:</p>
-
-<ol>
-<li>创建: maven archetype:generate (99: de.akquinet.android.archetypes:android-quickstart)
-   <a href="https://github.com/akquinet/android-archetypes">https://github.com/akquinet/android-archetypes</a></li>
-<li>运行: maven clean package android:deploy android:run    (android-maven-plugin)</li>
-<li>引入eclipse:
-    a).  mvn eclipse:eclipse
-    b).  import &ndash;> android &ndash;> existing android code into workspace
-    c).  注意, 要选中 copy projects into workspace , 否则会有 overlaps 问题
-    d).  下次,已经存在.project .classpath, 直接导入已存在的java工程即可</li>
-<li>打包同上~~~</li>
-</ol>
-
-
-<hr />
-
-<p>用maven编译android并部署</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>  export ANDROID_HOME=~/android/sdk/
-</span><span class='line'>  mvn clean package android:deploy android:run</span></code></pre></td></tr></table></div></figure>
-
-
-<p>其中package中使用了 android-maven-plugin中的</p>
-
-<ul>
-<li>android-maven-plugin:3.5.0:generate-sources</li>
-<li>android-maven-plugin:3.5.0:proguard</li>
-<li>android-maven-plugin:3.5.0:emma</li>
-<li>android-maven-plugin:3.5.0:dex</li>
-<li>android-maven-plugin:3.5.0:apk</li>
-</ul>
-
-
-<p>这四个mvn指令,穿插在了package正常打包过程中
-这四个mvn指令,均是直接调用了android.sdk中的platform-tools中的某个指令或java调用</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;plugin&gt;
-</span><span class='line'>    &lt;groupId&gt;com.jayway.maven.plugins.android.generation2&lt;/groupId&gt;
-</span><span class='line'>    &lt;artifactId&gt;android-maven-plugin&lt;/artifactId&gt;
-</span><span class='line'>    &lt;version&gt;3.1.1&lt;/version&gt;
-</span><span class='line'>    &lt;extensions&gt;true&lt;/extensions&gt;
-</span><span class='line'>    &lt;configuration&gt;
-</span><span class='line'>     &lt;sdk&gt;
-</span><span class='line'>      &lt;platform&gt;16&lt;/platform&gt;
-</span><span class='line'>     &lt;/sdk&gt;
-</span><span class='line'>    &lt;/configuration&gt;
-</span><span class='line'>   &lt;/plugin&gt;
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>maven.android的eclipse常用插件是 m2e-android 插件
-可以认为m2e-android也是同样的道理,</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/4/">&larr; Older</a>
@@ -687,9 +835,9 @@ Times written with an @ prefix represent an absolute time-of-day expiry, written
 <li class='category'><a href='/blog/categories/javascript/'>javascript (10)</a></li>
 <li class='category'><a href='/blog/categories/maven/'>maven (5)</a></li>
 <li class='category'><a href='/blog/categories/nginx/'>nginx (1)</a></li>
-<li class='category'><a href='/blog/categories/octopress/'>octopress (2)</a></li>
+<li class='category'><a href='/blog/categories/octopress/'>octopress (3)</a></li>
 <li class='category'><a href='/blog/categories/php/'>php (1)</a></li>
-<li class='category'><a href='/blog/categories/ruby/'>ruby (1)</a></li>
+<li class='category'><a href='/blog/categories/ruby/'>ruby (5)</a></li>
 <li class='category'><a href='/blog/categories/ubuntu/'>ubuntu (20)</a></li>
 <li class='category'><a href='/blog/categories/思考/'>思考 (9)</a></li>
 
@@ -700,23 +848,23 @@ Times written with an @ prefix represent an absolute time-of-day expiry, written
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014-01-19-ruby-multiple-return.html">ruby语法糖 - 多返回值</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014-01-12-ruby-enumerable.html">ruby Enumerator</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014-01-05-ruby-string-array.html">ruby 字符串与数组</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014-01-04-ruby-study-notes.html">ruby 学习笔记</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013-12-31-iteye-blog-migration.html">iteye 博客迁移</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013-12-23-ruby-spider.html">ruby spider</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013-12-16-fullscreen-picture-viewer.html">全屏图片查看器 fullscreen picture viewer</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013-12-13-hive-skill.html">hive 常用技巧</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013-12-04-linux-repeat.html">linux repeat</a>
       </li>
     
   </ul>
@@ -736,7 +884,7 @@ Times written with an @ prefix represent an absolute time-of-day expiry, written
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2013 - seavers -
+  Copyright &copy; 2014 - seavers -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 </footer>

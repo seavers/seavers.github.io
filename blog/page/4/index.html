@@ -9,9 +9,16 @@
   <meta name="author" content="seavers">
 
   
-  <meta name="description" content="android 开发环境搭建 刚接触android开发, 前辈们都说现在的android开发环境比以前容易搭建了~~~ 搭建方式如下: 下载android sdk
-http://developer.android.com/sdk/index.html
-下载后的sdk, 包括了 eclipse 以及 &hellip;">
+  <meta name="description" content="
+客户是谁？客户细分？
+客户需要我们解决的问题？
+什么情况和标志出现才体现我们解决了客户的问题？
+独特卖点？与众不同的引起客户关注的是什么？
+为解决客户的问题，我们需要聚焦的突破点和瓶颈是什么？
+客户现有的能力即制或习惯是什么？
+解决方案
+产品最重要的三个功能？
+客户参与的动力在哪？ ">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -50,16 +57,271 @@ http://developer.android.com/sdk/index.html
   
 <ul class="main-navigation">
   <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
-  <li><a href="/blog/picture">picture</a><li>
-  <li><a href="/blog/link">link</a></li>
-  <li><a href="/blog/about">about</a></li>
+  <li><a href="/blog/archives/">Archives</a></li>
+  <li><a href="/blog/picture/">picture</a><li>
+  <li><a href="/blog/link/">link</a></li>
+  <li><a href="/blog/about/">about</a></li>
 </ul>
 </nav>
   <div id="main">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013-06-03-1881714.html">思考方法论</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-03T19:56:00+08:00" pubdate data-updated="true">Jun 3<span>rd</span>, 2013</time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><ol>
+<li>客户是谁？客户细分？</li>
+<li>客户需要我们解决的问题？</li>
+<li>什么情况和标志出现才体现我们解决了客户的问题？</li>
+<li>独特卖点？与众不同的引起客户关注的是什么？</li>
+<li>为解决客户的问题，我们需要聚焦的突破点和瓶颈是什么？</li>
+<li>客户现有的能力即制或习惯是什么？</li>
+<li>解决方案</li>
+<li>产品最重要的三个功能？</li>
+<li>客户参与的动力在哪？</li>
+</ol>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013-05-08-1863348.html">ubuntu 无法载入支持的服务器方式列表  请检查您的gvfs安装</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-08T11:10:00+08:00" pubdate data-updated="true">May 8<span>th</span>, 2013</time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>ubuntu &ldquo;无法载入支持的服务器方式列表  请检查您的gvfs安装&rdquo; 的解决方案</p>
+
+<p>碰到两次这个错误了,记录下解决方案</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get remove gvfs
+</span><span class='line'>sudo apt-get install ubuntu-desktop</span></code></pre></td></tr></table></div></figure>
+
+
+<p>原因不明,重装解决问题</p>
+
+<p>补: 如果有些ubuntu底层的组件,类似gvfs, libgtk2.0等被卸载掉,又不想重装系统,直接install ubuntu-desktop就可以了</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013-05-02-1858898.html">批量转换GBK到UTF-8</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-02T18:58:00+08:00" pubdate data-updated="true">May 2<span>nd</span>, 2013</time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>批量转换GBK到UTF-8</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>find src | grep ".java" | grep -v ".svn" | xargs -I% echo "iconv -f GBK -t UTF-8 % &gt; %.temp " | bash
+</span><span class='line'>find src | grep ".java" | grep -v ".svn" | grep -v ".temp" | xargs -I% echo "cp %.temp %" | bash
+</span><span class='line'>find src | grep ".java" | grep -v ".svn" | grep ".temp" | xargs -I% echo "rm %" | bash</span></code></pre></td></tr></table></div></figure>
+
+
+<p>注意, 如果直接用</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>iconv -f GBK -t UTF-8 filename &gt; filename</span></code></pre></td></tr></table></div></figure>
+
+
+<p>会挂掉的, 导致filename清空,所以用的.temp</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013-04-30-1857184.html">android 整合 maven 环境</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-30T14:33:00+08:00" pubdate data-updated="true">Apr 30<span>th</span>, 2013</time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>我们再先整理一下思路:</p>
+
+<p>使用eclipse:</p>
+
+<ol>
+<li>创建:  adt自带的android创建插件  New &ndash;> android application project</li>
+<li>引入:  import &ndash;> existing project into workspace</li>
+<li>打包:  run as &ndash;>  android application</li>
+</ol>
+
+
+<p>使用maven:</p>
+
+<ol>
+<li>创建: maven archetype:generate (99: de.akquinet.android.archetypes:android-quickstart)
+   <a href="https://github.com/akquinet/android-archetypes">https://github.com/akquinet/android-archetypes</a></li>
+<li>运行: maven clean package android:deploy android:run    (android-maven-plugin)</li>
+<li>引入eclipse:
+    a).  mvn eclipse:eclipse
+    b).  import &ndash;> android &ndash;> existing android code into workspace
+    c).  注意, 要选中 copy projects into workspace , 否则会有 overlaps 问题
+    d).  下次,已经存在.project .classpath, 直接导入已存在的java工程即可</li>
+<li>打包同上~~~</li>
+</ol>
+
+
+<hr />
+
+<p>用maven编译android并部署</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>  export ANDROID_HOME=~/android/sdk/
+</span><span class='line'>  mvn clean package android:deploy android:run</span></code></pre></td></tr></table></div></figure>
+
+
+<p>其中package中使用了 android-maven-plugin中的</p>
+
+<ul>
+<li>android-maven-plugin:3.5.0:generate-sources</li>
+<li>android-maven-plugin:3.5.0:proguard</li>
+<li>android-maven-plugin:3.5.0:emma</li>
+<li>android-maven-plugin:3.5.0:dex</li>
+<li>android-maven-plugin:3.5.0:apk</li>
+</ul>
+
+
+<p>这四个mvn指令,穿插在了package正常打包过程中
+这四个mvn指令,均是直接调用了android.sdk中的platform-tools中的某个指令或java调用</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;plugin&gt;
+</span><span class='line'>    &lt;groupId&gt;com.jayway.maven.plugins.android.generation2&lt;/groupId&gt;
+</span><span class='line'>    &lt;artifactId&gt;android-maven-plugin&lt;/artifactId&gt;
+</span><span class='line'>    &lt;version&gt;3.1.1&lt;/version&gt;
+</span><span class='line'>    &lt;extensions&gt;true&lt;/extensions&gt;
+</span><span class='line'>    &lt;configuration&gt;
+</span><span class='line'>     &lt;sdk&gt;
+</span><span class='line'>      &lt;platform&gt;16&lt;/platform&gt;
+</span><span class='line'>     &lt;/sdk&gt;
+</span><span class='line'>    &lt;/configuration&gt;
+</span><span class='line'>   &lt;/plugin&gt;
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>maven.android的eclipse常用插件是 m2e-android 插件
+可以认为m2e-android也是同样的道理,</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -817,351 +1079,6 @@ install phpmyadmin &ndash;> pma-configure &ndash;> /phpmyadmin/setup &ndash;> pm
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013-03-26-1836490.html">ubuntu 支持无线网卡</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-26T08:23:00+08:00" pubdate data-updated="true">Mar 26<span>th</span>, 2013</time>
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>在cubieboard上测试了下无线网卡, ubuntu上也应该是适用的</p>
-
-<p>要求:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install wpasupplicant</span></code></pre></td></tr></table></div></figure>
-
-
-<p>插上无线网卡后, 在ifconfig里看到了wlan0</p>
-
-<p>然后在 /etc/network/interfaces 里添加四行即可, 完整的见下</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>auto lo
-</span><span class='line'>iface lo inet loopback
-</span><span class='line'>
-</span><span class='line'>auto wlan0
-</span><span class='line'>iface wlan0 inet dhcp   
-</span><span class='line'>wpa-ssid  &lt;you wlan ssid&gt;
-</span><span class='line'>wpa-psk   &lt;your wlan password&gt;</span></code></pre></td></tr></table></div></figure>
-
-
-<p>然后重启网络生效</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>//关闭再开启wlan0
-</span><span class='line'>sudo ifdown wlan0
-</span><span class='line'>sudo ifup wlan0
-</span><span class='line'>
-</span><span class='line'>//或者重启网络
-</span><span class='line'>sudo service networking stop
-</span><span class='line'>sudo service networking start
-</span><span class='line'>
-</span><span class='line'>//或者重启,有时需要执行两次, 执行时会有提示
-</span><span class='line'>sudo service networking restart</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>网上说的wpa打头的各类配置经测试可以省略,  我这里是 tp-link wpa2-psk的安全配置</li>
-<li>wpa-psk 也可以用密文, 有命令可以生成</li>
-</ul>
-
-
-<p>参考文档: <a href="http://ubuntuforums.org/showthread.php?t=318539">http://ubuntuforums.org/showthread.php?t=318539</a></p>
-
-<p>后记:
-还有一种实现方案比较繁琐
-使用了wpa_supplicant守护进程及配置文件的做法, 比较麻烦, 不过, 可用于启动后再插上网卡的情况
-比如: <a href="http://onefishum.blog.163.com/blog/static/5184730520131174170755/">http://onefishum.blog.163.com/blog/static/5184730520131174170755/</a>
-如果按文中所说,生成rc.local后,得停止networking,用守护进程安装后,再启动networking,然后依赖于networking的dbus,avahi-deamon还得再启动一次, 这个方式不适合rc.local
-无线网卡配置应该是在系统初始化时完成的,  /etc/network/interfaces正好
-所以文中的方法,适合, 系统已经正常运行时, 再插入的无线网卡配置</p>
-
-<p>或者: 这篇也可以
-比如: <a href="http://www.cnitblog.com/luofuchong/archive/2010/05/20/66251.html">http://www.cnitblog.com/luofuchong/archive/2010/05/20/66251.html</a></p>
-
-<p>精简配置, 来自于
-<a href="http://www.raspberrypi.org/phpBB3/viewtopic.php?f=27&amp;t=7592">http://www.raspberrypi.org/phpBB3/viewtopic.php?f=27&amp;t=7592</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013-03-23-1835389.html">ubuntu name server</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-23T14:47:00+08:00" pubdate data-updated="true">Mar 23<span>rd</span>, 2013</time>
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>我们在ubuntu下经常会遇到以下问题</p>
-
-<ol>
-<li>windows下ping ubuntu的机器名ping不到</li>
-<li>ubuntu下ping windows下的机器名 ping 不到</li>
-<li>ubuntu下ping ubuntu下的机器名ping不到</li>
-</ol>
-
-
-<p>以上就是碰到了name server的问题了</p>
-
-<p>首先, 我们要理清楚以下几个问题</p>
-
-<ol>
-<li>windows是如何根据name寻找ip的</li>
-<li>ubuntu是如何根据name寻找ip的</li>
-<li>mac呢</li>
-</ol>
-
-
-<p>name到ip的映射有以下几个方式
-1. /etc/hosts的方式, 用户自行配置的, 优先级最高
-2. wins  windows用于解析名字的服务
-3. mdns 是apple发明的, ubuntu下也可以使用
-4. dns服务, 通常由ISP提供,  一般局域网搜不到, 就要去外网搜了
-另外:
-wins 的服务, 有时会有域服务器来提供服务</p>
-
-<p>由此: windows 与 ubuntu 下互通name, 需要敲定要走 wins还是mdns
-1. windows 下默认支持 wins 服务, 有服务器,也有客户端支持
-2. ubuntu下走wins,  可以安装 samba , 由 nmbd服务器提供服务端
-3. ubuntu 下 ping wins, 可以在 smb.conf 下配置 wins server
-4. windows 下走 mdns 服务, 可以安装apple的itunes, 由bonjour提供服务端
-5. ubuntu 下安装 mdns服务, 可使用 avahi-demon 来提供 mdns 服务
-6. ubuntu 下解析 mdns, 可以在 /etc/resolv.conf 中配置, 由 dnsmasq 来提供解析
-7. mac 上默认提供了 mdns 与 wins</p>
-
-<p>因此, 不动 windows, 可以在 ubuntu 中安装以下服务</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sudo apt-get install samba
-</span><span class='line'>sudo apt-get install avahi-daemon
-</span><span class='line'>sudo apt-get install libnss-mdns             ##necessary?
-</span><span class='line'>
-</span><span class='line'>sudo vi /etc/nsswitch.conf   (hosts:          files mdns4_minimal dns)
-</span><span class='line'>sudo vi /etc/samba/smb.conf
-</span><span class='line'>
-</span><span class='line'>sudo service smbd restart
-</span><span class='line'>sudo service nmbd restart
-</span><span class='line'>//sudo service avahi-daemon restart
-</span><span class='line'>sudo dnsmasq
-</span><span class='line'>
-</span><span class='line'>sudo service networking restart</span></code></pre></td></tr></table></div></figure>
-
-
-<p>如果ubuntu一直ping不通mac.local or ipad.local,请尝试重启
-这样, 在 windows, ubuntu, mac 下互相ping hostname就OK了
-补: mdns 的ping时, 要加 .local</p>
-
-<p>相关的命令有:  ping nslookup host dig nbtscan nmblookup nmap
-sudo netstat -ntp
-sudo ss -nlt</p>
-
-<p>相关的文件有:
-/etc/resolv.conf
-/etc/nsswitch.conf
-/etc/NetworkManager/NetworkManager.conf
-<a href="https://wiki.archlinux.org/index.php/Avahi">https://wiki.archlinux.org/index.php/Avahi</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013-03-22-1834993.html">maven常用技巧</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-22T17:19:00+08:00" pubdate data-updated="true">Mar 22<span>nd</span>, 2013</time>
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>maven常用技巧</p>
-
-<p>限定只使用内置的archetypes</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>mvn archetype:generate -DarchetypeCatalog=internal</span></code></pre></td></tr></table></div></figure>
-
-
-<p></p>
-
-<p>mvn创建spring mvc
-<a href="https://github.com/kolorobot/spring-mvc-quickstart-archetype">https://github.com/kolorobot/spring-mvc-quickstart-archetype</a></p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>mvn archetype:generate -DarchetypeGroupId=com.github.spring-mvc-archetypes -DarchetypeArtifactId=spring-mvc-quickstart -DarchetypeVersion=1.0.0-SNAPSHOT -DgroupId=hello -DartifactId=hello -Dversion=1.0.0</span></code></pre></td></tr></table></div></figure>
-
-
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013-03-21-1833467.html">sunxi-bsp 脚本分析</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-21T15:36:00+08:00" pubdate data-updated="true">Mar 21<span>st</span>, 2013</time>
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>cubieboard刷sd卡时, 使用了下面的脚本
-<a href="https://github.com/linux-sunxi/sunxi-bsp/blob/master/scripts/sunxi-media-create.sh">https://github.com/linux-sunxi/sunxi-bsp/blob/master/scripts/sunxi-media-create.sh</a></p>
-
-<p>命令如下:
-./script/sunxi-media-create.sh /dev/sdb 引导文件 操作系统文件</p>
-
-<h4>分析如下:</h4>
-
-<ul>
-<li>umount sd</li>
-<li>sd卡前1M的字节,全部清0</li>
-<li>sfdisk命令写分区表</li>
-<li>两个分区分别格式化成vfat与ext4文件系统</li>
-<li>解压两个文件到临时目录</li>
-<li>/bootloader/sunxi-spl.bin 写至sd卡8K处, (第二引导系统处)</li>
-<li>/bootloader/u-boot.bin 写至32K处        (真正的引导模块)</li>
-<li>两个分区mount至文件系统</li>
-<li>拷贝文件 /kernel/uImage => 第一分区</li>
-<li>拷贝文件 /kernel/*.bin  => 第一分区</li>
-<li>拷贝文件 /kernel/*.scr  => 第一分区</li>
-<li>拷贝文件 操作系统文件/*   => 第二分区</li>
-<li>拷贝文件 /rootfs/*      => 第二分区</li>
-</ul>
-
-
-<h4>总结如下:</h4>
-
-<ul>
-<li>脚本主要是分区,格式化,拷贝文件</li>
-<li>分成两个区,两个文件解压后,拷贝至分区内</li>
-</ul>
-
-
-<h4>关于源码</h4>
-
-<p>源码的github上,有几多很特别的目录, 是打不开的, 很怪~~~
-更详细的可参考:
-<a href="http://linux-sunxi.org/Main_Page/zh_cn#.E8.BD.AF.E4.BB.B6">http://linux-sunxi.org/Main_Page/zh_cn#.E8.BD.AF.E4.BB.B6</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/5/">&larr; Older</a>
@@ -1188,9 +1105,9 @@ sudo ss -nlt</p>
 <li class='category'><a href='/blog/categories/javascript/'>javascript (10)</a></li>
 <li class='category'><a href='/blog/categories/maven/'>maven (5)</a></li>
 <li class='category'><a href='/blog/categories/nginx/'>nginx (1)</a></li>
-<li class='category'><a href='/blog/categories/octopress/'>octopress (2)</a></li>
+<li class='category'><a href='/blog/categories/octopress/'>octopress (3)</a></li>
 <li class='category'><a href='/blog/categories/php/'>php (1)</a></li>
-<li class='category'><a href='/blog/categories/ruby/'>ruby (1)</a></li>
+<li class='category'><a href='/blog/categories/ruby/'>ruby (5)</a></li>
 <li class='category'><a href='/blog/categories/ubuntu/'>ubuntu (20)</a></li>
 <li class='category'><a href='/blog/categories/思考/'>思考 (9)</a></li>
 
@@ -1201,23 +1118,23 @@ sudo ss -nlt</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014-01-19-ruby-multiple-return.html">ruby语法糖 - 多返回值</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014-01-12-ruby-enumerable.html">ruby Enumerator</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014-01-05-ruby-string-array.html">ruby 字符串与数组</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014-01-04-ruby-study-notes.html">ruby 学习笔记</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013-12-31-iteye-blog-migration.html">iteye 博客迁移</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013-12-23-ruby-spider.html">ruby spider</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013-12-16-fullscreen-picture-viewer.html">全屏图片查看器 fullscreen picture viewer</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013-12-13-hive-skill.html">hive 常用技巧</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013-12-04-linux-repeat.html">linux repeat</a>
       </li>
     
   </ul>
@@ -1237,7 +1154,7 @@ sudo ss -nlt</p>
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2013 - seavers -
+  Copyright &copy; 2014 - seavers -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 </footer>

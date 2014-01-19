@@ -4,7 +4,7 @@
   <title><![CDATA[Category: chrome | lianghaijun的博客]]></title>
   <link href="http://lianghaijun.com/blog/categories/chrome/atom.xml" rel="self"/>
   <link href="http://lianghaijun.com/"/>
-  <updated>2013-12-31T15:36:55+08:00</updated>
+  <updated>2014-01-19T16:20:09+08:00</updated>
   <id>http://lianghaijun.com/</id>
   <author>
     <name><![CDATA[seavers]]></name>
@@ -21,6 +21,9 @@
     <content type="html"><![CDATA[<h2>全屏图片查看器是一个chrome扩展</h2>
 
 <p>  可以用于全屏查看图片,当查看网页时,按f键后,会隐藏掉网页里的其它内容,只留下大图</p>
+
+<!--more-->
+
 
 <h2>举一些实际的使用场景</h2>
 
